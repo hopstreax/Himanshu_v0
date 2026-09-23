@@ -39,12 +39,12 @@ export function CenterCluster({
       aria-label="Main Navigation"
       className="relative z-10 flex items-center justify-center p-4"
     >
-      <div className="relative grid grid-cols-2 gap-x-10 sm:gap-x-20 md:gap-x-28 gap-y-8 sm:gap-y-12 md:gap-y-16">
+      <div className="relative grid grid-cols-2 gap-x-4 sm:gap-x-8 md:gap-x-10 gap-y-4 sm:gap-y-6 md:gap-y-8">
         {/* Central spatial anchor dot */}
         <OriginDot isActive={activeItem !== null} />
 
         {/* Quadrant 2: Top-Left -> About */}
-        <div className="flex justify-end items-end">
+        <div className="flex justify-center items-center">
           <NavQuadrantItem
             id="about"
             label="About"
@@ -65,7 +65,7 @@ export function CenterCluster({
         </div>
 
         {/* Quadrant 1: Top-Right -> Projects */}
-        <div className="flex justify-start items-end">
+        <div className="flex justify-center items-center">
           <NavQuadrantItem
             id="projects"
             label="Projects"
@@ -85,11 +85,11 @@ export function CenterCluster({
           />
         </div>
 
-        {/* Quadrant 3: Bottom-Left -> Open Source */}
-        <div className="flex justify-end items-start">
+        {/* Quadrant 3: Bottom-Left -> OSS */}
+        <div className="flex justify-center items-center">
           <NavQuadrantItem
             id="open-source"
-            label="Open Source"
+            label="OSS"
             subtext="· Graphify"
             href="/open-source"
             ariaLabel="Navigate to Open Source contributions"
@@ -107,7 +107,7 @@ export function CenterCluster({
         </div>
 
         {/* Quadrant 4: Bottom-Right -> Connect */}
-        <div className="flex justify-start items-start">
+        <div className="flex justify-center items-center">
           <NavQuadrantItem
             id="connect"
             label="Connect"

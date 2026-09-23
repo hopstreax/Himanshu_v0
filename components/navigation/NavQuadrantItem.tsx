@@ -59,8 +59,8 @@ export function NavQuadrantItem({
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
-        className={`group relative flex flex-col items-center justify-center p-3 sm:p-4 rounded-lg
-          min-w-[80px] min-h-[64px]
+        className={`group relative flex flex-col items-center justify-center p-2.5 sm:p-3 rounded-lg
+          w-24 sm:w-28 md:w-32 min-h-[64px]
           focus:outline-none focus-visible:ring-1.5 focus-visible:ring-ink/60 focus-visible:ring-offset-4 focus-visible:ring-offset-canvas
           select-none`}
       >
@@ -75,7 +75,7 @@ export function NavQuadrantItem({
               ? { duration: 0.15 }
               : { type: "spring", stiffness: 400, damping: 26 }
           }
-          className="flex flex-col items-center space-y-1.5"
+          className="flex flex-col items-center space-y-1.5 w-full"
         >
           <Icon
             className={`w-[19px] h-[19px] transition-colors duration-150 ${
@@ -85,7 +85,7 @@ export function NavQuadrantItem({
             aria-hidden="true"
           />
 
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center w-full">
             <span
               className={`text-[11px] uppercase tracking-editorial transition-colors duration-150 ${
                 isActive ? "font-semibold text-ink" : "font-medium text-ink-muted"

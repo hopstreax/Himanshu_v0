@@ -1,4 +1,4 @@
-import { SocialLinkItem } from "@/types/portfolio";
+import { ConnectData, SocialLinkItem } from "@/types/portfolio";
 
 export const socialLinks: readonly SocialLinkItem[] = [
   {
@@ -7,6 +7,7 @@ export const socialLinks: readonly SocialLinkItem[] = [
     url: "https://github.com/himanshupatro-334",
     handle: "@himanshupatro-334",
     isExternal: true,
+    actionText: "View Code & Repositories",
   },
   {
     platform: "LinkedIn",
@@ -14,6 +15,7 @@ export const socialLinks: readonly SocialLinkItem[] = [
     url: "https://linkedin.com/in/himanshupatro",
     handle: "/in/himanshupatro",
     isExternal: true,
+    actionText: "Professional Profile",
   },
   {
     platform: "X",
@@ -21,6 +23,7 @@ export const socialLinks: readonly SocialLinkItem[] = [
     url: "https://x.com/himanshupatro",
     handle: "@himanshupatro",
     isExternal: true,
+    actionText: "Engineering Updates",
   },
   {
     platform: "Email",
@@ -28,5 +31,13 @@ export const socialLinks: readonly SocialLinkItem[] = [
     url: "mailto:akashpatra.334@gmail.com",
     handle: "akashpatra.334@gmail.com",
     isExternal: false,
+    actionText: "Direct Communication",
   },
 ] as const;
+
+export const connectData: ConnectData = {
+  heading: "Let's build together",
+  tagline: "Open for full-time software engineering roles & open-source collaboration.",
+  actionPrompt: "GET IN TOUCH",
+  links: socialLinks,
+};
