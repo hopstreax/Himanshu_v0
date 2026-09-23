@@ -5,16 +5,34 @@ import { Compass, FolderGit2, GitPullRequest, ArrowUpRight } from "lucide-react"
 import { NavQuadrantItem } from "./NavQuadrantItem";
 import { OriginDot } from "./OriginDot";
 import { useHoverIntent } from "@/hooks/useHoverIntent";
+import { NavQuadrant } from "@/types/portfolio";
 
-export function CenterCluster() {
-  const {
-    activeItem,
-    handleMouseEnter,
-    handleMouseLeave,
-    handleFocus,
-    handleBlur,
-    handleKeyDown,
-  } = useHoverIntent({ entryDelay: 90, exitDelay: 190 });
+interface CenterClusterProps {
+  activeItem?: NavQuadrant | null;
+  onMouseEnter?: (id: NavQuadrant) => void;
+  onMouseLeave?: () => void;
+  onFocus?: (id: NavQuadrant) => void;
+  onBlur?: () => void;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
+}
+
+export function CenterCluster({
+  activeItem: propActiveItem,
+  onMouseEnter: propOnMouseEnter,
+  onMouseLeave: propOnMouseLeave,
+  onFocus: propOnFocus,
+  onBlur: propOnBlur,
+  onKeyDown: propOnKeyDown,
+}: CenterClusterProps = {}) {
+  // Use internal hook only if props are not provided
+  const internalHover = useHoverIntent({ entryDelay: 90, exitDelay: 190 });
+
+  const activeItem = propActiveItem !== undefined ? propActiveItem : internalHover.activeItem;
+  const handleMouseEnter = propOnMouseEnter || internalHover.handleMouseEnter;
+  const handleMouseLeave = propOnMouseLeave || internalHover.handleMouseLeave;
+  const handleFocus = propOnFocus || internalHover.handleFocus;
+  const handleBlur = propOnBlur || internalHover.handleBlur;
+  const handleKeyDown = propOnKeyDown || internalHover.handleKeyDown;
 
   return (
     <nav

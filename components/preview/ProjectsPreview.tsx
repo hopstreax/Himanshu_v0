@@ -1,0 +1,55 @@
+import React from "react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { projects } from "@/data/projects";
+
+export function ProjectsPreview() {
+  const featured = projects.filter((p) => p.featured);
+
+  return (
+    <div className="flex flex-col space-y-5">
+      {/* Section metadata badge */}
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-mono tracking-widest text-ink-muted uppercase px-2 py-0.5 rounded-full border border-border-subtle bg-canvas-subtle/80">
+          02 / PROJECTS
+        </span>
+        <span className="text-[11px] font-mono text-ink-subtle">
+          SELECTED WORK
+        </span>
+      </div>
+
+      {/* Featured Projects Highlight Stack */}
+      <div className="flex flex-col space-y-4">
+        {featured.map((project) => (
+          <div key={project.slug} className="group/item">
+            <div className="flex items-center space-x-2">
+              <span className="text-[9px] font-mono uppercase tracking-widest px-1.5 py-0.5 rounded bg-surface text-ink-muted">
+                {project.tag}
+              </span>
+              <span className="text-[10px] font-mono text-ink-subtle">
+                {project.year}
+              </span>
+            </div>
+            <h3 className="text-[18px] sm:text-[20px] font-semibold tracking-tight text-ink mt-1">
+              {project.title}
+            </h3>
+            <p className="text-[12px] text-ink-muted leading-relaxed mt-0.5">
+              {project.tagline}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Action Link */}
+      <div className="pt-2 border-t border-border-subtle/60">
+        <Link
+          href="/projects"
+          className="inline-flex items-center space-x-1.5 text-[11px] font-semibold tracking-widest uppercase text-ink hover:text-ink-muted transition-colors group"
+        >
+          <span>VIEW PROJECTS</span>
+          <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </Link>
+      </div>
+    </div>
+  );
+}

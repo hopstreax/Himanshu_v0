@@ -10,7 +10,7 @@ interface UseHoverIntentOptions {
 
 export function useHoverIntent({
   entryDelay = 90,
-  exitDelay = 190,
+  exitDelay = 220,
 }: UseHoverIntentOptions = {}) {
   const [activeItem, setActiveItem] = useState<NavQuadrant | null>(null);
 
@@ -88,18 +88,26 @@ export function useHoverIntent({
     exitTimerRef.current = setTimeout(() => {
       setActiveItem(null);
       exitTimerRef.current = null;
-    }, 60);
+    }, 80);
   }, [clearTimers]);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent | KeyboardEvent) => {
     if (e.key === "Escape") {
       setActiveItem(null);
     }
   }, []);
 
-  // Cleanup on unmount
+  // Global window listener for Escape key and unmount cleanup
   useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveItem(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
     return () => {
+      window.removeEventListener("keydown", handleGlobalKeyDown);
       clearTimers();
     };
   }, [clearTimers]);
