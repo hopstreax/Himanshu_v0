@@ -7,9 +7,21 @@ import { aboutData } from "@/data/about";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Connect — Himanshu Patro",
+  title: "Connect",
   description:
     "Direct communication directory and channels for Himanshu Patro — Open for full-time software engineering roles & open-source collaboration.",
+  openGraph: {
+    title: "Connect — Himanshu Patro",
+    description:
+      "Direct communication directory and channels for Himanshu Patro — Open for full-time software engineering roles & open-source collaboration.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Connect — Himanshu Patro",
+    description:
+      "Direct communication directory and channels for Himanshu Patro — Open for full-time software engineering roles & open-source collaboration.",
+  },
 };
 
 const platformIcons: Record<string, React.ReactNode> = {

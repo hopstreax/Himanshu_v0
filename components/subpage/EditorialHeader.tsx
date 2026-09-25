@@ -26,7 +26,7 @@ export function EditorialHeader({
         )}
       </div>
 
-      <h1 className="text-[32px] sm:text-[38px] md:text-[44px] font-semibold tracking-tight text-ink leading-tight">
+      <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-ink leading-tight">
         {title}
       </h1>
 

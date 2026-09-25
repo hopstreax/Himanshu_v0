@@ -17,6 +17,7 @@ export function ProjectsPreview() {
       </div>
 
       {/* Flagship Projects Stack (TraceKit & AI Interviewer) */}
+      <h2 className="sr-only">Selected Projects Preview</h2>
       <div className="flex flex-col space-y-3.5">
         {flagshipProjects.map((project) => (
           <div key={project.slug} className="group/item">

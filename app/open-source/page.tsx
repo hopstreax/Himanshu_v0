@@ -6,9 +6,21 @@ import { graphifyStory } from "@/data/openSource";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Open Source — Himanshu Patro",
+  title: "Open Source",
   description:
     "Open-source contributions across Graphify: AST analysis, symbol graph extraction, incremental processing, and 30+ merged pull requests.",
+  openGraph: {
+    title: "Open Source — Himanshu Patro",
+    description:
+      "Open-source contributions across Graphify: AST analysis, symbol graph extraction, incremental processing, and 30+ merged pull requests.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Open Source — Himanshu Patro",
+    description:
+      "Open-source contributions across Graphify: AST analysis, symbol graph extraction, incremental processing, and 30+ merged pull requests.",
+  },
 };
 
 export default function OpenSourcePage() {

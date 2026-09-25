@@ -7,9 +7,21 @@ import { aboutData } from "@/data/about";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — Himanshu Patro",
+  title: "About",
   description:
     "Background, engineering experience at Celebal Technologies and Tata Steel, education at ITER, and technical focus areas of Himanshu Patro.",
+  openGraph: {
+    title: "About — Himanshu Patro",
+    description:
+      "Background, engineering experience at Celebal Technologies and Tata Steel, education at ITER, and technical focus areas of Himanshu Patro.",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About — Himanshu Patro",
+    description:
+      "Background, engineering experience at Celebal Technologies and Tata Steel, education at ITER, and technical focus areas of Himanshu Patro.",
+  },
 };
 
 export default function AboutPage() {

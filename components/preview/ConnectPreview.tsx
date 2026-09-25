@@ -18,9 +18,9 @@ export function ConnectPreview() {
 
       {/* Title & Tagline */}
       <div>
-        <h3 className="text-[20px] sm:text-[22px] font-semibold tracking-tight text-ink">
+        <h2 className="text-[20px] sm:text-[22px] font-semibold tracking-tight text-ink">
           {connectData.heading}
-        </h3>
+        </h2>
         <p className="text-[12px] text-ink-muted mt-0.5 leading-normal">
           {connectData.tagline}
         </p>

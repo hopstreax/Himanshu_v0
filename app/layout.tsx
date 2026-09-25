@@ -9,7 +9,11 @@ const sansFont = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Himanshu Patro — AI / Software / Open Source",
+  metadataBase: new URL("https://himanshupatro.dev"),
+  title: {
+    default: "Himanshu Patro — AI / Software / Open Source",
+    template: "%s — Himanshu Patro",
+  },
   description:
     "Personal portfolio and engineering work of Himanshu Patro. Full Stack AI Developer and Open Source Contributor.",
   authors: [{ name: "Himanshu Patro" }],
@@ -28,6 +32,14 @@ export const metadata: Metadata = {
       "Personal portfolio and engineering work of Himanshu Patro. Full Stack AI Developer and Open Source Contributor.",
     type: "website",
     locale: "en_US",
+    siteName: "Himanshu Patro Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Himanshu Patro — AI / Software / Open Source",
+    description:
+      "Personal portfolio and engineering work of Himanshu Patro. Full Stack AI Developer and Open Source Contributor.",
+    creator: "@himanshupatro",
   },
 };
 

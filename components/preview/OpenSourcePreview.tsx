@@ -21,9 +21,9 @@ export function OpenSourcePreview() {
 
       {/* Main Story: Graphify */}
       <div>
-        <h3 className="text-[20px] sm:text-[22px] font-semibold tracking-tight text-ink">
+        <h2 className="text-[20px] sm:text-[22px] font-semibold tracking-tight text-ink">
           {graphifyStory.project}
-        </h3>
+        </h2>
         <p className="text-[11px] uppercase tracking-editorial text-ink-muted mt-0.5">
           {graphifyStory.role} · {graphifyStory.tagline}
         </p>

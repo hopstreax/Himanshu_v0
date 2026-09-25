@@ -7,9 +7,21 @@ import { flagshipProjects, secondaryProjects } from "@/data/projects";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Projects — Himanshu Patro",
+  title: "Projects",
   description:
     "Flagship engineering work including TraceKit (Autonomous AI testing) and AI Interviewer, alongside full-stack application archives.",
+  openGraph: {
+    title: "Projects — Himanshu Patro",
+    description:
+      "Flagship engineering work including TraceKit (Autonomous AI testing) and AI Interviewer, alongside full-stack application archives.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects — Himanshu Patro",
+    description:
+      "Flagship engineering work including TraceKit (Autonomous AI testing) and AI Interviewer, alongside full-stack application archives.",
+  },
 };
 
 export default function ProjectsPage() {

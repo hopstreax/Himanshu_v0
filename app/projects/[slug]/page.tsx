@@ -24,9 +24,22 @@ export async function generateMetadata({
   const project = projects.find((p) => p.slug === slug);
   if (!project) return { title: "Project Not Found" };
 
+  const title = `${project.title} — Case Study`;
+  const description = `${project.tagline}. ${project.shortDescription}`;
+
   return {
-    title: `${project.title} — Case Study`,
-    description: project.shortDescription,
+    title,
+    description,
+    openGraph: {
+      title: `${project.title} — Case Study | Himanshu Patro`,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Case Study | Himanshu Patro`,
+      description,
+    },
   };
 }
 
@@ -77,7 +90,7 @@ export default async function ProjectCaseStudyPage({
           </span>
         </div>
 
-        <h1 className="text-[34px] sm:text-[42px] md:text-[48px] font-semibold tracking-tight text-ink leading-tight">
+        <h1 className="text-[30px] sm:text-[40px] md:text-[46px] font-semibold tracking-tight text-ink leading-tight">
           {project.title}
         </h1>
 
