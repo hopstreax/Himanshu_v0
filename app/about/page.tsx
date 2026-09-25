@@ -10,10 +10,14 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Background, engineering experience at Celebal Technologies and Tata Steel, education at ITER, and technical focus areas of Himanshu Patro.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About — Himanshu Patro",
     description:
       "Background, engineering experience at Celebal Technologies and Tata Steel, education at ITER, and technical focus areas of Himanshu Patro.",
+    url: "https://himanshupatro.dev/about",
     type: "profile",
   },
   twitter: {

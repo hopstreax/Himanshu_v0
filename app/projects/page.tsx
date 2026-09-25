@@ -10,10 +10,14 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Flagship engineering work including TraceKit (Autonomous AI testing) and AI Interviewer, alongside full-stack application archives.",
+  alternates: {
+    canonical: "/projects",
+  },
   openGraph: {
     title: "Projects — Himanshu Patro",
     description:
       "Flagship engineering work including TraceKit (Autonomous AI testing) and AI Interviewer, alongside full-stack application archives.",
+    url: "https://himanshupatro.dev/projects",
     type: "website",
   },
   twitter: {

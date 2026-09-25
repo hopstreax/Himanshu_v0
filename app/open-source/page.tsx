@@ -9,10 +9,14 @@ export const metadata: Metadata = {
   title: "Open Source",
   description:
     "Open-source contributions across Graphify: AST analysis, symbol graph extraction, incremental processing, and 30+ merged pull requests.",
+  alternates: {
+    canonical: "/open-source",
+  },
   openGraph: {
     title: "Open Source — Himanshu Patro",
     description:
       "Open-source contributions across Graphify: AST analysis, symbol graph extraction, incremental processing, and 30+ merged pull requests.",
+    url: "https://himanshupatro.dev/open-source",
     type: "website",
   },
   twitter: {

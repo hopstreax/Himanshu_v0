@@ -10,10 +10,14 @@ export const metadata: Metadata = {
   title: "Connect",
   description:
     "Direct communication directory and channels for Himanshu Patro — Open for full-time software engineering roles & open-source collaboration.",
+  alternates: {
+    canonical: "/connect",
+  },
   openGraph: {
     title: "Connect — Himanshu Patro",
     description:
       "Direct communication directory and channels for Himanshu Patro — Open for full-time software engineering roles & open-source collaboration.",
+    url: "https://himanshupatro.dev/connect",
     type: "website",
   },
   twitter: {

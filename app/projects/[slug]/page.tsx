@@ -30,9 +30,13 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: `/projects/${project.slug}`,
+    },
     openGraph: {
       title: `${project.title} — Case Study | Himanshu Patro`,
       description,
+      url: `https://himanshupatro.dev/projects/${project.slug}`,
       type: "article",
     },
     twitter: {
@@ -55,8 +59,27 @@ export default async function ProjectCaseStudyPage({
 
   const isFlagship = project.tier === "flagship";
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    name: project.title,
+    description: project.shortDescription,
+    programmingLanguage: project.technologies,
+    author: {
+      "@type": "Person",
+      name: "Himanshu Patro",
+      url: "https://himanshupatro.dev",
+    },
+    dateCreated: project.year,
+    url: `https://himanshupatro.dev/projects/${project.slug}`,
+  };
+
   return (
     <PageShell activeSection="projects">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Back to Projects Index */}
       <div className="mb-8">
         <Link
