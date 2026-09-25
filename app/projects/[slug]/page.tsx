@@ -1,7 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle2, Cpu, Layers, Terminal } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  CheckCircle2,
+  Cpu,
+  FileText,
+  Github,
+  Layers,
+  Terminal,
+} from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
 import { ProjectNavigation } from "@/components/subpage/ProjectNavigation";
 import { projects } from "@/data/projects";
@@ -72,6 +81,8 @@ export default async function ProjectCaseStudyPage({
     },
     dateCreated: project.year,
     url: `https://himanshupatro.dev/projects/${project.slug}`,
+    ...(project.repositoryUrl && { codeRepository: project.repositoryUrl }),
+    ...(project.liveUrl && { targetProduct: { "@type": "WebApplication", url: project.liveUrl } }),
   };
 
   return (
@@ -132,6 +143,50 @@ export default async function ProjectCaseStudyPage({
             </span>
           ))}
         </div>
+
+        {/* Verified Links & Project Artifacts */}
+        {(project.liveUrl || project.repositoryUrl || project.notionUrl) && (
+          <div className="flex flex-wrap items-center gap-3 pt-3">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-md bg-canvas border border-border-strong hover:bg-surface text-ink text-[11px] font-mono font-semibold uppercase tracking-wider transition-colors group"
+                aria-label={`Open live deployment for ${project.title}`}
+              >
+                <span>LIVE APPLICATION</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            )}
+            {project.repositoryUrl && (
+              <a
+                href={project.repositoryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-md bg-canvas border border-border-subtle hover:border-border-strong hover:bg-surface text-ink text-[11px] font-mono font-medium uppercase tracking-wider transition-colors group"
+                aria-label={`View ${project.title} source code on GitHub`}
+              >
+                <Github className="w-3.5 h-3.5" />
+                <span>GITHUB REPO</span>
+                <ArrowUpRight className="w-3 h-3 text-ink-subtle group-hover:text-ink transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            )}
+            {project.notionUrl && (
+              <a
+                href={project.notionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-md bg-canvas border border-border-subtle hover:border-border-strong hover:bg-surface text-ink-muted hover:text-ink text-[11px] font-mono font-medium uppercase tracking-wider transition-colors group"
+                aria-label={`Open Notion specification for ${project.title}`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>NOTION DOCS</span>
+                <ArrowUpRight className="w-3 h-3 text-ink-subtle group-hover:text-ink transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            )}
+          </div>
+        )}
       </header>
 
       {/* Case Study Body */}

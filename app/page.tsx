@@ -47,9 +47,10 @@ const jsonLd = {
       url: "https://himanshupatro.dev",
       jobTitle: "Full Stack AI Developer",
       sameAs: [
-        "https://github.com/himanshupatro-334",
-        "https://linkedin.com/in/himanshupatro",
-        "https://x.com/himanshupatro",
+        "https://github.com/hopstreax",
+        "https://www.linkedin.com/in/himanshupatro/",
+        "https://x.com/hopstreax",
+        "https://www.instagram.com/hop.streax/",
       ],
       knowsAbout: [
         "Full Stack Development",

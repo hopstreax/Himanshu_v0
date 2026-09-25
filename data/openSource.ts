@@ -1,4 +1,74 @@
-import { OSSContribution } from "@/types/portfolio";
+import { OSSContribution, OpenSourceRepository } from "@/types/portfolio";
+import { githubActivity } from "./githubActivity";
+
+export const openSourceRepositories: readonly OpenSourceRepository[] = [
+  {
+    name: "Graphify",
+    organization: "Graphify-Labs",
+    url: "https://github.com/Graphify-Labs/graphify",
+    description:
+      "Code intelligence, multi-language AST parsing, and symbol dependency graph engine.",
+    focusAreas: [
+      "AST Analysis",
+      "Code Intelligence",
+      "Symbol Graphs",
+      "Deterministic Builds",
+    ],
+    isPrimary: true,
+  },
+  {
+    name: "Agent Orchestrator",
+    organization: "Untrivial-ai",
+    url: "https://github.com/Untrivial-ai/agent-orchestrator",
+    description:
+      "Multi-agent task orchestration, execution runtime pipelines, and agentic workflows.",
+    focusAreas: [
+      "Multi-Agent Systems",
+      "Task Orchestration",
+      "Workflow Automation",
+    ],
+    isPrimary: false,
+  },
+  {
+    name: "PDA",
+    organization: "ProteinDeficientsAnonymous",
+    url: "https://github.com/ProteinDeficientsAnonymous/pda",
+    description:
+      "Community open-source software tooling and application systems.",
+    focusAreas: [
+      "Community Tooling",
+      "Software Systems",
+      "Collaborative Development",
+    ],
+    isPrimary: false,
+  },
+  {
+    name: "Continue",
+    organization: "continuedev",
+    url: "https://github.com/continuedev/continue",
+    description:
+      "Open-source AI code assistant ecosystem, IDE integrations, and developer workflows.",
+    focusAreas: [
+      "AI Code Assistant",
+      "Developer Workflows",
+      "IDE Integrations",
+    ],
+    isPrimary: false,
+  },
+  {
+    name: "Headroom",
+    organization: "headroomlabs-ai",
+    url: "https://github.com/headroomlabs-ai/headroom",
+    description:
+      "Contextual intelligence infrastructure and modern AI runtime tooling.",
+    focusAreas: [
+      "Contextual Intelligence",
+      "AI Infrastructure",
+      "Agent Runtime",
+    ],
+    isPrimary: false,
+  },
+] as const;
 
 export const graphifyStory: OSSContribution = {
   slug: "graphify",
@@ -38,7 +108,9 @@ export const graphifyStory: OSSContribution = {
     "NetworkX",
     "Graph Theory",
   ],
-  repositoryUrl: "https://github.com/hopstreax",
+  repositoryUrl: "https://github.com/Graphify-Labs/graphify",
+  repositories: openSourceRepositories,
+  activity: githubActivity,
 };
 
 export const openSourceContributions: readonly OSSContribution[] = [graphifyStory];

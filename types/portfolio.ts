@@ -30,12 +30,44 @@ export interface ProjectItem {
   technologies: readonly string[];
   highlights: readonly string[];
   links?: readonly ProjectLink[];
+  repositoryUrl?: string;
+  liveUrl?: string;
+  notionUrl?: string;
   featured: boolean;
 }
 
 export interface OSSMetric {
   label: string;
   value: string;
+}
+
+export interface OpenSourceRepository {
+  name: string;
+  organization: string;
+  url: string;
+  description: string;
+  focusAreas: readonly string[];
+  isPrimary?: boolean;
+}
+
+export interface GitHubDayContribution {
+  date: string;
+  level: number;
+  count: number;
+  weekday?: number;
+}
+
+export interface GitHubActivity {
+  username: string;
+  totalContributions: number;
+  updatedAt: string;
+  source?: string;
+  generatedAt?: string;
+  range: {
+    from: string;
+    to: string;
+  };
+  days: readonly GitHubDayContribution[];
 }
 
 export interface OSSContribution {
@@ -51,6 +83,8 @@ export interface OSSContribution {
   notableWork: readonly string[];
   technologies: readonly string[];
   repositoryUrl: string;
+  repositories?: readonly OpenSourceRepository[];
+  activity?: GitHubActivity;
 }
 
 export interface ExperienceItem {
@@ -86,12 +120,15 @@ export interface AboutData {
   coreSkills: readonly string[];
 }
 
+export type SocialPlatform = "GitHub" | "LinkedIn" | "X" | "Email" | "Instagram" | "Notion";
+
 export interface SocialLinkItem {
-  platform: "GitHub" | "LinkedIn" | "X" | "Email";
+  platform: SocialPlatform;
   label: string;
   url: string;
   handle: string;
   isExternal: boolean;
+  isPrimary?: boolean;
   actionText?: string;
 }
 
@@ -100,4 +137,5 @@ export interface ConnectData {
   tagline: string;
   actionPrompt: string;
   links: readonly SocialLinkItem[];
+  secondaryLinks?: readonly SocialLinkItem[];
 }

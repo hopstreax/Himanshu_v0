@@ -18,6 +18,10 @@ export const projects: readonly ProjectItem[] = [
       "Ambient diagnostic session recording and trace visualizer",
       "Deterministic end-to-end test orchestration across modern web stacks",
     ],
+    liveUrl: "https://tracekit-one.vercel.app/",
+    notionUrl:
+      "https://app.notion.com/p/TraceKit-AI-web-testing-that-acts-verifies-and-explains-40f91c3ec4e94f44b103db3b555f9500?source=copy_link",
+    repositoryUrl: "https://github.com/hopstreax/testing-agent_v0",
     featured: true,
   },
   {
@@ -37,6 +41,7 @@ export const projects: readonly ProjectItem[] = [
       "Dynamic question difficulty adjustment powered by LLM prompt engineering",
       "Structured analytical candidate feedback across technical accuracy and clarity",
     ],
+    repositoryUrl: "https://github.com/hopstreax/ai-interviewer",
     featured: true,
   },
   {
@@ -56,6 +61,7 @@ export const projects: readonly ProjectItem[] = [
       "Indexed search reducing item discovery time by 40%",
       "Real-time user dashboards for tracking posted items and claim activity",
     ],
+    repositoryUrl: "https://github.com/hopstreax/campus-portal",
     featured: false,
   },
   {

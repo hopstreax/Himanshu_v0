@@ -1,5 +1,16 @@
 import React from "react";
-import { ArrowUpRight, Mail, Github, Linkedin, Twitter, MessageSquare, Compass, Send } from "lucide-react";
+import {
+  ArrowUpRight,
+  Mail,
+  Github,
+  Linkedin,
+  Twitter,
+  MessageSquare,
+  Compass,
+  Send,
+  Instagram,
+  FileText,
+} from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
 import { EditorialHeader } from "@/components/subpage/EditorialHeader";
 import { connectData } from "@/data/social";
@@ -33,6 +44,8 @@ const platformIcons: Record<string, React.ReactNode> = {
   LinkedIn: <Linkedin className="w-4 h-4 text-ink" />,
   X: <Twitter className="w-4 h-4 text-ink" />,
   Email: <Mail className="w-4 h-4 text-ink" />,
+  Instagram: <Instagram className="w-4 h-4 text-ink" />,
+  Notion: <FileText className="w-4 h-4 text-ink" />,
 };
 
 export default function ConnectPage() {
@@ -46,11 +59,11 @@ export default function ConnectPage() {
       />
 
       <div className="flex flex-col space-y-14">
-        {/* Main Direct Channels */}
+        {/* Primary Communication Channels */}
         <section aria-labelledby="channels-heading">
           <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle mb-6">
             <MessageSquare className="w-3.5 h-3.5 text-ink" />
-            <h2 id="channels-heading">VERIFIED CHANNELS & PROFILES</h2>
+            <h2 id="channels-heading">PRIMARY COMMUNICATION CHANNELS</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -87,6 +100,44 @@ export default function ConnectPage() {
             ))}
           </div>
         </section>
+
+        {/* Secondary / Additional Profiles */}
+        {connectData.secondaryLinks && connectData.secondaryLinks.length > 0 && (
+          <section aria-labelledby="secondary-channels-heading" className="pt-2">
+            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle mb-4">
+              <Compass className="w-3.5 h-3.5 text-ink" />
+              <h2 id="secondary-channels-heading">ADDITIONAL PROFILES & NOTES</h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {connectData.secondaryLinks.map((link) => (
+                <a
+                  key={link.platform}
+                  href={link.url}
+                  target={link.isExternal ? "_blank" : undefined}
+                  rel={link.isExternal ? "noopener noreferrer" : undefined}
+                  className="group p-4 rounded-xl border border-border-subtle/80 bg-canvas-subtle/30 hover:bg-surface/80 transition-all flex items-center justify-between"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="p-1.5 rounded-md bg-canvas border border-border-subtle/60 text-ink">
+                      {platformIcons[link.platform] || <Compass className="w-4 h-4" />}
+                    </div>
+                    <div>
+                      <div className="text-[14px] font-medium text-ink">
+                        {link.label}
+                      </div>
+                      <div className="text-[11px] font-mono text-ink-muted">
+                        {link.handle}
+                      </div>
+                    </div>
+                  </div>
+
+                  <ArrowUpRight className="w-3.5 h-3.5 text-ink-subtle group-hover:text-ink transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Status / Availability Brief */}
         <section aria-labelledby="status-heading" className="pt-8 border-t border-border-subtle/80">
