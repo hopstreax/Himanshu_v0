@@ -260,14 +260,14 @@ export default function OpenSourcePage() {
                 key={eco.repoName}
                 className="p-6 rounded-xl border border-border-subtle bg-canvas-subtle/30 flex flex-col justify-between space-y-4"
               >
-                <div className="space-y-3">
+                <div className="space-y-3.5">
                   <div className="flex items-center justify-between text-[10px] font-mono text-ink-subtle">
-                    <span className="uppercase">{eco.organization}</span>
+                    <span className="uppercase tracking-wider">{eco.organization}</span>
                     <span>{eco.role}</span>
                   </div>
 
                   <div className="flex items-baseline justify-between">
-                    <h3 className="text-[18px] font-semibold text-ink">
+                    <h3 className="text-[19px] font-semibold text-ink">
                       {eco.repoName}
                     </h3>
                     <a
@@ -283,10 +283,57 @@ export default function OpenSourcePage() {
                   </div>
 
                   <p className="text-[13px] text-ink-muted leading-relaxed">
-                    {eco.summary}
+                    {eco.description || eco.summary}
                   </p>
 
-                  <div className="p-3.5 rounded-lg bg-surface/60 border border-border-subtle/60 space-y-1.5 text-[12px]">
+                  {eco.whyInteresting && (
+                    <div className="p-3.5 rounded-lg bg-surface/60 border border-border-subtle/60 space-y-1 text-[12px]">
+                      <div className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider">
+                        Why It Was Interesting:
+                      </div>
+                      <p className="text-ink-muted leading-relaxed">
+                        {eco.whyInteresting}
+                      </p>
+                    </div>
+                  )}
+
+                  {eco.contributionAreas && eco.contributionAreas.length > 0 && (
+                    <div className="space-y-1.5">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                        Contribution Areas:
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {eco.contributionAreas.map((area) => (
+                          <span
+                            key={area}
+                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface text-ink border border-border-subtle/70"
+                          >
+                            {area}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {eco.technicalAreasTouched && eco.technicalAreasTouched.length > 0 && (
+                    <div className="space-y-1.5">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                        Technical Areas Touched:
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {eco.technicalAreasTouched.map((area) => (
+                          <span
+                            key={area}
+                            className="text-[10px] font-mono px-2 py-0.5 rounded bg-canvas text-ink-muted border border-border-subtle/50"
+                          >
+                            {area}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="p-3.5 rounded-lg bg-surface/60 border border-border-subtle/60 space-y-1 text-[12px]">
                     <div className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider">
                       Technical Work:
                     </div>
@@ -295,7 +342,7 @@ export default function OpenSourcePage() {
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-lg bg-surface/60 border border-border-subtle/60 space-y-1.5 text-[12px]">
+                  <div className="p-3.5 rounded-lg bg-surface/60 border border-border-subtle/60 space-y-1 text-[12px]">
                     <div className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider">
                       What I Learned:
                     </div>

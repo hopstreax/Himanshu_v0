@@ -39,8 +39,12 @@ export const projects: readonly ProjectItem[] = [
         "TraceKit is an autonomous browser testing agent designed to eliminate the fragility of traditional end-to-end test maintenance. By pairing multimodal LLM reasoning with deterministic browser automation and assertions, TraceKit turns plain-English test objectives into verifiable browser interactions, structured execution traces, and inspectable artifact reports. Its foundational architectural thesis is: LLMs decide what to do; deterministic browser assertions decide whether it actually worked.",
       problem:
         "Traditional end-to-end testing frameworks (Playwright, Cypress, Selenium) suffer from recurring maintenance overhead. Subtle DOM restructuring, renamed CSS classes, or adjusted layouts frequently break hardcoded locators even when application logic remains correct. Teams spend substantial engineering cycles updating brittle scripts. Conversely, relying purely on an LLM to evaluate visual screenshots or DOM states often produces hallucinations—grading a broken checkout as 'passing' because it 'looks plausible.'",
-      whyBuilt:
+      motivation:
         "I built TraceKit to bridge the gap between brittle rule-based scripts and speculative AI testers. The goal was to build a system where the AI acts as a flexible planner (adapting to UI drift and navigating user journeys) while strict, deterministic Chromium DOM APIs serve as an uncompromising ground truth for test verification.",
+      whyBuilt:
+        "To eliminate the high engineering maintenance tax of brittle selectors while providing developers with transparent, verifiable test traces and failure diagnoses.",
+      solution:
+        "TraceKit separates planning from verification: multimodal LLM inference interprets user goals and inspects the accessibility tree to select actions, while Playwright assertions evaluate the live DOM state directly, emitting structured timing, locators, and failure classifications.",
       whatSystemDoes: [
         "Ingests target URLs and plain-English testing objectives (e.g. 'Search for product X, add to cart, verify order summary').",
         "Captures semantic accessibility tree snapshots and interactive element locators, keeping token usage minimal.",
@@ -49,12 +53,23 @@ export const projects: readonly ProjectItem[] = [
         "Evaluates explicit Playwright expect assertions directly against the live DOM state (visibility, text values, element counts).",
         "Records 4-part structured execution traces (observation, decision, action, result) with full-resolution screenshots and failure triage.",
       ],
+      technicalApproach: [
+        "Dual-engine architecture: Python FastAPI backend controls browser execution; Next.js 16 frontend streams execution traces in real time.",
+        "Chrome DevTools Protocol (CDP) orchestration via Patchright driver, avoiding bot-detection barriers and enabling authentic browser automation.",
+        "Semantic accessibility tree parsing that strips non-interactive noise, reducing LLM token consumption by over 75% compared to raw DOM dumps.",
+      ],
       architectureFlow: [
         "1. OBSERVE: Captures clean DOM accessibility snapshot, interactive locators, and viewport screenshot.",
         "2. REASON: LLM analyzes current state against goal and historical step context; selects next logical action.",
         "3. ACT: ActionDispatcher executes typed Pydantic action in Patchright Chromium.",
         "4. VERIFY: Evaluates deterministic Playwright expect assertion directly against Chromium DOM.",
         "5. REPORT: Records step trace, visual evidence, timings, and diagnostic failure categorization.",
+      ],
+      keyFeatures: [
+        "Autonomous failure triage and self-healing test execution",
+        "Ambient diagnostic session recording and trace visualizer",
+        "Deterministic end-to-end test orchestration across modern web stacks",
+        "User-scoped volume artifact storage and session history",
       ],
       technicalImplementation: [
         {
@@ -137,6 +152,23 @@ export const projects: readonly ProjectItem[] = [
         "Visual regression diffing engine comparing viewport baseline snapshots.",
         "Export capability allowing autonomous test traces to be exported directly as idiomatic Playwright test scripts.",
       ],
+      links: [
+        {
+          label: "Live Application",
+          url: "https://tracekit-one.vercel.app/",
+          type: "live",
+        },
+        {
+          label: "GitHub Repository",
+          url: "https://github.com/hopstreax/testing-agent_v0",
+          type: "github",
+        },
+        {
+          label: "Notion Architecture Documentation",
+          url: "https://app.notion.com/p/TraceKit-AI-web-testing-that-acts-verifies-and-explains-40f91c3ec4e94f44b103db3b555f9500?source=copy_link",
+          type: "demo",
+        },
+      ],
     },
   },
   {
@@ -170,13 +202,22 @@ export const projects: readonly ProjectItem[] = [
         "AI Interviewer is an intelligent interview preparation platform that replaces static question-and-answer flashcards with a dynamic, conversational simulation. Candidates experience interactive technical and behavioral interview sessions where questions adapt based on prior answers, and performance is evaluated across technical precision and communication clarity.",
       problem:
         "Traditional interview preparation tools rely on static question lists and generic multiple-choice quizzes. They fail to test candidates in realistic verbal conditions, offer no dynamic follow-up questioning when an answer is incomplete, and provide superficial, keyword-matching feedback that does not assess conceptual understanding.",
+      motivation:
+        "To provide students and engineers with realistic, low-pressure interview practice that mirrors actual technical and behavioral screening loops, emphasizing vocal articulation, technical depth, and handling unexpected follow-ups.",
       whyBuilt:
-        "I built AI Interviewer to provide students and engineers with realistic, low-pressure interview practice that mirrors actual technical and behavioral screening loops. The platform focuses on vocal articulation, technical depth, and handling unexpected follow-ups.",
+        "To automate realistic technical and HR interview workflows with real-time speech evaluation and structured candidate feedback.",
+      solution:
+        "Integrated a real-time speech ingestion pipeline in Python with Generative AI prompt orchestration, analyzing spoken responses against technical rubrics and generating tailored follow-up inquiries.",
       whatSystemDoes: [
         "Captures candidate speech in real-time and converts audio to text via speech recognition pipelines.",
         "Parses candidate responses against role-tailored technical criteria and domain knowledge bases.",
         "Dynamically determines question difficulty and generates intelligent follow-up inquiries.",
         "Produces structured post-interview analytical scorecards highlighting communication strengths, conceptual gaps, and recommendations.",
+      ],
+      technicalApproach: [
+        "Streamlit-based reactive interface for audio input and instant candidate feedback display.",
+        "Speech recognition preprocessing handling hesitation markers without breaking transcription context.",
+        "Structured prompt chaining enforcing strict JSON scoring schemas for rubric visualization.",
       ],
       architectureFlow: [
         "1. CONFIGURATION: Candidate selects role domain (Software Engineering, Data Science, HR) and experience level.",
@@ -184,6 +225,12 @@ export const projects: readonly ProjectItem[] = [
         "3. TRANSCRIPTION & PARSING: Audio is transcribed and preprocessed for evaluation.",
         "4. REASONING & ADAPTATION: LLM evaluates technical accuracy and generates contextual follow-up questions.",
         "5. SYNTHESIS: Session concludes with a comprehensive multi-attribute evaluation report.",
+      ],
+      keyFeatures: [
+        "AI-generated domain-specific interview questions",
+        "Role-based interview configurations (Technical, System Design, Behavioral)",
+        "Real-time speech recognition and verbal fluency analysis",
+        "Structured analytical scorecards with strengths and growth areas",
       ],
       technicalImplementation: [
         {
@@ -239,6 +286,13 @@ export const projects: readonly ProjectItem[] = [
         "Integrating multimodal facial and gaze cues to provide feedback on eye contact and presentation confidence.",
         "Adding an interactive in-browser code editor for real-time coding interview simulations.",
       ],
+      links: [
+        {
+          label: "GitHub Repository",
+          url: "https://github.com/hopstreax/ai-interviewer",
+          type: "github",
+        },
+      ],
     },
   },
   {
@@ -251,7 +305,7 @@ export const projects: readonly ProjectItem[] = [
     shortDescription:
       "Full-stack campus management system with secure RESTful APIs, JWT role-based access control, and indexed search reducing item recovery time by 40%.",
     longDescription:
-      "A full-stack campus-focused community web application built for students and faculty of ITER, SOA University. Eliminates fragmented social media notices by providing a centralized, searchable portal for reporting lost belongings, logging found items, and coordinating academic resource sharing.",
+      "A full-stack campus-focused community web application built for students and faculty of ITER, Siksha 'O' Anusandhan (SOA) University. Eliminates fragmented social media notices by providing a centralized, searchable portal for reporting lost belongings, logging found items, and coordinating academic resource sharing.",
     technologies: [
       "React.js",
       "Node.js",
@@ -270,22 +324,37 @@ export const projects: readonly ProjectItem[] = [
     featured: false,
     caseStudy: {
       overview:
-        "Campus Lost & Found Portal is a centralized web platform designed for the students and faculty of ITER, SOA University, Bhubaneswar. It replaces unorganized WhatsApp and Telegram group messages with an indexed, authenticated system for recovering lost campus property and sharing academic resources.",
+        "Campus Lost & Found Portal is a centralized web platform designed for the students and faculty of ITER, Siksha 'O' Anusandhan (SOA) University, Bhubaneswar. It replaces unorganized WhatsApp and Telegram group messages with an indexed, authenticated system for recovering lost campus property and sharing academic resources.",
       problem:
         "Across large university campuses, hundreds of valuable items (identity cards, lab equipment, chargers, notebooks) are misplaced weekly. Announcements were scattered across disparate chat groups, leading to low item recovery rates, duplicate posts, and lack of accountability when claiming items.",
+      motivation:
+        "To provide the university campus community with a structured, verified tool that streamlines lost item reporting, facilitates verified ownership claims, and encourages academic resource sharing.",
       whyBuilt:
-        "I built this portal to provide my university community with a structured, verified tool that streamlines lost item reporting, facilitates verified ownership claims, and encourages campus resource sharing.",
+        "To eliminate lost item chaos on campus by providing indexed search, visual status distinction, and authenticated claim verification.",
+      solution:
+        "Engineered a full-stack MERN portal with compound MongoDB indexing, JWT role-based authentication, and structured claim verification forms.",
       whatSystemDoes: [
         "Allows authenticated campus users to report lost or found items with images, descriptions, location markers, and category tags.",
         "Provides visual status distinction between lost (urgent) and found items with color-coded badges.",
         "Features indexed search filtering by keyword, date range, campus zone, and category.",
         "Manages private claim requests, allowing finders and claimers to coordinate handoffs securely.",
       ],
+      technicalApproach: [
+        "Layered MERN architecture separating Express controllers, services, and Mongoose database models.",
+        "Text and category compound indices on MongoDB collections ensuring sub-50ms search query performance.",
+        "JWT-based authorization middleware verifying user claims before allowing post modifications or claim approvals.",
+      ],
       architectureFlow: [
         "1. USER AUTHENTICATION: Students register with campus credentials; JWT token issued with role claims.",
         "2. ITEM POSTING: Item details and location tagged; persisted to MongoDB with compound indices.",
         "3. SEARCH & DISCOVERY: Search queries executed across indexed title, category, and location fields.",
         "4. CLAIM VERIFICATION: Claimer submits identifying verification; poster confirms handoff.",
+      ],
+      keyFeatures: [
+        "Visual distinction between lost and found items",
+        "Indexed keyword, date, and category search",
+        "Role-based access control protecting user postings",
+        "Resource sharing marketplace for academic materials",
       ],
       technicalImplementation: [
         {
@@ -326,6 +395,13 @@ export const projects: readonly ProjectItem[] = [
       futureDirection: [
         "Automated push notifications via WebSockets when newly posted found items match a user's lost item alert.",
       ],
+      links: [
+        {
+          label: "GitHub Repository",
+          url: "https://github.com/hopstreax/campus-portal",
+          type: "github",
+        },
+      ],
     },
   },
   {
@@ -360,19 +436,34 @@ export const projects: readonly ProjectItem[] = [
         "e-PMSSS is a paperless scholarship administration system developed as part of the Smart India Hackathon (SIH). It streamlines the end-to-end disbursement workflow for the Prime Minister's Special Scholarship Scheme, replacing slow, physical paper trails with an authenticated, multi-tier digital verification pipeline.",
       problem:
         "The traditional PMSSS scholarship disbursement process involved physical paper forms, manual multi-departmental stamping, and physical courier transit between colleges, nodal verification centers, and state administrative offices. This resulted in processing backlogs of several months, lost documents, and lack of transparency for student beneficiaries.",
-      whyBuilt:
+      motivation:
         "Developed during the Smart India Hackathon where I served as the technical lead of a student engineering team, addressing a national-level challenge to modernize public scholarship disbursement through transparent digital workflows.",
+      whyBuilt:
+        "To eliminate paper-based administrative friction and secure student scholarship distribution through digital verification state machines.",
+      solution:
+        "Engineered an authenticated digital pipeline with role-tailored dashboards and sequential state-enforced approval checkpoints.",
       whatSystemDoes: [
         "Enables students to register, upload academic credentials, and track their application progress through real-time state badges.",
         "Implements a multi-stage approval state machine: College Verification -> Nodal Officer Audit -> State Administrative Approval -> Disbursement.",
         "Provides role-based dashboards tailored specifically for Students, College Officials, and State Administrators.",
         "Stores encrypted document records with hash verification to prevent document tampering.",
       ],
+      technicalApproach: [
+        "State machine modeling in Express.js enforcing that applications cannot transition without prerequisite approval sign-offs.",
+        "Cryptographically signed JWT tokens with embedded permission scopes driving role-based middleware guards.",
+        "Bcrypt.js password hashing and secure HTTP-only cookie storage for administrator sessions.",
+      ],
       architectureFlow: [
         "1. APPLICATION SUBMISSION: Student submits academic proofs and banking details via React frontend.",
         "2. COLLEGE TIER: College nodal officer reviews records; signs off with verified status.",
         "3. STATE TIER: State administrator audits cross-college batches and authorizes disbursement.",
         "4. AUDIT & DISBURSEMENT: Immutable timestamped audit entries generated for every state change.",
+      ],
+      keyFeatures: [
+        "Multi-stage approval state machine",
+        "Role-based dashboards for students, colleges, and administrators",
+        "Encrypted document record management",
+        "Tamper-resistant audit history log",
       ],
       technicalImplementation: [
         {

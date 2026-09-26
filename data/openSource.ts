@@ -148,16 +148,63 @@ export const graphifyInvestigations: readonly InvestigationStory[] = [
 
 export const ecosystemContributions: readonly EcosystemContribution[] = [
   {
+    repoName: "graphify",
+    organization: "Graphify-Labs",
+    repoUrl: "https://github.com/Graphify-Labs/graphify",
+    description:
+      "Code intelligence, multi-language AST parsing, and symbol dependency graph engine.",
+    summary:
+      "Enterprise-grade code intelligence engine constructing queryable symbol and dependency graphs from multi-language repositories.",
+    whyInteresting:
+      "Operates at the intersection of compiler theory, syntax tree parsing (Tree-Sitter), cross-file reference resolution, and large-scale graph persistence.",
+    role: "Core Contributor (30+ Merged PRs)",
+    contributionAreas: [
+      "AST Extraction & Multi-Language Parsers",
+      "Cross-File Import & Symbol Resolution",
+      "Incremental Graph Deduplication",
+      "Fail-Closed Parser Fault Tolerance",
+      "Cross-Platform Process Isolation",
+    ],
+    technicalAreasTouched: [
+      "Tree-Sitter Grammars & Concrete Syntax Trees",
+      "NetworkX Directed Hypergraphs",
+      "Atomic Filesystem I/O & Path Length Limits",
+      "Python Subprocess Isolation & Windows Flags",
+      "Automated Regression Test Suites",
+    ],
+    technicalWork:
+      "Authored 30+ maintainer-reviewed PRs resolving critical issues across import resolution, hyperedge deduplication during incremental builds, semantic node preservation during partial parse timeouts, and Windows headless subprocess execution.",
+    whatILearned:
+      "Building resilient code intelligence tools where precision is paramount, debugging deep AST and symbol resolution issues, and maintaining backwards compatibility across multi-language ecosystems.",
+    technologies: [
+      "Python",
+      "TypeScript",
+      "Tree-Sitter",
+      "AST Analysis",
+      "NetworkX",
+      "Graph Theory",
+    ],
+  },
+  {
     repoName: "agent-orchestrator",
     organization: "Untrivial-ai",
     repoUrl: "https://github.com/Untrivial-ai/agent-orchestrator",
-    summary:
+    description:
       "Multi-agent task orchestration, execution runtime pipelines, and agentic workflows.",
+    summary:
+      "Multi-agent task orchestration and execution runtime pipeline managing concurrent developer agents.",
+    whyInteresting:
+      "Provides real-world exposure to complex multi-agent execution lifecycles, cross-platform desktop application packaging, and interactive terminal session attachment.",
     role: "Open Source Contributor",
     contributionAreas: [
       "Desktop Release Pipelines",
       "Terminal Subprocess Management",
       "Nightly Feed Integration",
+    ],
+    technicalAreasTouched: [
+      "GitHub Actions Workflow Matrix",
+      "Electron / Tauri Release Channels",
+      "tmux Terminal Emulation Parameters",
     ],
     technicalWork:
       "Investigated desktop release delivery workflows in `.github/workflows/frontend-release.yml`. Resolved an issue where stable release channels failed to publish nightly update feeds, ensuring desktop users received timely software updates. Investigated terminal emulator attachment parameters, setting explicit terminal types (`TERM`) for tmux attach commands to prevent garbled escape sequences.",
@@ -169,14 +216,24 @@ export const ecosystemContributions: readonly EcosystemContribution[] = [
     repoName: "pda",
     organization: "ProteinDeficientsAnonymous",
     repoUrl: "https://github.com/ProteinDeficientsAnonymous/pda",
-    summary:
+    description:
       "Community software tooling, membership management, and event RSVP platforms.",
+    summary:
+      "Community software tooling and membership management platform with complex event reservation flows.",
+    whyInteresting:
+      "Deals with high-concurrency reservation states, multi-tier RSVP gates, and data normalization across user accounts.",
     role: "Open Source Contributor",
     contributionAreas: [
       "RSVP Gate Enforcement",
       "Waitlist Promotion State Machines",
       "Data Normalization",
       "E2E Playwright Testing",
+    ],
+    technicalAreasTouched: [
+      "Capacity Promotion Algorithms",
+      "Authorization Middleware Gates",
+      "E.164 Phone Number Schema Validation",
+      "Playwright End-to-End Test Fixtures",
     ],
     technicalWork:
       "Resolved a critical waitlist promotion bug (Issue #971 / PR #1024) where party '+1' guests were separated during capacity promotions; updated the promotion logic to seat parties together. Enforced member gate validations stopping archived members from bypassing event RSVP gates. Normalized user phone numbers to international E.164 standards at the database model layer and hardened Playwright end-to-end test coverage.",
@@ -188,13 +245,22 @@ export const ecosystemContributions: readonly EcosystemContribution[] = [
     repoName: "continue",
     organization: "continuedev",
     repoUrl: "https://github.com/continuedev/continue",
+    description:
+      "Leading open-source AI code assistant ecosystem, IDE integrations, and developer workflows.",
     summary:
-      "Leading open-source AI code assistant for VS Code and JetBrains IDEs.",
+      "Leading open-source AI code assistant for VS Code and JetBrains IDEs with extensible model providers.",
+    whyInteresting:
+      "Critical developer tool deployed to hundreds of thousands of engineers, requiring defensive parsing when interfacing with unpredictable third-party model provider APIs.",
     role: "Open Source Contributor",
     contributionAreas: [
       "Structured Error Extraction",
       "GUI Error Diagnostics",
       "Provider Failure Triage",
+    ],
+    technicalAreasTouched: [
+      "JSON Error Payloads & Recursive Unwrapping",
+      "Google Gemini Quota Diagnostics",
+      "React IDE Webview State Management",
     ],
     technicalWork:
       "Investigated confusing error presentations in the Continue GUI when interacting with external LLM providers (specifically Google Gemini quota exhaustion and structured API errors). In `gui/src/util/errorAnalysis.ts`, engineered recursive extraction logic to unwrap deeply nested error messages, presenting human-actionable descriptions instead of opaque `[object Object]` error alerts.",
@@ -206,13 +272,22 @@ export const ecosystemContributions: readonly EcosystemContribution[] = [
     repoName: "headroom",
     organization: "headroomlabs-ai",
     repoUrl: "https://github.com/headroomlabs-ai/headroom",
+    description:
+      "Contextual intelligence infrastructure, modern AI proxy runtimes, and streaming pipelines.",
     summary:
-      "Contextual intelligence infrastructure and modern AI proxy runtime.",
+      "Contextual intelligence infrastructure and modern AI proxy runtime managing low-latency streaming completions.",
+    whyInteresting:
+      "Operates at the network transport layer where long-running generative AI completions interact with strict reverse proxy timeout boundaries.",
     role: "Open Source Contributor",
     contributionAreas: [
       "SSE Streaming Keepalive",
       "Proxy Timeout Mitigation",
       "Async Socket Protocols",
+    ],
+    technicalAreasTouched: [
+      "Server-Sent Events (SSE) Wire Format",
+      "Python AsyncIO Tasks & Timeouts",
+      "Reverse Proxy Disconnect Handling",
     ],
     technicalWork:
       "Diagnosed premature connection drops on long-running LLM completions routed through reverse proxies (Issue #3267). In `headroom/proxy/handlers/streaming.py`, implemented transport-level Server-Sent Events (SSE) keepalive frames (`: ping\\n\\n`) dispatched every 15 seconds using `asyncio.wait` timeouts while in-flight tokens were being computed, preserving TTFB telemetry while preventing downstream proxy disconnects.",

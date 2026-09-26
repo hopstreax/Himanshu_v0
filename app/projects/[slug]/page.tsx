@@ -220,25 +220,82 @@ export default async function ProjectCaseStudyPage({
           </div>
         </section>
 
-        {/* 03: Why I Built It */}
-        {caseStudy?.whyBuilt && (
+        {/* 03: Motivation / Why Built */}
+        {(caseStudy?.motivation || caseStudy?.whyBuilt) && (
           <section aria-labelledby="why-heading" className="pt-8 border-t border-border-subtle/80 space-y-4">
             <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
               <Lightbulb className="w-3.5 h-3.5 text-ink" />
-              <h2 id="why-heading">03 / WHY I BUILT IT</h2>
+              <h2 id="why-heading">03 / MOTIVATION & PURPOSE</h2>
             </div>
             <p className="text-[15px] sm:text-[16px] text-ink-muted leading-relaxed">
-              {caseStudy.whyBuilt}
+              {caseStudy.motivation || caseStudy.whyBuilt}
             </p>
           </section>
         )}
 
-        {/* 04: What The System Does */}
+        {/* 04: The Solution */}
+        {caseStudy?.solution && (
+          <section aria-labelledby="solution-heading" className="pt-8 border-t border-border-subtle/80 space-y-4">
+            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+              <CheckCircle2 className="w-3.5 h-3.5 text-ink" />
+              <h2 id="solution-heading">04 / THE SOLUTION</h2>
+            </div>
+            <div className="p-5 rounded-xl border border-border-strong bg-canvas-subtle/40 text-[15px] text-ink leading-relaxed">
+              {caseStudy.solution}
+            </div>
+          </section>
+        )}
+
+        {/* Technical Approach */}
+        {caseStudy?.technicalApproach && caseStudy.technicalApproach.length > 0 && (
+          <section aria-labelledby="approach-heading" className="pt-8 border-t border-border-subtle/80 space-y-4">
+            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+              <Terminal className="w-3.5 h-3.5 text-ink" />
+              <h2 id="approach-heading">TECHNICAL APPROACH & METHODOLOGY</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+              {caseStudy.technicalApproach.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 rounded-lg border border-border-subtle bg-canvas-subtle/20 flex flex-col justify-between space-y-2 text-[13px] text-ink-muted leading-relaxed"
+                >
+                  <span className="font-mono text-ink font-semibold text-[10px] tracking-wider uppercase">
+                    0{idx + 1} / APPROACH
+                  </span>
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Key Features */}
+        {caseStudy?.keyFeatures && caseStudy.keyFeatures.length > 0 && (
+          <section aria-labelledby="features-heading" className="pt-8 border-t border-border-subtle/80 space-y-4">
+            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+              <Layers className="w-3.5 h-3.5 text-ink" />
+              <h2 id="features-heading">KEY SYSTEM FEATURES</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {caseStudy.keyFeatures.map((feat, idx) => (
+                <div
+                  key={idx}
+                  className="p-3.5 rounded-lg border border-border-subtle bg-surface/50 flex items-start space-x-2.5 text-[13px] text-ink"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-ink-muted mt-0.5 shrink-0" />
+                  <span>{feat}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* What The System Does */}
         {caseStudy?.whatSystemDoes && (
           <section aria-labelledby="capabilities-heading" className="pt-8 border-t border-border-subtle/80 space-y-5">
             <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
               <Layers className="w-3.5 h-3.5 text-ink" />
-              <h2 id="capabilities-heading">04 / WHAT THE SYSTEM DOES</h2>
+              <h2 id="capabilities-heading">SYSTEM CAPABILITIES</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
@@ -425,6 +482,30 @@ export default async function ProjectCaseStudyPage({
                 </li>
               ))}
             </ul>
+          </section>
+        )}
+
+        {/* 12: Verified Project Links */}
+        {caseStudy?.links && caseStudy.links.length > 0 && (
+          <section aria-labelledby="links-heading" className="pt-8 border-t border-border-subtle/80 space-y-4">
+            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+              <Compass className="w-3.5 h-3.5 text-ink" />
+              <h2 id="links-heading">12 / VERIFIED PROJECT ARTIFACTS & LINKS</h2>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {caseStudy.links.map((link, idx) => (
+                <a
+                  key={idx}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-md bg-canvas border border-border-subtle hover:border-border-strong text-ink text-[11px] font-mono font-medium uppercase tracking-wider transition-colors group"
+                >
+                  <span>{link.label}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              ))}
+            </div>
           </section>
         )}
       </article>

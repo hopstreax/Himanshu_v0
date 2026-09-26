@@ -38,15 +38,20 @@ export interface CaseStudyChallenge {
 export interface ProjectCaseStudy {
   overview: string;
   problem: string;
-  whyBuilt: string;
-  whatSystemDoes: readonly string[];
-  architectureFlow: readonly string[];
-  technicalImplementation: readonly CaseStudyImplementationSection[];
-  engineeringDecisions: readonly CaseStudyDecision[];
-  challengesAndSolutions: readonly CaseStudyChallenge[];
-  currentState: string;
-  whatILearned: readonly string[];
-  futureDirection: readonly string[];
+  motivation?: string;
+  whyBuilt?: string;
+  solution?: string;
+  whatSystemDoes?: readonly string[];
+  technicalApproach?: readonly string[];
+  architectureFlow?: readonly string[];
+  keyFeatures?: readonly string[];
+  technicalImplementation?: readonly CaseStudyImplementationSection[];
+  engineeringDecisions?: readonly CaseStudyDecision[];
+  challengesAndSolutions?: readonly CaseStudyChallenge[];
+  currentState?: string;
+  whatILearned?: readonly string[];
+  futureDirection?: readonly string[];
+  links?: readonly ProjectLink[];
 }
 
 export interface ProjectItem {
@@ -84,9 +89,12 @@ export interface EcosystemContribution {
   repoName: string;
   organization: string;
   repoUrl: string;
+  description?: string;
   summary: string;
+  whyInteresting?: string;
   role: string;
   contributionAreas: readonly string[];
+  technicalAreasTouched?: readonly string[];
   technicalWork: string;
   whatILearned: string;
   technologies: readonly string[];
@@ -193,6 +201,22 @@ export interface OutsideEngineeringItem {
   description: string;
 }
 
+export interface WhatIBuildItem {
+  domain: string;
+  headline: string;
+  description: string;
+  competencies: readonly string[];
+}
+
+export interface OpenSourceJourneySection {
+  summary: string;
+  stages: readonly {
+    phase: string;
+    focus: string;
+    description: string;
+  }[];
+}
+
 export interface AboutData {
   name: string;
   title: string;
@@ -200,11 +224,14 @@ export interface AboutData {
   longBio: readonly string[];
   currentFocus: string;
   location: string;
+  baseLocation?: string;
   technicalFocusAreas: readonly string[];
   education: EducationItem;
   experiences: readonly ExperienceItem[];
   coreSkills: readonly string[];
+  whatIBuild?: readonly WhatIBuildItem[];
   engineeringInterests?: readonly EngineeringInterestItem[];
+  openSourceJourney?: OpenSourceJourneySection;
   howIWork?: readonly WorkPrincipleItem[];
   currentWork?: readonly CurrentWorkItem[];
   outsideEngineering?: readonly OutsideEngineeringItem[];
