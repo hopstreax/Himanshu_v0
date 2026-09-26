@@ -7,10 +7,14 @@ import { GitCommit, ArrowUpRight, Info } from "lucide-react";
 
 interface ContributionGraphProps {
   activity?: GitHubActivity;
+  className?: string;
+  hideHeader?: boolean;
 }
 
 export function ContributionGraph({
   activity = githubActivity,
+  className,
+  hideHeader = false,
 }: ContributionGraphProps) {
   const [activeCell, setActiveCell] = useState<GitHubDayContribution | null>(null);
 
@@ -113,34 +117,39 @@ export function ContributionGraph({
   return (
     <section
       aria-label="GitHub annual contribution activity"
-      className="p-5 sm:p-7 rounded-xl border border-border-subtle bg-canvas-subtle/40 flex flex-col space-y-5 select-none"
+      className={
+        className ??
+        "p-5 sm:p-7 rounded-xl border border-border-subtle bg-canvas-subtle/40 flex flex-col space-y-5 select-none"
+      }
     >
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 border-b border-border-subtle/60 pb-4">
-        <div>
-          <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-            <GitCommit className="w-3.5 h-3.5 text-ink" />
-            <span>GITHUB ACTIVITY · @{activity.username}</span>
+      {!hideHeader && (
+        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 border-b border-border-subtle/60 pb-4">
+          <div>
+            <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
+              <GitCommit className="w-3.5 h-3.5 text-ink" />
+              <span>GITHUB ACTIVITY · @{activity.username}</span>
+            </div>
+            <div className="text-[19px] sm:text-[22px] font-semibold text-ink tracking-tight mt-1">
+              {totalCount} Contributions{dateRangeLabel ? ` · ${dateRangeLabel}` : ""}
+            </div>
           </div>
-          <div className="text-[19px] sm:text-[22px] font-semibold text-ink tracking-tight mt-1">
-            {totalCount} Contributions{dateRangeLabel ? ` · ${dateRangeLabel}` : ""}
-          </div>
-        </div>
 
-        <div className="text-[11px] font-mono text-ink-muted flex items-center space-x-3">
-          <span>{activeDaysCount} active days</span>
-          <span>·</span>
-          <a
-            href={`https://github.com/${activity.username}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-ink transition-colors inline-flex items-center space-x-1 group"
-          >
-            <span>github.com/{activity.username}</span>
-            <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          <div className="text-[11px] font-mono text-ink-muted flex items-center space-x-3">
+            <span>{activeDaysCount} active days</span>
+            <span>·</span>
+            <a
+              href={`https://github.com/${activity.username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-ink transition-colors inline-flex items-center space-x-1 group"
+            >
+              <span>github.com/{activity.username}</span>
+              <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Text summary for accessibility & guaranteed clarity */}
       <p className="sr-only">
