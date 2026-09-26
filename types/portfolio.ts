@@ -18,6 +18,37 @@ export interface ProjectLink {
   type: "github" | "live" | "demo";
 }
 
+export interface CaseStudyImplementationSection {
+  title: string;
+  description: string;
+  points?: readonly string[];
+}
+
+export interface CaseStudyDecision {
+  decision: string;
+  rationale: string;
+  outcome?: string;
+}
+
+export interface CaseStudyChallenge {
+  challenge: string;
+  solution: string;
+}
+
+export interface ProjectCaseStudy {
+  overview: string;
+  problem: string;
+  whyBuilt: string;
+  whatSystemDoes: readonly string[];
+  architectureFlow: readonly string[];
+  technicalImplementation: readonly CaseStudyImplementationSection[];
+  engineeringDecisions: readonly CaseStudyDecision[];
+  challengesAndSolutions: readonly CaseStudyChallenge[];
+  currentState: string;
+  whatILearned: readonly string[];
+  futureDirection: readonly string[];
+}
+
 export interface ProjectItem {
   slug: string;
   title: string;
@@ -34,6 +65,31 @@ export interface ProjectItem {
   liveUrl?: string;
   notionUrl?: string;
   featured: boolean;
+  caseStudy?: ProjectCaseStudy;
+}
+
+export interface InvestigationStory {
+  title: string;
+  scope: string;
+  prReference?: string;
+  problem: string;
+  investigation: string;
+  change: string;
+  validation: string;
+  result: string;
+  technologies: readonly string[];
+}
+
+export interface EcosystemContribution {
+  repoName: string;
+  organization: string;
+  repoUrl: string;
+  summary: string;
+  role: string;
+  contributionAreas: readonly string[];
+  technicalWork: string;
+  whatILearned: string;
+  technologies: readonly string[];
 }
 
 export interface OSSMetric {
@@ -70,23 +126,6 @@ export interface GitHubActivity {
   days: readonly GitHubDayContribution[];
 }
 
-export interface OSSContribution {
-  slug: string;
-  project: string;
-  role: string;
-  period: string;
-  metrics: readonly OSSMetric[];
-  tagline: string;
-  summary: string;
-  longDescription: string;
-  coreAreas: readonly string[];
-  notableWork: readonly string[];
-  technologies: readonly string[];
-  repositoryUrl: string;
-  repositories?: readonly OpenSourceRepository[];
-  activity?: GitHubActivity;
-}
-
 export interface ExperienceItem {
   company: string;
   role: string;
@@ -107,6 +146,53 @@ export interface EducationItem {
   highlights?: readonly string[];
 }
 
+export interface OSSContribution {
+  slug: string;
+  project: string;
+  role: string;
+  period: string;
+  metrics: readonly OSSMetric[];
+  tagline: string;
+  summary: string;
+  longDescription: string;
+  coreAreas: readonly string[];
+  notableWork: readonly string[];
+  technologies: readonly string[];
+  repositoryUrl: string;
+  repositories?: readonly OpenSourceRepository[];
+  activity?: GitHubActivity;
+  investigations?: readonly InvestigationStory[];
+  ecosystemContributions?: readonly EcosystemContribution[];
+  journeyEssay?: readonly string[];
+}
+
+export interface EngineeringInterestItem {
+  title: string;
+  category: string;
+  description: string;
+  competencies: readonly string[];
+}
+
+export interface WorkPrincipleItem {
+  principle: string;
+  summary: string;
+  practices: readonly string[];
+}
+
+export interface CurrentWorkItem {
+  title: string;
+  detail: string;
+  status: string;
+  linkUrl?: string;
+  linkLabel?: string;
+}
+
+export interface OutsideEngineeringItem {
+  title: string;
+  category: string;
+  description: string;
+}
+
 export interface AboutData {
   name: string;
   title: string;
@@ -118,6 +204,10 @@ export interface AboutData {
   education: EducationItem;
   experiences: readonly ExperienceItem[];
   coreSkills: readonly string[];
+  engineeringInterests?: readonly EngineeringInterestItem[];
+  howIWork?: readonly WorkPrincipleItem[];
+  currentWork?: readonly CurrentWorkItem[];
+  outsideEngineering?: readonly OutsideEngineeringItem[];
 }
 
 export type SocialPlatform = "GitHub" | "LinkedIn" | "X" | "Email" | "Instagram" | "Notion";

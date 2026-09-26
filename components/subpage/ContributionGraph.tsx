@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { GitHubActivity, GitHubDayContribution } from "@/types/portfolio";
 import { githubActivity } from "@/data/githubActivity";
-import { GitCommit, ArrowUpRight } from "lucide-react";
+import { GitCommit, ArrowUpRight, Info } from "lucide-react";
 
 interface ContributionGraphProps {
   activity?: GitHubActivity;
@@ -245,6 +245,17 @@ export function ContributionGraph({
             <span className="w-2.5 h-2.5 rounded-[2px] bg-[#111111]" />
           </div>
           <span>More</span>
+        </div>
+      </div>
+
+      {/* How This Works Explanation */}
+      <div className="pt-3 border-t border-border-subtle/40 flex items-start space-x-2.5 text-[12px] text-ink-muted leading-relaxed">
+        <Info className="w-3.5 h-3.5 text-ink-subtle mt-0.5 shrink-0" />
+        <div>
+          <span className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider block sm:inline sm:mr-1.5">
+            How this works:
+          </span>
+          Synchronized automatically from GitHub via a scheduled background workflow that queries the official GitHub GraphQL contribution calendar API. The resulting dataset is compiled as a static TypeScript snapshot during Next.js builds, ensuring zero client-side token exposure, sub-millisecond rendering, and complete offline resilience.
         </div>
       </div>
     </section>

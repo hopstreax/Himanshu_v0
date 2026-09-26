@@ -151,10 +151,10 @@ export default function ProjectsPage() {
 
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="inline-flex items-center space-x-1 text-[10px] font-mono font-medium uppercase tracking-wider text-ink hover:text-ink-muted transition-colors"
+                    className="inline-flex items-center space-x-1 text-[10px] font-mono font-semibold uppercase tracking-wider text-ink hover:text-ink-muted transition-colors group"
                   >
-                    <span>DETAILS</span>
-                    <ArrowUpRight className="w-3 h-3" />
+                    <span>READ CASE STUDY</span>
+                    <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </div>
               </article>
