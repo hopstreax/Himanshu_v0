@@ -13,23 +13,24 @@ import {
   CheckCircle2,
   MapPin,
   GitBranch,
+  BookOpen,
 } from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
-import { EditorialHeader } from "@/components/subpage/EditorialHeader";
+import { EditorialSection, SectionIndex, StatementBlock, MetadataRow } from "@/components/primitives/Editorial";
 import { aboutData } from "@/data/about";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Engineering profile of Himanshu Patro: based in Jamshedpur, Jharkhand, India. B.Tech in CSIT from ITER, Siksha 'O' Anusandhan (SOA) University. Corporate internships at Celebal Technologies and Tata Steel, and open source engineering.",
+    "Engineering profile of Himanshu Patro: based in Jamshedpur, Jharkhand, India. B.Tech in CSIT from ITER, Siksha 'O' Anusandhan (SOA) University. Corporate internships at Celebal Technologies and Tata Steel, alongside open-source code intelligence work.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "About — Himanshu Patro",
     description:
-      "Engineering profile of Himanshu Patro: based in Jamshedpur, Jharkhand, India. B.Tech in CSIT from ITER, Siksha 'O' Anusandhan (SOA) University. Corporate internships at Celebal Technologies and Tata Steel, and open source engineering.",
+      "Engineering profile of Himanshu Patro: based in Jamshedpur, Jharkhand, India. B.Tech in CSIT from ITER, Siksha 'O' Anusandhan (SOA) University. Corporate internships at Celebal Technologies and Tata Steel, alongside open-source code intelligence work.",
     url: "https://himanshupatro.dev/about",
     type: "profile",
   },
@@ -37,174 +38,114 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About — Himanshu Patro",
     description:
-      "Engineering profile of Himanshu Patro: based in Jamshedpur, Jharkhand, India. B.Tech in CSIT from ITER, Siksha 'O' Anusandhan (SOA) University. Corporate internships at Celebal Technologies and Tata Steel, and open source engineering.",
+      "Engineering profile of Himanshu Patro: based in Jamshedpur, Jharkhand, India. B.Tech in CSIT from ITER, Siksha 'O' Anusandhan (SOA) University. Corporate internships at Celebal Technologies and Tata Steel, alongside open-source code intelligence work.",
   },
 };
 
 export default function AboutPage() {
   return (
     <PageShell activeSection="about">
-      <EditorialHeader
-        sectionNumber="01 / ABOUT"
-        title="Engineering Profile"
-        subtitle={aboutData.shortBio}
-        badge="ENGINEERING DOSSIER"
-      />
+      {/* Editorial Opening / Hero Statement */}
+      <header className="pb-10 mb-14 border-b border-border-subtle/80 space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <span className="text-[10px] font-mono tracking-widest text-ink-muted uppercase px-2.5 py-0.5 rounded-full border border-border-subtle bg-canvas-subtle/80 font-medium">
+              ABOUT / 01
+            </span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
+              ENGINEERING DOSSIER
+            </span>
+          </div>
+          <span className="text-[11px] font-mono text-ink-subtle hidden sm:inline-block">
+            CLASS OF 2026 · CSIT
+          </span>
+        </div>
+
+        <div className="space-y-4 max-w-4xl">
+          <h1 className="text-[36px] sm:text-[48px] md:text-[58px] font-semibold tracking-tight text-ink leading-[1.08]">
+            Himanshu Patro
+          </h1>
+
+          <p className="text-[17px] sm:text-[20px] text-ink-muted leading-relaxed font-sans max-w-3xl">
+            Software engineer interested in building reliable systems around code, AI agents, and developer tooling.
+          </p>
+        </div>
+
+        <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-ink-subtle border-t border-border-subtle/50">
+          <span className="flex items-center space-x-1.5 text-ink font-medium">
+            <MapPin className="w-3 h-3 text-ink-muted" />
+            <span>JAMSHEDPUR, JHARKHAND, INDIA</span>
+          </span>
+          <span className="hidden sm:inline">·</span>
+          <span>B.TECH CSIT · ITER, SOA UNIVERSITY</span>
+          <span className="hidden sm:inline">·</span>
+          <span>OPEN SOURCE CONTRIBUTOR (GRAPHIFY)</span>
+        </div>
+      </header>
 
       <div className="flex flex-col space-y-16">
-        {/* Section 1: Background & Summary */}
-        <section aria-labelledby="background-heading" className="space-y-6">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Terminal className="w-3.5 h-3.5 text-ink" />
-            <h2 id="background-heading">01 / BACKGROUND & PERSONAL INFORMATION</h2>
-          </div>
+        {/* ============================================================ */}
+        {/* 01 / WHO I AM                                                */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="who-heading" hasTopRule={false}>
+          <SectionIndex
+            id="who-heading"
+            number="01"
+            title="WHO I AM & BACKGROUND"
+            icon={<Terminal className="w-3.5 h-3.5" />}
+          />
 
-          <div className="space-y-4 text-[15px] sm:text-[16px] text-ink-muted leading-relaxed">
-            {aboutData.longBio.map((paragraph, idx) => (
-              <p key={idx}>{paragraph}</p>
-            ))}
-          </div>
-
-          {/* Quick Demographic & Institutional Facts */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2">
-            <div className="p-4 rounded-lg border border-border-subtle bg-canvas-subtle/30 space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle flex items-center space-x-1.5">
-                <MapPin className="w-3 h-3 text-ink-muted" />
-                <span>Current Base</span>
-              </div>
-              <div className="text-[14px] font-semibold text-ink">
-                {aboutData.baseLocation || aboutData.location}
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2">
+            <div className="lg:col-span-5 space-y-4">
+              <StatementBlock
+                statement="Software engineering is at its best when it moves beyond building toys and grapples with the unglamorous realities of complex systems: deterministic execution, edge-case failure classification, and rigorous maintainer review."
+                attribution="Engineering Journal"
+              />
             </div>
 
-            <div className="p-4 rounded-lg border border-border-subtle bg-canvas-subtle/30 space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle flex items-center space-x-1.5">
-                <GraduationCap className="w-3 h-3 text-ink-muted" />
-                <span>Degree & Discipline</span>
-              </div>
-              <div className="text-[14px] font-semibold text-ink">
-                {aboutData.education.degree} in {aboutData.education.field}
-              </div>
-            </div>
-
-            <div className="p-4 rounded-lg border border-border-subtle bg-canvas-subtle/30 space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle flex items-center space-x-1.5">
-                <Sparkles className="w-3 h-3 text-ink-muted" />
-                <span>Graduation Timeline</span>
-              </div>
-              <div className="text-[14px] font-semibold text-ink">
-                Graduating 2026 ({aboutData.education.period})
-              </div>
-            </div>
-          </div>
-
-          {/* Institutional Academic Card */}
-          <div className="p-6 rounded-xl border border-border-subtle bg-canvas-subtle/40 flex flex-col space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-              <div>
-                <h3 className="text-[18px] sm:text-[19px] font-semibold text-ink">
-                  {aboutData.education.institution}
-                </h3>
-                <div className="text-[13px] text-ink-muted mt-0.5">
-                  {aboutData.education.location}
-                </div>
-              </div>
-              <div className="text-[11px] font-mono text-ink-subtle sm:text-right shrink-0">
-                <div className="text-ink font-semibold">{aboutData.education.grade}</div>
-                <div>Class of 2026</div>
-              </div>
-            </div>
-
-            {aboutData.education.highlights && (
-              <div className="pt-3 border-t border-border-subtle/60 space-y-1.5">
-                <div className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle mb-1">
-                  Academic Milestones & Leadership
-                </div>
-                <ul className="space-y-1.5 text-[13px] text-ink-muted">
-                  {aboutData.education.highlights.map((highlight, hIdx) => (
-                    <li key={hIdx} className="flex items-start space-x-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-ink/40 mt-1.5 shrink-0" />
-                      <span className="leading-relaxed">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* Section 2: What I Build */}
-        {aboutData.whatIBuild && aboutData.whatIBuild.length > 0 && (
-          <section aria-labelledby="build-heading" className="pt-8 border-t border-border-subtle/80 space-y-6">
-            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-              <Layers className="w-3.5 h-3.5 text-ink" />
-              <h2 id="build-heading">02 / WHAT I BUILD</h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {aboutData.whatIBuild.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-xl border border-border-subtle bg-canvas-subtle/30 flex flex-col justify-between space-y-3"
-                >
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-                      {item.domain}
-                    </span>
-                    <h3 className="text-[16px] font-semibold text-ink mt-1">
-                      {item.headline}
-                    </h3>
-                    <p className="text-[13px] text-ink-muted leading-relaxed mt-2">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-border-subtle/50 flex flex-wrap gap-1.5">
-                    {item.competencies.map((comp) => (
-                      <span
-                        key={comp}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface text-ink border border-border-subtle/40"
-                      >
-                        {comp}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            <div className="lg:col-span-7 space-y-4 text-[15px] sm:text-[16px] text-ink-muted leading-relaxed">
+              {aboutData.longBio.map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
               ))}
             </div>
-          </section>
-        )}
-
-        {/* Section 3: Engineering Interests */}
-        <section aria-labelledby="interests-heading" className="pt-8 border-t border-border-subtle/80 space-y-6">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Cpu className="w-3.5 h-3.5 text-ink" />
-            <h2 id="interests-heading">03 / ENGINEERING INTERESTS & FOCUS AREAS</h2>
           </div>
+        </EditorialSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {aboutData.engineeringInterests?.map((interest, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-xl border border-border-subtle/80 bg-canvas-subtle/30 flex flex-col justify-between space-y-4"
-              >
-                <div>
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle mb-1">
-                    {interest.category}
+        {/* ============================================================ */}
+        {/* 02 / WHAT I BUILD                                            */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="build-heading">
+          <SectionIndex
+            id="build-heading"
+            number="02"
+            title="WHAT I BUILD · ARCHITECTURAL DOMAINS"
+            icon={<Layers className="w-3.5 h-3.5" />}
+            sideText="4 CORE DOMAINS"
+          />
+
+          <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
+            {aboutData.whatIBuild?.map((item, idx) => (
+              <div key={idx} className="py-6 space-y-3 group">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
+                      DOMAIN 0{idx + 1} · {item.domain}
+                    </span>
+                    <h3 className="text-[18px] sm:text-[20px] font-semibold text-ink group-hover:translate-x-1 transition-transform inline-block">
+                      {item.headline}
+                    </h3>
                   </div>
-                  <h3 className="text-[16px] font-semibold text-ink">
-                    {interest.title}
-                  </h3>
-                  <p className="text-[13px] text-ink-muted leading-relaxed mt-2">
-                    {interest.description}
-                  </p>
                 </div>
 
-                <div className="pt-3 border-t border-border-subtle/50 flex flex-wrap gap-1.5">
-                  {interest.competencies.map((comp) => (
+                <p className="text-[14px] text-ink-muted leading-relaxed max-w-3xl">
+                  {item.description}
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {item.competencies.map((comp) => (
                     <span
                       key={comp}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface text-ink border border-border-subtle/40"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface text-ink border border-border-subtle/50"
                     >
                       {comp}
                     </span>
@@ -213,236 +154,382 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </section>
+        </EditorialSection>
 
-        {/* Section 4: Open Source Journey */}
-        {aboutData.openSourceJourney && (
-          <section aria-labelledby="journey-heading" className="pt-8 border-t border-border-subtle/80 space-y-6">
-            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-              <GitBranch className="w-3.5 h-3.5 text-ink" />
-              <h2 id="journey-heading">04 / OPEN SOURCE PROGRESSION & JOURNEY</h2>
+        {/* ============================================================ */}
+        {/* 03 / ENGINEERING INTERESTS                                   */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="interests-heading">
+          <SectionIndex
+            id="interests-heading"
+            number="03"
+            title="ENGINEERING INTERESTS & FOCUS AREAS"
+            icon={<Cpu className="w-3.5 h-3.5" />}
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
+            {aboutData.engineeringInterests?.map((interest, idx) => (
+              <div key={idx} className="space-y-3">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle block">
+                    AREA 0{idx + 1} · {interest.category}
+                  </span>
+                  <h3 className="text-[17px] font-semibold text-ink">
+                    {interest.title}
+                  </h3>
+                </div>
+
+                <p className="text-[13px] text-ink-muted leading-relaxed pl-3 border-l border-border-subtle">
+                  {interest.description}
+                </p>
+
+                <div className="flex flex-wrap gap-1 pt-1">
+                  {interest.competencies.map((comp) => (
+                    <span
+                      key={comp}
+                      className="text-[9px] font-mono px-2 py-0.5 rounded bg-surface text-ink border border-border-subtle/40"
+                    >
+                      {comp}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </EditorialSection>
+
+        {/* ============================================================ */}
+        {/* 04 / EDUCATION                                               */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="education-heading">
+          <SectionIndex
+            id="education-heading"
+            number="04"
+            title="EDUCATION & ACADEMIC FOUNDATION"
+            icon={<GraduationCap className="w-3.5 h-3.5" />}
+          />
+
+          <div className="border-t border-b border-border-subtle py-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+              <div className="space-y-1">
+                <div className="text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+                  {aboutData.education.degree}
+                </div>
+                <h3 className="text-[22px] sm:text-[26px] font-semibold text-ink tracking-tight">
+                  {aboutData.education.field}
+                </h3>
+                <div className="text-[14px] text-ink-muted">
+                  {aboutData.education.institution}
+                </div>
+                <div className="text-[12px] font-mono text-ink-subtle">
+                  {aboutData.education.location}
+                </div>
+              </div>
+
+              <div className="text-left sm:text-right font-mono text-[12px] shrink-0 space-y-1">
+                <div className="text-ink font-semibold">{aboutData.education.grade}</div>
+                <div className="text-ink-subtle uppercase tracking-wider text-[11px]">
+                  Class of 2026 ({aboutData.education.period})
+                </div>
+                <div className="text-[11px] text-ink-muted">
+                  Base: Jamshedpur, Jharkhand, India
+                </div>
+              </div>
             </div>
 
-            <p className="text-[15px] text-ink leading-relaxed">
-              {aboutData.openSourceJourney.summary}
+            {aboutData.education.highlights && (
+              <div className="pt-4 border-t border-border-subtle/60 space-y-2">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle block">
+                  ACADEMIC MILESTONES & LEADERSHIP
+                </span>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[13px] text-ink-muted">
+                  {aboutData.education.highlights.map((highlight, hIdx) => (
+                    <li key={hIdx} className="flex items-start space-x-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-ink/50 mt-2 shrink-0" />
+                      <span className="leading-relaxed">{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </EditorialSection>
+
+        {/* ============================================================ */}
+        {/* 05 / EXPERIENCE (The Editorial Timeline)                     */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="experience-heading">
+          <SectionIndex
+            id="experience-heading"
+            number="05"
+            title="PROFESSIONAL INTERNSHIP ARCHIVE"
+            icon={<Briefcase className="w-3.5 h-3.5" />}
+            sideText="EDITORIAL TIMELINE"
+          />
+
+          <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
+            {/* Experience 1: Celebal Technologies */}
+            <article className="py-8 space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                <div className="space-y-1">
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-ink font-semibold">
+                    2025 · CELEBAL TECHNOLOGIES
+                  </div>
+                  <h3 className="text-[20px] sm:text-[22px] font-semibold text-ink">
+                    Software Development Intern – ReactJS / Full Stack
+                  </h3>
+                  <div className="text-[12px] font-mono text-ink-subtle">
+                    Remote · June 2025 — August 2025
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-surface border border-border-subtle text-ink font-medium shrink-0">
+                  FULL-STACK DEVELOPMENT
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 text-[13px] leading-relaxed pt-1">
+                <div className="lg:col-span-4 space-y-3">
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                      Context & Scope
+                    </span>
+                    <p className="text-ink-muted mt-0.5">
+                      Engineered an enterprise Service Desk Application handling cross-departmental incident tickets and user workflows.
+                    </p>
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                      Verified Metrics
+                    </span>
+                    <p className="text-ink font-medium font-mono text-[12px] mt-0.5">
+                      30% faster page loads · 25% faster ticket resolution
+                    </p>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-8 space-y-2">
+                  <span className="block text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                    Engineering Work & Impact
+                  </span>
+                  <ul className="space-y-1.5 text-ink-muted list-disc list-outside ml-4">
+                    <li>Built dynamic ticket routing system with priority tagging, category assignment, and real-time status updates.</li>
+                    <li>Integrated real-time notification workflows, enhancing end-user transparency and support communication.</li>
+                    <li>Maintained modular React component architecture in an Agile sprint environment, ensuring reliable REST API integration with Express/Node.js backends.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {["React.js", "Node.js", "Express.js", "MongoDB", "REST APIs", "Git"].map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[9px] font-mono px-2 py-0.5 rounded bg-surface text-ink-muted border border-border-subtle/50"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </article>
+
+            {/* Experience 2: Tata Steel Ltd. */}
+            <article className="py-8 space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                <div className="space-y-1">
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-ink font-semibold">
+                    2024 · TATA STEEL LTD.
+                  </div>
+                  <h3 className="text-[20px] sm:text-[22px] font-semibold text-ink">
+                    Application Development Intern – Full Stack MERN
+                  </h3>
+                  <div className="text-[12px] font-mono text-ink-subtle">
+                    Jamshedpur, Jharkhand, India · July 2024 — September 2024
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-surface border border-border-subtle text-ink font-medium shrink-0">
+                  ENTERPRISE MERN
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 text-[13px] leading-relaxed pt-1">
+                <div className="lg:col-span-4 space-y-3">
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                      Context & Scope
+                    </span>
+                    <p className="text-ink-muted mt-0.5">
+                      Designed internal enterprise access management dashboard supporting 500+ organizational users.
+                    </p>
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                      Verified Metrics
+                    </span>
+                    <p className="text-ink font-medium font-mono text-[12px] mt-0.5">
+                      500+ active users · 20% faster MongoDB queries
+                    </p>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-8 space-y-2">
+                  <span className="block text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
+                    Engineering Work & Impact
+                  </span>
+                  <ul className="space-y-1.5 text-ink-muted list-disc list-outside ml-4">
+                    <li>Implemented JWT & bcrypt.js session authentication with role-based access control (RBAC).</li>
+                    <li>Engineered and deployed 10+ scalable RESTful APIs in Node.js/Express.js with MongoDB schema indexing.</li>
+                    <li>Created fully responsive management interfaces using React.js and Tailwind CSS with cross-browser compatibility.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "JWT", "Bcrypt.js"].map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[9px] font-mono px-2 py-0.5 rounded bg-surface text-ink-muted border border-border-subtle/50"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </article>
+          </div>
+        </EditorialSection>
+
+        {/* ============================================================ */}
+        {/* 06 / HOW I WORK                                              */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="discipline-heading">
+          <SectionIndex
+            id="discipline-heading"
+            number="06"
+            title="HOW I WORK · ENGINEERING DISCIPLINE"
+            icon={<BookOpen className="w-3.5 h-3.5" />}
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-2">
+            {aboutData.howIWork?.map((item, idx) => (
+              <div key={idx} className="space-y-2.5">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
+                  RULE 0{idx + 1}
+                </span>
+                <h3 className="text-[16px] font-semibold text-ink">
+                  {item.principle}
+                </h3>
+                <p className="text-[13px] text-ink-muted leading-relaxed">
+                  {item.summary}
+                </p>
+                <ul className="space-y-1 pt-1 text-[12px] text-ink-muted border-l border-border-subtle pl-3">
+                  {item.practices.map((p, pIdx) => (
+                    <li key={pIdx}>— {p}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </EditorialSection>
+
+        {/* ============================================================ */}
+        {/* 07 / OPEN SOURCE JOURNEY                                     */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="oss-journey-heading">
+          <SectionIndex
+            id="oss-journey-heading"
+            number="07"
+            title="OPEN SOURCE JOURNEY & SIGNAL"
+            icon={<GitBranch className="w-3.5 h-3.5" />}
+          />
+
+          <div className="space-y-6 pt-2">
+            <p className="text-[15px] sm:text-[16px] text-ink leading-relaxed">
+              {aboutData.openSourceJourney?.summary}
             </p>
 
-            <div className="space-y-4 pt-2">
-              {aboutData.openSourceJourney.stages.map((stage, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-xl border border-border-subtle bg-surface/50 space-y-2"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                    <span className="text-[11px] font-mono uppercase tracking-widest font-semibold text-ink">
+            <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
+              {aboutData.openSourceJourney?.stages.map((stage, idx) => (
+                <div key={idx} className="py-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                  <div className="sm:w-1/3">
+                    <span className="text-[11px] font-mono uppercase tracking-widest font-semibold text-ink block">
                       {stage.phase}
                     </span>
-                    <span className="text-[12px] font-mono text-ink-subtle">
+                    <span className="text-[11px] font-mono text-ink-subtle">
                       {stage.focus}
                     </span>
                   </div>
-                  <p className="text-[13px] text-ink-muted leading-relaxed">
+                  <p className="sm:w-2/3 text-[13px] text-ink-muted leading-relaxed">
                     {stage.description}
                   </p>
                 </div>
               ))}
             </div>
-          </section>
-        )}
 
-        {/* Section 5: Professional Experience */}
-        <section aria-labelledby="experience-heading" className="pt-8 border-t border-border-subtle/80 space-y-8">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Briefcase className="w-3.5 h-3.5 text-ink" />
-            <h2 id="experience-heading">05 / PROFESSIONAL INTERNSHIP EXPERIENCE</h2>
-          </div>
-
-          <div className="space-y-8">
-            {aboutData.experiences.map((exp, idx) => (
-              <article
-                key={idx}
-                className="p-6 rounded-xl border border-border-subtle bg-canvas-subtle/20 flex flex-col space-y-4"
+            <div className="pt-2">
+              <Link
+                href="/open-source"
+                className="inline-flex items-center space-x-1.5 text-[11px] font-mono font-semibold uppercase tracking-widest text-ink hover:text-ink-muted transition-colors group"
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                  <div>
-                    <h3 className="text-[18px] sm:text-[20px] font-semibold text-ink">
-                      {exp.role}
-                    </h3>
-                    <div className="text-[13px] text-ink-muted font-medium mt-0.5">
-                      {exp.company} · {exp.location}
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-mono text-ink-subtle shrink-0">
-                    {exp.period}
-                  </span>
-                </div>
-
-                <ul className="space-y-2 text-[13px] sm:text-[14px] text-ink-muted leading-relaxed list-disc list-outside ml-4">
-                  {exp.bulletPoints.map((point, pIdx) => (
-                    <li key={pIdx}>{point}</li>
-                  ))}
-                </ul>
-
-                <div className="pt-3 border-t border-border-subtle/60 flex flex-wrap gap-1.5">
-                  {exp.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface text-ink-muted border border-border-subtle/50"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
+                <span>EXPLORE FULL OPEN SOURCE ARCHIVE</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
           </div>
-        </section>
+        </EditorialSection>
 
-        {/* Section 6: How I Work (Engineering Discipline) */}
-        <section aria-labelledby="work-heading" className="pt-8 border-t border-border-subtle/80 space-y-6">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Terminal className="w-3.5 h-3.5 text-ink" />
-            <h2 id="work-heading">06 / HOW I WORK & ENGINEERING DISCIPLINE</h2>
-          </div>
+        {/* ============================================================ */}
+        {/* 08 / BEYOND CODE                                             */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="beyond-heading">
+          <SectionIndex
+            id="beyond-heading"
+            number="08"
+            title="BEYOND CODE · CREATIVE DISCIPLINES"
+            icon={<Palette className="w-3.5 h-3.5" />}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {aboutData.howIWork?.map((principle, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-xl border border-border-subtle bg-canvas-subtle/30 flex flex-col justify-between space-y-3"
-              >
-                <div>
-                  <h3 className="text-[15px] font-semibold text-ink">
-                    {principle.principle}
-                  </h3>
-                  <p className="text-[13px] text-ink-muted leading-relaxed mt-1.5">
-                    {principle.summary}
-                  </p>
-                </div>
-
-                <ul className="pt-2 border-t border-border-subtle/40 space-y-1 text-[12px] text-ink-muted">
-                  {principle.practices.map((practice, pIdx) => (
-                    <li key={pIdx} className="flex items-start space-x-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-ink-muted mt-0.5 shrink-0" />
-                      <span>{practice}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 7: Current Work & Focus */}
-        <section aria-labelledby="current-heading" className="pt-8 border-t border-border-subtle/80 space-y-6">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Sparkles className="w-3.5 h-3.5 text-ink" />
-            <h2 id="current-heading">07 / CURRENT FOCUS & ACTIVE WORK</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {aboutData.currentWork?.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-xl border border-border-subtle bg-canvas-subtle/40 flex flex-col justify-between space-y-3"
-              >
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded bg-surface text-ink font-medium">
-                    {item.status}
-                  </span>
-                  <h3 className="text-[15px] font-semibold text-ink mt-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-[13px] text-ink-muted leading-relaxed mt-1.5">
-                    {item.detail}
-                  </p>
-                </div>
-
-                {item.linkUrl && (
-                  <div className="pt-2 border-t border-border-subtle/50">
-                    <a
-                      href={item.linkUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-1 text-[11px] font-mono font-medium uppercase tracking-wider text-ink hover:text-ink-muted transition-colors group"
-                    >
-                      <span>{item.linkLabel || "LEARN MORE"}</span>
-                      <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </a>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 8: Outside Engineering */}
-        <section aria-labelledby="arts-heading" className="pt-8 border-t border-border-subtle/80 space-y-6">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Palette className="w-3.5 h-3.5 text-ink" />
-            <h2 id="arts-heading">08 / BEYOND CODE & CREATIVE DISCIPLINES</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border-subtle border-t border-b border-border-subtle py-6">
             {aboutData.outsideEngineering?.map((art, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-xl border border-border-subtle/70 bg-canvas-subtle/20 flex flex-col space-y-2"
-              >
-                <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
+              <div key={idx} className="sm:px-4 first:sm:pl-0 last:sm:pr-0 space-y-1.5 py-3 sm:py-0">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
                   {art.category}
                 </span>
-                <h3 className="text-[15px] font-semibold text-ink">
+                <h4 className="text-[15px] font-semibold text-ink">
                   {art.title}
-                </h3>
-                <p className="text-[13px] text-ink-muted leading-relaxed">
+                </h4>
+                <p className="text-[12px] text-ink-muted leading-relaxed">
                   {art.description}
                 </p>
               </div>
             ))}
           </div>
-        </section>
+        </EditorialSection>
 
-        {/* Section 9: Technical Skills Matrix */}
-        <section aria-labelledby="skills-heading" className="pt-8 border-t border-border-subtle/80 space-y-4">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Code2 className="w-3.5 h-3.5 text-ink" />
-            <h2 id="skills-heading">09 / TECHNICAL SKILLS MATRIX</h2>
-          </div>
+        {/* ============================================================ */}
+        {/* 09 / TOOLKIT & SKILLS                                        */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="skills-heading">
+          <SectionIndex
+            id="skills-heading"
+            number="09"
+            title="TOOLKIT & TECHNICAL SKILLS"
+            icon={<Code2 className="w-3.5 h-3.5" />}
+          />
 
-          <div className="flex flex-wrap gap-2">
-            {aboutData.coreSkills.map((skill) => (
-              <span
-                key={skill}
-                className="text-[11px] font-mono px-3 py-1 rounded-full border border-border-subtle bg-canvas text-ink"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        {/* Cross Link to Open Source */}
-        <div className="p-6 rounded-xl border border-border-strong bg-surface/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-              OPEN SOURCE VERIFICATION
-            </div>
-            <div className="text-[16px] font-semibold text-ink mt-0.5">
-              30+ Merged PRs in Graphify · 50+ Across Open Source
-            </div>
-            <div className="text-[13px] text-ink-muted mt-0.5">
-              Explore concrete engineering investigations across AST analysis, symbol resolution, and streaming protocols.
+          <div className="pt-2 space-y-4">
+            <p className="text-[13px] text-ink-muted">
+              Core technologies, runtime environments, and tools utilized in daily engineering:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {aboutData.coreSkills.map((skill) => (
+                <span
+                  key={skill}
+                  className="text-[11px] font-mono px-3 py-1 rounded bg-canvas-subtle/80 border border-border-subtle text-ink font-medium"
+                >
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
-          <Link
-            href="/open-source"
-            className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-md bg-canvas border border-border-strong text-[11px] font-mono font-semibold tracking-widest uppercase text-ink hover:bg-surface transition-colors shrink-0 group"
-          >
-            <span>VIEW OPEN SOURCE</span>
-            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-        </div>
+        </EditorialSection>
       </div>
     </PageShell>
   );

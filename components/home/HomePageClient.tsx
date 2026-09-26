@@ -41,7 +41,7 @@ export function HomePageClient() {
       </div>
 
       {/* Bottom Section: Status & Temporal Anchor (z-10) */}
-      <div className="relative z-10 w-full flex items-end justify-end">
+      <div className="relative z-10 w-full">
         <StatusFooter />
       </div>
 

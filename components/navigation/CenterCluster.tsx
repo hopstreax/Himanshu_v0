@@ -39,7 +39,17 @@ export function CenterCluster({
       aria-label="Main Navigation"
       className="relative z-10 flex items-center justify-center p-4"
     >
-      <div className="relative grid grid-cols-2 gap-x-4 sm:gap-x-8 md:gap-x-10 gap-y-4 sm:gap-y-6 md:gap-y-8">
+      <div className="relative grid grid-cols-2 gap-x-6 sm:gap-x-10 md:gap-x-14 gap-y-6 sm:gap-y-8 md:gap-y-10 p-6 sm:p-8">
+        {/* Subtle architectural coordinate axes */}
+        <div
+          aria-hidden="true"
+          className="absolute top-1/2 left-4 right-4 h-px bg-border-subtle/50 -translate-y-1/2 pointer-events-none"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute left-1/2 top-4 bottom-4 w-px bg-border-subtle/50 -translate-x-1/2 pointer-events-none"
+        />
+
         {/* Central spatial anchor dot */}
         <OriginDot isActive={activeItem !== null} />
 
