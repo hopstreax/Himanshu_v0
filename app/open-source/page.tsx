@@ -78,7 +78,7 @@ export default function OpenSourcePage() {
         </section>
 
         {/* 3. Headline Metrics Banner */}
-        <section aria-labelledby="metrics-heading" className="pt-8 border-t border-border-subtle/80">
+        <section aria-labelledby="metrics-heading" className="pt-8 border-t border-border-subtle/80 space-y-3">
           <h2 id="metrics-heading" className="sr-only">
             Contribution Metrics
           </h2>
@@ -98,6 +98,12 @@ export default function OpenSourcePage() {
               </div>
             ))}
           </div>
+
+          {graphifyStory.metricsExplanation && (
+            <p className="text-[12px] sm:text-[13px] text-ink-muted leading-relaxed">
+              {graphifyStory.metricsExplanation}
+            </p>
+          )}
         </section>
 
         {/* 4. Primary Deep Dive: Graphify Engine Case Study */}

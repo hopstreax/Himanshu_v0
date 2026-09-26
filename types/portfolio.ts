@@ -160,6 +160,7 @@ export interface OSSContribution {
   role: string;
   period: string;
   metrics: readonly OSSMetric[];
+  metricsExplanation?: string;
   tagline: string;
   summary: string;
   longDescription: string;

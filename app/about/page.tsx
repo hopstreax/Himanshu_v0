@@ -429,7 +429,7 @@ export default function AboutPage() {
               OPEN SOURCE VERIFICATION
             </div>
             <div className="text-[16px] font-semibold text-ink mt-0.5">
-              30+ Merged PRs in Graphify & Ecosystem Tooling
+              30+ Merged PRs in Graphify · 50+ Across Open Source
             </div>
             <div className="text-[13px] text-ink-muted mt-0.5">
               Explore concrete engineering investigations across AST analysis, symbol resolution, and streaming protocols.
