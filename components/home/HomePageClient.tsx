@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowDown } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { EvidenceStrip } from "@/components/home/EvidenceStrip";
-import { SystemConstellation } from "@/components/home/SystemConstellation";
+import { OrganicNetwork } from "@/components/home/OrganicNetwork";
 import { SelectedWork } from "@/components/home/SelectedWork";
 import { OpenSourcePreview } from "@/components/home/OpenSourcePreview";
 import { PersonalCraft } from "@/components/home/PersonalCraft";
@@ -26,7 +26,7 @@ export function HomePageClient() {
     <div className="min-h-screen bg-[#08090B] text-[#F4F1EA] flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA] overflow-x-hidden relative">
       {/* Ambient background technical coordinate grid & cursor glow */}
       <div
-        className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+        className="fixed inset-0 pointer-events-none opacity-[0.025] z-0"
         style={{
           backgroundImage:
             "linear-gradient(to right, #F4F1EA 1px, transparent 1px), linear-gradient(to bottom, #F4F1EA 1px, transparent 1px)",
@@ -34,9 +34,9 @@ export function HomePageClient() {
         }}
       />
 
-      {/* Subtle cursor-reactive glow */}
+      {/* Subtle cursor-reactive diffuse glow */}
       <div
-        className="fixed pointer-events-none w-[600px] h-[600px] rounded-full blur-[140px] opacity-15 transition-transform duration-700 ease-out z-0"
+        className="fixed pointer-events-none w-[600px] h-[600px] rounded-full blur-[150px] opacity-10 transition-transform duration-700 ease-out z-0"
         style={{
           background:
             "radial-gradient(circle, rgba(155, 123, 255, 0.25) 0%, rgba(92, 168, 255, 0.15) 40%, transparent 70%)",
@@ -44,22 +44,22 @@ export function HomePageClient() {
         }}
       />
 
-      {/* 1. Minimal Editorial Navigation Header */}
+      {/* 1. Integrated Editorial Header (Matching Reference Image) */}
       <header
         role="banner"
-        className="sticky top-0 z-50 w-full bg-[#08090B]/90 backdrop-blur-md border-b border-[#242830] px-5 sm:px-10 md:px-14 py-4"
+        className="sticky top-0 z-50 w-full bg-[#08090B]/85 backdrop-blur-md border-b border-[#242830]/80 px-5 sm:px-10 md:px-14 py-4"
       >
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link
             href="/"
-            className="flex items-center space-x-2 text-[#F4F1EA] hover:text-[#9B7BFF] transition-colors"
+            className="flex items-center space-x-2.5 text-[#F4F1EA] hover:text-[#9B7BFF] transition-colors group"
             aria-label="Himanshu Patro Home"
           >
-            <span className="text-[13px] sm:text-[14px] font-mono font-bold uppercase tracking-wider">
-              HIMANSHU PATRO
+            <span className="text-[17px] font-mono font-bold tracking-tight text-[#F4F1EA] group-hover:text-[#9B7BFF] transition-colors">
+              HP
             </span>
-            <span className="text-[9px] font-mono uppercase tracking-widest text-[#666B73] hidden sm:inline">
-              / ROOT_00
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] hidden sm:inline">
+              / HIMANSHU PATRO
             </span>
           </Link>
 
@@ -69,21 +69,21 @@ export function HomePageClient() {
           >
             <Link
               href="/about"
-              className="text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors"
+              className="text-[#9A9DA3] hover:text-[#E2C08D] transition-colors"
             >
               ABOUT
             </Link>
             <Link
               href="/projects"
-              className="text-[#9A9DA3] hover:text-[#FFB86B] transition-colors"
+              className="text-[#9A9DA3] hover:text-[#5CA8FF] transition-colors"
             >
-              WORK
+              PROJECTS
             </Link>
             <Link
               href="/open-source"
               className="text-[#9A9DA3] hover:text-[#45D6A0] transition-colors"
             >
-              OSS
+              OPEN SOURCE
             </Link>
             <Link
               href="/connect"
@@ -97,66 +97,85 @@ export function HomePageClient() {
 
       {/* Main Content Stream */}
       <main className="w-full flex-1 relative z-10">
-        {/* 1. IMMERSIVE HERO */}
+        {/* ============================================================ */}
+        {/* 1. TWO-PART HERO COMPOSITION (Left: 38% / Right: 62%)         */}
+        {/* ============================================================ */}
         <section
-          aria-label="Engineering Positioning and Identity"
-          className="w-full pt-16 sm:pt-24 md:pt-32 pb-16 sm:pb-24 px-5 sm:px-10 md:px-14 border-b border-[#242830] relative"
+          aria-label="Engineering Positioning and Knowledge Ecosystem"
+          className="w-full min-h-[calc(100vh-65px)] flex flex-col justify-center py-12 lg:py-16 px-5 sm:px-10 md:px-14 border-b border-[#242830] relative overflow-hidden"
         >
-          <div className="max-w-6xl mx-auto space-y-10 sm:space-y-14">
-            {/* Small Technical Metadata */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
-              <span className="flex items-center space-x-2 text-[#9A9DA3]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#45D6A0] animate-pulse" />
-                <span>JAMSHEDPUR / INDIA</span>
-              </span>
-              <span>·</span>
-              <span className="text-[#9A9DA3]">CSIT / 2026</span>
-              <span>·</span>
-              <span className="text-[#45D6A0] font-semibold">
-                AVAILABLE FOR ENGINEERING WORK
-              </span>
-            </div>
-
-            {/* Enormous Typography Display */}
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
+            {/* LEFT COLUMN: Editorial Typography & Positioning (38-40%) */}
             <motion.div
-              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-6"
+              className="lg:col-span-5 space-y-6 z-10"
             >
-              <h1 className="text-[clamp(4.5rem,10vw,9rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] leading-[0.92] select-none">
-                <div>HIMANSHU</div>
-                <div className="text-[#9A9DA3]">PATRO</div>
+              {/* Small Status Metadata */}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[10.5px] font-mono uppercase tracking-widest text-[#666B73]">
+                <span className="flex items-center space-x-2 text-[#9A9DA3]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#45D6A0] animate-pulse" />
+                  <span>JAMSHEDPUR, INDIA</span>
+                </span>
+                <span className="text-[#343943]">·</span>
+                <span className="text-[#9A9DA3]">CSIT 2026</span>
+                <span className="text-[#343943]">·</span>
+                <span className="text-[#45D6A0] font-semibold">
+                  AVAILABLE FOR ROLES
+                </span>
+              </div>
+
+              {/* Large Editorial Headline (Clean 3-Line Composition) */}
+              <h1 className="text-[clamp(2.35rem,3.8vw,3.75rem)] font-sans font-bold tracking-tight text-[#F4F1EA] leading-[1.08]">
+                Software engineer<br />
+                building systems around<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9B7BFF] via-[#5CA8FF] to-[#45D6A0]">
+                  code, AI
+                </span>{" "}
+                and{" "}
+                <span className="font-serif italic font-normal text-[#FFB86B]">
+                  intelligence.
+                </span>
               </h1>
 
-              <div className="pt-4 max-w-3xl">
-                <p className="text-[clamp(1.25rem,2vw,2rem)] text-[#F4F1EA] font-sans font-light leading-relaxed">
-                  Software engineer building reliable systems around code, AI agents, developer tooling and open-source code intelligence.
-                </p>
+              {/* Concise Supporting Description */}
+              <p className="text-[clamp(1.05rem,1.5vw,1.25rem)] text-[#C5C8CE] font-sans font-light leading-relaxed max-w-lg">
+                I’m Himanshu — building reliable systems around code intelligence, autonomous AI agents, developer tooling, and maintainer-reviewed open source.
+              </p>
+
+              {/* Action Buttons & Secondary Link */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <a
+                  href="#selected-work"
+                  className="group inline-flex items-center space-x-2.5 px-6 py-3 rounded-full border border-[#343943] bg-[#0E1217]/90 text-[#F4F1EA] text-[13px] font-mono uppercase tracking-wider hover:border-[#9B7BFF] hover:bg-[#141920] hover:shadow-[0_0_24px_rgba(155,123,255,0.22)] transition-all duration-300"
+                >
+                  <span>Explore Systems</span>
+                  <ArrowRight className="w-4 h-4 text-[#9B7BFF] group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                <Link
+                  href="/about"
+                  className="inline-flex items-center space-x-1.5 px-4 py-3 text-[12px] font-mono uppercase tracking-wider text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors"
+                >
+                  <span>Read Dossier</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#666B73]" />
+                </Link>
+              </div>
+
+              {/* Factual Output Quick Strip */}
+              <div className="pt-6 border-t border-[#242830] flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-mono text-[#666B73]">
+                <span className="text-[#45D6A0]">50+ MERGED/CLOSED PRS</span>
+                <span className="text-[#343943]">·</span>
+                <span className="text-[#5CA8FF]">30+ GRAPHIFY PRS</span>
+                <span className="text-[#343943]">·</span>
+                <span className="text-[#FFB86B]">4 SYSTEMS</span>
               </div>
             </motion.div>
 
-            {/* Restrained Domain Signals & Scroll Target */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 border-t border-[#242830]">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-mono uppercase tracking-wider text-[#666B73]">
-                <span className="text-[#9B7BFF]">AI / AGENTS</span>
-                <span>·</span>
-                <span className="text-[#5CA8FF]">CODE INTELLIGENCE</span>
-                <span>·</span>
-                <span className="text-[#45D6A0]">OPEN SOURCE</span>
-                <span>·</span>
-                <span className="text-[#FFB86B]">SYSTEMS ARCHITECTURE</span>
-                <span>·</span>
-                <span className="text-[#FF718C]">HUMAN CRAFT</span>
-              </div>
-
-              <a
-                href="#system-constellation"
-                className="inline-flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors"
-              >
-                <span>EXPLORE SYSTEM MAP</span>
-                <ArrowDown className="w-3.5 h-3.5" />
-              </a>
+            {/* RIGHT COLUMN: Large Interactive Organic Network Visualization (60-65%) */}
+            <div className="lg:col-span-7 relative z-10 w-full lg:-ml-6">
+              <OrganicNetwork />
             </div>
           </div>
         </section>
@@ -166,17 +185,7 @@ export function HomePageClient() {
           <EvidenceStrip />
         </section>
 
-        {/* 3. SYSTEM CONSTELLATION (Architecture Diagram Network) */}
-        <section
-          id="system-constellation"
-          className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
-        >
-          <div className="max-w-6xl mx-auto">
-            <SystemConstellation />
-          </div>
-        </section>
-
-        {/* 4. SELECTED WORK (Vertical Editorial Sequence, 3 Distinct Compositions) */}
+        {/* 3. SELECTED WORK (Vertical Editorial Sequence, 3 Distinct Compositions) */}
         <section
           id="selected-work"
           className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
@@ -186,7 +195,7 @@ export function HomePageClient() {
           </div>
         </section>
 
-        {/* 5. OPEN SOURCE (Engineering Contribution Map & Repository Tree) */}
+        {/* 4. OPEN SOURCE (Engineering Contribution Map & Repository Tree) */}
         <section
           id="open-source-preview"
           className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
@@ -196,7 +205,7 @@ export function HomePageClient() {
           </div>
         </section>
 
-        {/* 6. PERSONAL SECTION (BEYOND CODE Typography & Abstract Representations) */}
+        {/* 5. PERSONAL SECTION (BEYOND CODE Typography & Abstract Representations) */}
         <section
           id="personal-craft"
           className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
@@ -206,7 +215,7 @@ export function HomePageClient() {
           </div>
         </section>
 
-        {/* 7. FINAL CTA (Large Typography, Generous Whitespace, Zero Cards) */}
+        {/* 6. FINAL CTA (Large Typography, Generous Whitespace, Zero Cards) */}
         <section
           aria-label="Direct Engagement and Channels"
           className="w-full py-24 sm:py-36 px-5 sm:px-10 md:px-14"
