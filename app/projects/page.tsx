@@ -4,10 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, FolderGit2 } from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
+import { useAtmosphere } from "@/components/background/AtmosphereContext";
+import { BackgroundThemeKey } from "@/components/background/themes";
 import { projects } from "@/data/projects";
 
 export default function ProjectsPage() {
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+  const { setAtmosphere } = useAtmosphere();
 
   const projectAccents: Record<string, string> = {
     tracekit: "#9B7BFF",
@@ -71,10 +74,26 @@ export default function ProjectsPage() {
               <Link
                 key={project.slug}
                 href={`/projects/${project.slug}`}
-                onMouseEnter={() => setHoveredSlug(project.slug)}
-                onMouseLeave={() => setHoveredSlug(null)}
-                className="group block py-10 sm:py-14 transition-transform duration-300 hover:translate-x-2"
+                onMouseEnter={() => {
+                  setHoveredSlug(project.slug);
+                  setAtmosphere(project.slug as BackgroundThemeKey);
+                }}
+                onMouseLeave={() => {
+                  setHoveredSlug(null);
+                  setAtmosphere(null);
+                }}
+                className="group relative block py-10 sm:py-14 transition-transform duration-300 hover:translate-x-2"
               >
+                {/* Subtle localized aura behind hovered project row - NO card borders, pure diffused light */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -inset-x-8 -inset-y-4 rounded-3xl blur-[90px] pointer-events-none transition-opacity duration-700 -z-10"
+                  style={{
+                    background: accent,
+                    opacity: isHovered ? 0.08 : 0,
+                  }}
+                />
+
                 <div className="space-y-4">
                   {/* Meta Row: Number, Tier, Year */}
                   <div className="flex items-center justify-between text-[11px] font-mono">

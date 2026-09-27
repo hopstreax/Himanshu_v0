@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
@@ -12,37 +12,9 @@ import { PersonalCraft } from "@/components/home/PersonalCraft";
 
 export function HomePageClient() {
   const shouldReduceMotion = useReducedMotion();
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   return (
-    <div className="min-h-screen bg-[#08090B] text-[#F4F1EA] flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA] overflow-x-hidden relative">
-      {/* Ambient background technical coordinate grid & cursor glow */}
-      <div
-        className="fixed inset-0 pointer-events-none opacity-[0.025] z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #F4F1EA 1px, transparent 1px), linear-gradient(to bottom, #F4F1EA 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      {/* Subtle cursor-reactive diffuse glow */}
-      <div
-        className="fixed pointer-events-none w-[600px] h-[600px] rounded-full blur-[150px] opacity-10 transition-transform duration-700 ease-out z-0"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(155, 123, 255, 0.25) 0%, rgba(92, 168, 255, 0.15) 40%, transparent 70%)",
-          transform: `translate(${mousePos.x - 300}px, ${mousePos.y - 300}px)`,
-        }}
-      />
+    <div className="min-h-screen bg-transparent text-[#F4F1EA] flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA] overflow-x-hidden relative">
 
       {/* 1. Integrated Editorial Header (Matching Reference Image) */}
       <header

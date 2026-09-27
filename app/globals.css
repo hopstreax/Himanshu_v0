@@ -36,6 +36,40 @@
   --accent-craft: #FF718C;
   --accent-craft-subtle: #251217;
   --accent-craft-border: #5C2733;
+
+  /* Global Technical Grid System Tokens */
+  --grid-size-minor: 32px;
+  --grid-size-major: 128px;
+  --grid-line-minor: rgba(244, 241, 234, 0.018);
+  --grid-line-major: rgba(244, 241, 234, 0.045);
+  --grid-opacity: 1;
+}
+
+@keyframes technicalGridDrift {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      128px 128px,
+      128px 128px,
+      32px 32px,
+      32px 32px;
+  }
+}
+
+.technical-grid-animated {
+  animation: technicalGridDrift 50s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .technical-grid-animated {
+    animation: none !important;
+  }
 }
 
 @layer base {

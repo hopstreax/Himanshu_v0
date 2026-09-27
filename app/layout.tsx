@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AtmosphereProvider } from "@/components/background/AtmosphereContext";
+import { GlobalBackground } from "@/components/background/GlobalBackground";
 
 const sansFont = Inter({
   subsets: ["latin"],
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F9F8F5",
+  themeColor: "#08090B",
 };
 
 export default function RootLayout({
@@ -56,8 +58,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={sansFont.variable}>
-      <body className="font-sans antialiased bg-canvas text-ink selection:bg-[#E8E5DC] selection:text-ink">
-        {children}
+      <body className="font-sans antialiased bg-canvas text-ink selection:bg-[#273142] selection:text-[#F4F1EA] relative">
+        <AtmosphereProvider>
+          <GlobalBackground />
+          <div className="relative z-10 w-full min-h-screen">
+            {children}
+          </div>
+        </AtmosphereProvider>
       </body>
     </html>
   );

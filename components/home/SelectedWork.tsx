@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Workflow, GitPullRequest, Activity } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import { useAtmosphere } from "@/components/background/AtmosphereContext";
 
 export function SelectedWork() {
   const shouldReduceMotion = useReducedMotion();
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const { setAtmosphere } = useAtmosphere();
 
   return (
     <div
@@ -40,9 +42,24 @@ export function SelectedWork() {
       <section
         aria-label="Project 01: TraceKit"
         className="w-full relative group"
-        onMouseEnter={() => setHoveredProject("tracekit")}
-        onMouseLeave={() => setHoveredProject(null)}
+        onMouseEnter={() => {
+          setHoveredProject("tracekit");
+          setAtmosphere("tracekit");
+        }}
+        onMouseLeave={() => {
+          setHoveredProject(null);
+          setAtmosphere(null);
+        }}
       >
+        {/* Subtle localized aura behind TraceKit section */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-12 -left-12 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-opacity duration-1000 -z-10"
+          style={{
+            background: "#9B7BFF",
+            opacity: hoveredProject === "tracekit" ? 0.08 : 0,
+          }}
+        />
         <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
           {/* Top Metadata Row */}
           <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
@@ -171,9 +188,24 @@ export function SelectedWork() {
       <section
         aria-label="Project 02: Graphify"
         className="w-full relative group"
-        onMouseEnter={() => setHoveredProject("graphify")}
-        onMouseLeave={() => setHoveredProject(null)}
+        onMouseEnter={() => {
+          setHoveredProject("graphify");
+          setAtmosphere("graphify");
+        }}
+        onMouseLeave={() => {
+          setHoveredProject(null);
+          setAtmosphere(null);
+        }}
       >
+        {/* Subtle localized aura behind Graphify section */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-12 right-0 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-opacity duration-1000 -z-10"
+          style={{
+            background: "#5CA8FF",
+            opacity: hoveredProject === "graphify" ? 0.08 : 0,
+          }}
+        />
         <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
           {/* Top Metadata Row */}
           <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
@@ -265,9 +297,24 @@ export function SelectedWork() {
       <section
         aria-label="Project 03: AI Interviewer"
         className="w-full relative group"
-        onMouseEnter={() => setHoveredProject("ai-interviewer")}
-        onMouseLeave={() => setHoveredProject(null)}
+        onMouseEnter={() => {
+          setHoveredProject("ai-interviewer");
+          setAtmosphere("ai-interviewer");
+        }}
+        onMouseLeave={() => {
+          setHoveredProject(null);
+          setAtmosphere(null);
+        }}
       >
+        {/* Subtle localized aura behind AI Interviewer section */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-12 -left-8 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-opacity duration-1000 -z-10"
+          style={{
+            background: "#FF718C",
+            opacity: hoveredProject === "ai-interviewer" ? 0.08 : 0,
+          }}
+        />
         <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
           {/* Top Metadata Row */}
           <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">

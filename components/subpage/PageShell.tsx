@@ -10,11 +10,11 @@ interface PageShellProps {
 
 export function PageShell({ children, activeSection }: PageShellProps) {
   return (
-    <div className="min-h-screen bg-canvas text-ink flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA]">
+    <div className="min-h-screen bg-transparent text-ink flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA]">
       {/* Editorial Global Navigation */}
       <header
         role="banner"
-        className="sticky top-0 z-30 w-full bg-canvas/92 backdrop-blur-md border-b border-border-subtle/80 px-5 sm:px-10 md:px-14 py-3.5 sm:py-4 transition-colors"
+        className="sticky top-0 z-30 w-full bg-[#08090B]/85 backdrop-blur-md border-b border-[#242830]/80 px-5 sm:px-10 md:px-14 py-3.5 sm:py-4 transition-colors"
       >
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <div className="flex items-center justify-between">
