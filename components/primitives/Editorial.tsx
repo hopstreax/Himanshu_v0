@@ -19,7 +19,7 @@ export function EditorialSection({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`${hasTopRule ? "pt-10 border-t border-border-subtle/80" : ""} space-y-6 ${className}`}
+      className={`${hasTopRule ? "pt-12 sm:pt-16 border-t border-border-subtle" : ""} space-y-8 ${className}`}
     >
       {children}
     </section>
@@ -32,6 +32,7 @@ interface SectionIndexProps {
   title: string;
   icon?: React.ReactNode;
   sideText?: string;
+  accentClass?: string;
 }
 
 export function SectionIndex({
@@ -40,19 +41,20 @@ export function SectionIndex({
   title,
   icon,
   sideText,
+  accentClass = "text-accent-ai",
 }: SectionIndexProps) {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-      <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-        {icon && <span className="text-ink">{icon}</span>}
-        <h2 id={id} className="font-medium">
-          <span className="text-ink font-semibold">{number}</span>
-          <span className="mx-1.5 opacity-60">/</span>
+    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 pb-3 border-b border-border-subtle">
+      <div className="flex items-center space-x-3">
+        {icon && <span className={`${accentClass} shrink-0`}>{icon}</span>}
+        <h2 id={id} className="font-mono font-bold text-[clamp(1.25rem,2.2vw,1.85rem)] text-ink uppercase tracking-tight flex items-baseline space-x-2">
+          <span className={`text-[clamp(1rem,1.8vw,1.5rem)] font-bold ${accentClass}`}>{number}</span>
+          <span className="text-border-strong font-light">/</span>
           <span>{title}</span>
         </h2>
       </div>
       {sideText && (
-        <span className="text-[11px] font-mono text-ink-subtle uppercase tracking-wider">
+        <span className="text-[10px] font-mono text-ink-subtle uppercase tracking-widest">
           {sideText}
         </span>
       )}
@@ -64,22 +66,24 @@ interface StatementBlockProps {
   statement: string;
   attribution?: string;
   className?: string;
+  accentClass?: string;
 }
 
 export function StatementBlock({
   statement,
   attribution,
   className = "",
+  accentClass = "border-accent-ai",
 }: StatementBlockProps) {
   return (
     <blockquote
-      className={`p-6 sm:p-7 rounded-xl border-l-2 border-ink bg-canvas-subtle/40 space-y-2.5 ${className}`}
+      className={`pl-5 sm:pl-6 border-l-2 ${accentClass} space-y-2 py-1 ${className}`}
     >
-      <p className="text-[15px] sm:text-[17px] text-ink italic leading-relaxed">
-        “{statement}”
+      <p className="text-[16px] sm:text-[18px] text-ink italic font-normal leading-relaxed">
+        &ldquo;{statement}&rdquo;
       </p>
       {attribution && (
-        <cite className="block text-[11px] font-mono uppercase tracking-widest text-ink-subtle not-italic">
+        <cite className="block text-[10px] font-mono uppercase tracking-widest text-ink-subtle not-italic">
           — {attribution}
         </cite>
       )}
@@ -95,17 +99,13 @@ interface MetadataRowProps {
 
 export function MetadataRow({ label, value, className = "" }: MetadataRowProps) {
   return (
-    <div className={`space-y-1 ${className}`}>
-      <span className="block text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
+    <div
+      className={`flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 py-3 border-b border-border-subtle/80 text-[12px] font-mono ${className}`}
+    >
+      <span className="uppercase tracking-widest text-ink-subtle font-medium">
         {label}
       </span>
-      <div className="text-[13px] sm:text-[14px] font-medium text-ink leading-snug">
-        {value}
-      </div>
+      <span className="text-ink text-left sm:text-right">{value}</span>
     </div>
   );
-}
-
-export function EditorialRule({ className = "" }: { className?: string }) {
-  return <hr className={`border-0 border-t border-border-subtle/80 my-8 ${className}`} />;
 }

@@ -1,20 +1,7 @@
 import React from "react";
-import {
-  ArrowUpRight,
-  Mail,
-  Github,
-  Linkedin,
-  Twitter,
-  Instagram,
-  FileText,
-  MapPin,
-  Send,
-  MessageSquare,
-} from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
-import { EditorialSection, SectionIndex, MetadataRow } from "@/components/primitives/Editorial";
 import { connectData } from "@/data/social";
-import { aboutData } from "@/data/about";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -39,151 +26,146 @@ export const metadata: Metadata = {
   },
 };
 
-const allLinks = [
-  ...connectData.links,
-  ...(connectData.secondaryLinks || []),
-];
-
 export default function ConnectPage() {
+  const primaryChannels = [
+    {
+      name: "GITHUB",
+      href: "https://github.com/hopstreax",
+      handle: "@hopstreax",
+      scope: "Repositories, AST parsers & verified pull requests",
+      accent: "#5CA8FF",
+    },
+    {
+      name: "LINKEDIN",
+      href: "https://www.linkedin.com/in/himanshupatro/",
+      handle: "in/himanshupatro",
+      scope: "Professional background, internships & engineering network",
+      accent: "#9B7BFF",
+    },
+    {
+      name: "EMAIL",
+      href: "mailto:himanshupatro4@gmail.com",
+      handle: "himanshupatro4@gmail.com",
+      scope: "Direct inbox for engineering roles, inquiries & systems discussion",
+      accent: "#45D6A0",
+    },
+    {
+      name: "X / TWITTER",
+      href: "https://x.com/hopstreax",
+      handle: "@hopstreax",
+      scope: "Observations on developer tools, AI agents & code intelligence",
+      accent: "#FF718C",
+    },
+  ];
+
   return (
     <PageShell activeSection="connect">
       {/* Editorial Opening / Hero Statement */}
-      <header className="pb-10 mb-14 border-b border-border-subtle/80 space-y-6">
-        <div className="flex items-center justify-between">
+      <header className="pb-12 mb-16 border-b border-[#242830] space-y-8">
+        <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
           <div className="flex items-center space-x-2">
-            <span className="text-[10px] font-mono tracking-widest text-ink-muted uppercase px-2.5 py-0.5 rounded-full border border-border-subtle bg-canvas-subtle/80 font-medium">
-              CONNECT / 01
-            </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-              DIRECT CHANNELS
-            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF718C]" />
+            <span className="text-[#F4F1EA] font-semibold">CONNECT / 01</span>
+            <span>·</span>
+            <span>COMMUNICATION DIRECTORY</span>
           </div>
-          <span className="text-[11px] font-mono text-ink-subtle hidden sm:inline-block">
+          <span className="text-[#45D6A0] font-semibold hidden sm:inline-block">
             OPEN TO OPPORTUNITIES
           </span>
         </div>
 
-        <div className="space-y-4 max-w-4xl">
-          <h1 className="text-[34px] sm:text-[46px] md:text-[54px] font-semibold tracking-tight text-ink leading-[1.12]">
-            I’m open to conversations about software engineering, developer tools, AI systems, and interesting problems.
+        {/* Controlled Editorial Typography: LET'S TALK. */}
+        <div className="space-y-4 max-w-5xl">
+          <h1 className="text-[clamp(3rem,6vw,5.5rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] leading-[0.95] select-none">
+            LET&apos;S<br />
+            <span className="text-[#9A9DA3]">TALK.</span>
           </h1>
 
-          <p className="text-[16px] sm:text-[18px] text-ink-muted leading-relaxed font-sans max-w-3xl">
-            Whether you are discussing engineering roles, exploring autonomous browser testing with TraceKit, or collaborating on AST and code intelligence tools like Graphify, my inbox and channels are always open.
+          <p className="text-[clamp(1.1rem,1.8vw,1.4rem)] text-[#C5C8CE] font-sans font-light leading-relaxed max-w-3xl pt-4">
+            I’m open to conversations about software engineering, developer tools, AI systems, and interesting engineering problems.
           </p>
         </div>
 
-        <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-ink-subtle border-t border-border-subtle/50">
-          <span className="flex items-center space-x-1.5 text-ink font-medium">
-            <MapPin className="w-3 h-3 text-ink-muted" />
+        <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-[#666B73] border-t border-[#242830]">
+          <span className="flex items-center space-x-1.5 text-[#F4F1EA]">
+            <MapPin className="w-3.5 h-3.5 text-[#FFB86B]" />
             <span>BASE: JAMSHEDPUR, JHARKHAND, INDIA</span>
           </span>
           <span className="hidden sm:inline">·</span>
-          <span>SEEKING: FULL-TIME SDE / AI SYSTEMS</span>
+          <span>SEEKING: FULL-TIME SDE / AI SYSTEMS ROLES</span>
           <span className="hidden sm:inline">·</span>
           <span>CLASS OF 2026</span>
         </div>
       </header>
 
-      <div className="flex flex-col space-y-16">
-        {/* Large Typographic Communication Directory (List Pattern, No Box Cards) */}
-        <section aria-labelledby="directory-heading" className="space-y-6">
-          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <div className="flex items-center space-x-2">
-              <MessageSquare className="w-3.5 h-3.5 text-ink" />
-              <h2 id="directory-heading">DIRECT COMMUNICATION DIRECTORY</h2>
-            </div>
-            <span>6 VERIFIED CHANNELS</span>
+      {/* Large Interactive Links Directory (Zero Cards, Editorial Rows) */}
+      <div className="space-y-16">
+        <div className="divide-y divide-[#242830] border-t-2 border-[#F4F1EA] border-b border-[#242830]">
+          {primaryChannels.map((channel, idx) => (
+            <a
+              key={channel.name}
+              href={channel.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block py-10 sm:py-14 transition-transform duration-300 hover:translate-x-2"
+            >
+              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4">
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-3 text-[11px] font-mono">
+                    <span className="text-[#666B73]">0{idx + 1}</span>
+                    <span className="text-[#343943]">/</span>
+                    <span className="text-[#666B73] uppercase tracking-widest">
+                      {channel.handle}
+                    </span>
+                  </div>
+
+                  <h2
+                    className="text-[clamp(2rem,4vw,3.5rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] transition-colors duration-200"
+                    style={{
+                      // Custom hover via CSS class handled or inline
+                    }}
+                  >
+                    {channel.name}
+                  </h2>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <p className="text-[13px] text-[#9A9DA3] font-sans max-w-sm hidden sm:block">
+                    {channel.scope}
+                  </p>
+                  <ArrowUpRight
+                    className="w-8 h-8 text-[#666B73] group-hover:text-[#F4F1EA] transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                    style={{ color: channel.accent }}
+                  />
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* Secondary Channels & Identity Summary */}
+        <div className="pt-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-6 text-[12px] font-mono text-[#666B73]">
+          <div>
+            <span>LOCATION: JAMSHEDPUR, JHARKHAND, INDIA</span>
+            <span className="mx-2">·</span>
+            <span>TIMEZONE: IST (UTC+5:30)</span>
           </div>
 
-          <div className="divide-y divide-border-subtle border-t-2 border-ink border-b border-border-subtle">
-            {allLinks.map((link) => (
+          <div className="flex items-center space-x-6">
+            {connectData.secondaryLinks?.map((sec) => (
               <a
-                key={link.platform}
-                href={link.url}
-                target={link.isExternal ? "_blank" : undefined}
-                rel={link.isExternal ? "noopener noreferrer" : undefined}
-                className="group block py-6 sm:py-7 px-2 -mx-2 hover:bg-canvas-subtle/30 rounded-lg transition-all"
+                key={sec.label}
+                href={sec.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#F4F1EA] transition-colors inline-flex items-center space-x-1"
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                  <div className="space-y-1">
-                    <div className="flex items-center space-x-3">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-                        {link.platform}
-                      </span>
-                      <span className="text-[12px] font-mono text-ink-muted">
-                        {link.handle}
-                      </span>
-                    </div>
-
-                    <h3 className="text-[22px] sm:text-[28px] md:text-[32px] font-semibold text-ink tracking-tight group-hover:translate-x-1.5 transition-transform duration-200">
-                      {link.label}
-                    </h3>
-                  </div>
-
-                  <div className="flex items-center space-x-2 text-[12px] font-mono font-semibold uppercase tracking-wider text-ink shrink-0 pt-2 sm:pt-0">
-                    <span className="group-hover:underline underline-offset-4 decoration-border-strong">
-                      {link.actionText || "OPEN CHANNEL"}
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </div>
-                </div>
+                <span>{sec.label.toUpperCase()}</span>
+                <ArrowUpRight className="w-3 h-3" />
               </a>
             ))}
           </div>
-        </section>
-
-        {/* Editorial Availability & Focus Brief */}
-        <EditorialSection labelledBy="availability-heading">
-          <SectionIndex
-            id="availability-heading"
-            number="02"
-            title="CURRENT AVAILABILITY & PROFESSIONAL SCOPE"
-            icon={<Send className="w-3.5 h-3.5" />}
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border-subtle border-t border-b border-border-subtle py-6">
-            <div className="sm:px-4 first:sm:pl-0 space-y-1.5 py-3 sm:py-0">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                LOCATION & RELOCATION
-              </span>
-              <div className="text-[14px] font-medium text-ink">
-                {aboutData.location}
-              </div>
-              <p className="text-[12px] text-ink-muted">
-                Open to in-person and remote roles across India and globally.
-              </p>
-            </div>
-
-            <div className="sm:px-4 space-y-1.5 py-3 sm:py-0">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                TARGET OPPORTUNITIES
-              </span>
-              <div className="text-[14px] font-medium text-ink">
-                Full-Time SDE / AI Systems
-              </div>
-              <p className="text-[12px] text-ink-muted">
-                Software development, compiler/AST tooling, and agent runtimes.
-              </p>
-            </div>
-
-            <div className="sm:px-4 last:sm:pr-0 space-y-1.5 py-3 sm:py-0">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                PRIMARY FOCUS
-              </span>
-              <div className="text-[14px] font-medium text-ink">
-                Autonomous Testing & ASTs
-              </div>
-              <p className="text-[12px] text-ink-muted">
-                Lead developer on TraceKit and core contributor to Graphify.
-              </p>
-            </div>
-          </div>
-
-          <p className="text-[14px] text-ink-muted leading-relaxed max-w-2xl pt-2">
-            Graduating in 2026 with a Bachelor of Technology in Computer Science and Information Technology from ITER, SOA University. Open to full-time roles starting 2026 and immediate internship/contract engineering engagements.
-          </p>
-        </EditorialSection>
+        </div>
       </div>
     </PageShell>
   );

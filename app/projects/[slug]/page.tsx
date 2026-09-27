@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowUpRight,
-  CheckCircle2,
   Cpu,
   FileText,
   Github,
@@ -12,15 +11,12 @@ import {
   Terminal,
   AlertCircle,
   Lightbulb,
-  Compass,
   Workflow,
-  Sparkles,
-  ArrowDown,
   ArrowRight,
 } from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
 import { ProjectNavigation } from "@/components/subpage/ProjectNavigation";
-import { EditorialSection, SectionIndex, StatementBlock, MetadataRow } from "@/components/primitives/Editorial";
+import { StatementBlock } from "@/components/primitives/Editorial";
 import { projects } from "@/data/projects";
 import { Metadata } from "next";
 
@@ -77,6 +73,14 @@ export default async function ProjectCaseStudyPage({
   const isFlagship = project.tier === "flagship";
   const caseStudy = project.caseStudy;
 
+  const projectAccents: Record<string, string> = {
+    tracekit: "#9B7BFF",
+    "ai-interviewer": "#FFB86B",
+    "campus-lost-and-found": "#45D6A0",
+    "e-pmsss": "#5CA8FF",
+  };
+  const accent = projectAccents[project.slug] || "#9B7BFF";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
@@ -105,119 +109,114 @@ export default async function ProjectCaseStudyPage({
       <div className="mb-8">
         <Link
           href="/projects"
-          className="inline-flex items-center space-x-1.5 text-[11px] font-mono uppercase tracking-widest text-ink-muted hover:text-ink transition-colors group"
+          className="inline-flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors group"
         >
           <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
-          <span>PROJECT ARCHIVE</span>
+          <span>BACK TO WORK / 2026 ARCHIVE</span>
         </Link>
       </div>
 
       {/* Case Study Editorial Header */}
-      <header className="pb-10 mb-14 border-b border-border-subtle/80 space-y-6">
-        <div className="flex items-center justify-between">
+      <header className="pb-12 mb-20 border-b border-[#242830] space-y-8">
+        <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
           <div className="flex items-center space-x-2">
             <span
-              className={`text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full border ${
-                isFlagship
-                  ? "border-border-strong bg-canvas-subtle font-semibold text-ink"
-                  : "border-border-subtle bg-surface text-ink-muted"
-              }`}
-            >
-              {isFlagship ? "FLAGSHIP ENGINEERING CASE STUDY" : "ENGINEERING ARCHIVE"}
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ backgroundColor: accent }}
+            />
+            <span style={{ color: accent }} className="font-semibold">
+              {isFlagship ? "FLAGSHIP ARCHITECTURE" : "ENGINEERING ARCHIVE"}
             </span>
-            <span className="text-[11px] font-mono text-ink-subtle">
-              {project.category}
-            </span>
+            <span>·</span>
+            <span>{project.category}</span>
           </div>
-          <span className="text-[11px] font-mono text-ink-subtle">
-            {project.year} · PRODUCTION
-          </span>
+          <span>{project.year} · PRODUCTION RECORD</span>
         </div>
 
-        <div className="space-y-4 max-w-4xl">
-          <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-ink leading-[1.08]">
+        {/* Project Title */}
+        <div className="space-y-4 max-w-5xl">
+          <h1 className="text-[clamp(2.75rem,5vw,5rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] leading-[0.98]">
             {project.title}
           </h1>
 
-          <p className="text-[16px] sm:text-[19px] text-ink-muted leading-relaxed font-sans max-w-3xl">
+          <p className="text-[clamp(1.1rem,1.8vw,1.35rem)] text-[#C5C8CE] font-sans font-light leading-relaxed max-w-3xl pt-2">
             {project.tagline}
           </p>
         </div>
 
-        {/* Tech Stack Badges */}
-        <div className="pt-2 flex flex-wrap items-center gap-1.5 border-t border-border-subtle/50">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle mr-2">
-            STACK:
-          </span>
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface text-ink border border-border-subtle/60"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* Verified Links Bar */}
-        {(project.liveUrl || project.repositoryUrl || project.notionUrl) && (
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-md bg-canvas border border-border-strong hover:bg-surface text-ink text-[11px] font-mono font-semibold uppercase tracking-wider transition-colors group"
-                aria-label={`Open live deployment for ${project.title}`}
-              >
-                <span>LIVE APPLICATION</span>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
-            )}
-            {project.repositoryUrl && (
-              <a
-                href={project.repositoryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-md bg-canvas border border-border-subtle hover:border-border-strong hover:bg-surface text-ink text-[11px] font-mono font-medium uppercase tracking-wider transition-colors group"
-                aria-label={`View ${project.title} source code on GitHub`}
-              >
-                <Github className="w-3.5 h-3.5" />
-                <span>GITHUB REPO</span>
-                <ArrowUpRight className="w-3 h-3 text-ink-subtle group-hover:text-ink transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
-            )}
-            {project.notionUrl && (
-              <a
-                href={project.notionUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-md bg-canvas border border-border-subtle hover:border-border-strong hover:bg-surface text-ink-muted hover:text-ink text-[11px] font-mono font-medium uppercase tracking-wider transition-colors group"
-                aria-label={`Open Notion specification for ${project.title}`}
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>NOTION DOCS</span>
-                <ArrowUpRight className="w-3 h-3 text-ink-subtle group-hover:text-ink transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
-            )}
+        {/* Stack & Verified Deployment Links */}
+        <div className="pt-6 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-[#242830]">
+          <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono text-[#9A9DA3]">
+            <span className="text-[#666B73] uppercase tracking-wider mr-1">STACK:</span>
+            {project.technologies.map((tech) => (
+              <span key={tech} className="px-2 py-0.5 border border-[#242830] text-[#F4F1EA]">
+                {tech}
+              </span>
+            ))}
           </div>
-        )}
+
+          {(project.liveUrl || project.repositoryUrl || project.notionUrl) && (
+            <div className="flex flex-wrap items-center gap-4 text-[11px] font-mono uppercase tracking-wider">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 border font-semibold transition-colors"
+                  style={{ borderColor: accent, color: accent }}
+                >
+                  <span>LIVE APP</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {project.repositoryUrl && (
+                <a
+                  href={project.repositoryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 px-3 py-1.5 border border-[#242830] text-[#F4F1EA] hover:border-[#666B73] transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>GITHUB</span>
+                  <ArrowUpRight className="w-3 h-3 text-[#666B73]" />
+                </a>
+              )}
+              {project.notionUrl && (
+                <a
+                  href={project.notionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 px-3 py-1.5 border border-[#242830] text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>NOTION DOCS</span>
+                  <ArrowUpRight className="w-3 h-3 text-[#666B73]" />
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       </header>
 
-      {/* Case Study Content Flow */}
-      <article className="space-y-16">
+      {/* Case Study Sticky / Split Editorial Chapters */}
+      <article className="space-y-24 sm:space-y-32">
         {/* ============================================================ */}
-        {/* 01 / WHY I BUILT IT                                          */}
+        {/* 01 / PROBLEM                                                 */}
         {/* ============================================================ */}
-        <EditorialSection labelledBy="why-heading" hasTopRule={false}>
-          <SectionIndex
-            id="why-heading"
-            number="01"
-            title="WHY I BUILT IT & MOTIVATION"
-            icon={<Lightbulb className="w-3.5 h-3.5" />}
-          />
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-[#242830] pt-10">
+          <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-2">
+            <div className="text-3xl sm:text-4xl font-mono font-light tracking-tighter text-[#666B73]">
+              01
+            </div>
+            <div className="text-[clamp(1.25rem,2.2vw,1.75rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA]">
+              PROBLEM & MOTIVATION
+            </div>
+            <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-widest">
+              FAILURE MODES & INVARIANTS
+            </div>
+          </div>
 
-          <div className="space-y-6 pt-2">
+          <div className="lg:col-span-8 space-y-6">
             <StatementBlock
               statement={
                 caseStudy?.motivation ||
@@ -228,373 +227,237 @@ export default async function ProjectCaseStudyPage({
               attribution={`${project.title} Architecture Brief`}
             />
 
-            <p className="text-[15px] sm:text-[16px] text-ink leading-relaxed">
-              {caseStudy?.overview || project.longDescription}
-            </p>
+            <div className="space-y-4 text-[15px] sm:text-[16px] text-[#C5C8CE] leading-relaxed">
+              <p>{caseStudy?.overview || project.longDescription}</p>
+
+              {caseStudy?.problem && (
+                <div className="border-l-2 border-[#F4F1EA] pl-6 py-2 my-4 space-y-2">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#9A9DA3] font-semibold block">
+                    THE ARCHITECTURAL FAILURE POINT:
+                  </span>
+                  <p className="text-[15px] text-[#F4F1EA]">
+                    {caseStudy.problem}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
-        </EditorialSection>
+        </section>
 
         {/* ============================================================ */}
-        {/* 02 / THE CORE ENGINEERING PROBLEM                            */}
+        {/* 02 / SYSTEM PIPELINE                                         */}
         {/* ============================================================ */}
-        <EditorialSection labelledBy="problem-heading">
-          <SectionIndex
-            id="problem-heading"
-            number="02"
-            title="THE CORE ENGINEERING PROBLEM"
-            icon={<AlertCircle className="w-3.5 h-3.5" />}
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2">
-            <div className="lg:col-span-4 space-y-1">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                FAILURE MODES & INVARIANTS
-              </span>
-              <p className="text-[13px] text-ink-muted">
-                What breaks in traditional architectures without deterministic constraints.
-              </p>
+        {caseStudy?.architectureFlow && caseStudy.architectureFlow.length > 0 && (
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-[#242830] pt-10">
+            <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-2">
+              <div className="text-3xl sm:text-4xl font-mono font-light tracking-tighter text-[#666B73]">
+                02
+              </div>
+              <div className="text-[clamp(1.25rem,2.2vw,1.75rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA]">
+                SYSTEM PIPELINE
+              </div>
+              <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-widest">
+                DETERMINISTIC FLOW
+              </div>
             </div>
 
-            <div className="lg:col-span-8 space-y-4">
-              <p className="text-[15px] sm:text-[16px] text-ink-muted leading-relaxed pl-4 border-l-2 border-ink">
-                {caseStudy?.problem}
-              </p>
-
-              {caseStudy?.solution && (
-                <div className="pt-3">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink font-semibold block mb-1">
+            <div className="lg:col-span-8 space-y-6">
+              {caseStudy.solution && (
+                <div className="space-y-2 pb-4">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] block">
                     ENGINEERING SOLUTION:
                   </span>
-                  <p className="text-[14px] text-ink leading-relaxed">
+                  <p className="text-[16px] text-[#F4F1EA] font-sans leading-relaxed">
                     {caseStudy.solution}
                   </p>
                 </div>
               )}
-            </div>
-          </div>
-        </EditorialSection>
 
-        {/* ============================================================ */}
-        {/* 03 / SYSTEM EXECUTION FLOW (Visual Flowchart Structure)     */}
-        {/* ============================================================ */}
-        {caseStudy?.architectureFlow && caseStudy.architectureFlow.length > 0 && (
-          <EditorialSection labelledBy="system-heading">
-            <SectionIndex
-              id="system-heading"
-              number="03"
-              title="SYSTEM EXECUTION PIPELINE"
-              icon={<Workflow className="w-3.5 h-3.5" />}
-              sideText="DETERMINISTIC CYCLE"
-            />
+              {/* Connected Pipeline Flow */}
+              <div className="border border-[#242830] bg-[#08090B] p-6 space-y-4">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] pb-2 flex items-center space-x-2">
+                  <Workflow className="w-3.5 h-3.5" style={{ color: accent }} />
+                  <span>STEP-BY-STEP EXECUTION TRACE:</span>
+                </div>
 
-            {/* Visual Architectural Flow Structure */}
-            <div className="pt-2 space-y-6">
-              <div className="border-t-2 border-ink border-b border-border-subtle py-8">
-                {/* Flow Diagram (Horizontal on desktop / Vertical on mobile) */}
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
-                  {(() => {
-                    const flowSteps = caseStudy.architectureFlow;
-                    return flowSteps.map((step, idx) => {
-                      const colonIndex = step.indexOf(":");
-                      const stepTitle =
-                        colonIndex !== -1 ? step.slice(0, colonIndex).replace(/^\d+\.\s*/, "").trim() : `STAGE 0${idx + 1}`;
-                      const stepDesc = colonIndex !== -1 ? step.slice(colonIndex + 1).trim() : step;
+                <div className="space-y-4">
+                  {caseStudy.architectureFlow.map((step, idx) => {
+                    const colonIndex = step.indexOf(":");
+                    const stepTitle =
+                      colonIndex !== -1
+                        ? step.slice(0, colonIndex).replace(/^\d+\.\s*/, "").trim()
+                        : `STAGE 0${idx + 1}`;
+                    const stepDesc =
+                      colonIndex !== -1 ? step.slice(colonIndex + 1).trim() : step;
 
-                      return (
-                        <div key={idx} className="relative flex flex-col justify-between space-y-3 p-4 rounded-lg bg-canvas-subtle/30 border border-border-subtle group">
-                          <div className="space-y-1.5">
-                            <div className="flex items-center justify-between">
-                              <span className="text-[10px] font-mono font-semibold text-ink-subtle">
-                                0{idx + 1}
-                              </span>
-                              {idx < flowSteps.length - 1 && (
-                                <ArrowRight className="hidden md:inline w-3.5 h-3.5 text-ink-subtle/70" />
-                              )}
-                            </div>
-                            <div className="text-[13px] font-semibold uppercase tracking-wider text-ink font-mono">
-                              {stepTitle}
-                            </div>
-                          </div>
-
-                          <p className="text-[12px] text-ink-muted leading-relaxed">
-                            {stepDesc}
-                          </p>
+                    return (
+                      <div
+                        key={idx}
+                        className="flex flex-col sm:flex-row sm:items-baseline gap-2 pb-3 border-b border-[#242830] last:border-0"
+                      >
+                        <div className="sm:w-1/3 flex items-center space-x-2 font-mono text-[12px] font-bold uppercase text-[#F4F1EA]">
+                          <span style={{ color: accent }}>0{idx + 1}</span>
+                          <span>{stepTitle}</span>
                         </div>
-                      );
-                    });
-                  })()}
+                        <p className="sm:w-2/3 text-[13px] text-[#9A9DA3] font-sans leading-relaxed">
+                          {stepDesc}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
-          </EditorialSection>
+          </section>
         )}
 
         {/* ============================================================ */}
-        {/* 04 / ARCHITECTURE & CORE CAPABILITIES                        */}
-        {/* ============================================================ */}
-        {(caseStudy?.whatSystemDoes || caseStudy?.technicalApproach) && (
-          <EditorialSection labelledBy="arch-heading">
-            <SectionIndex
-              id="arch-heading"
-              number="04"
-              title="ARCHITECTURE & SYSTEM CAPABILITIES"
-              icon={<Layers className="w-3.5 h-3.5" />}
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-2">
-              {caseStudy.whatSystemDoes && (
-                <div className="space-y-3">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold block">
-                    CAPABILITIES & SCOPE
-                  </span>
-                  <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
-                    {caseStudy.whatSystemDoes.map((item, idx) => (
-                      <div key={idx} className="py-3 flex items-start space-x-3">
-                        <span className="text-[11px] font-mono font-semibold text-ink-subtle mt-0.5">
-                          0{idx + 1}
-                        </span>
-                        <p className="text-[13px] text-ink leading-relaxed">
-                          {item}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {caseStudy.technicalApproach && (
-                <div className="space-y-3">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold block">
-                    TECHNICAL METHODOLOGY
-                  </span>
-                  <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
-                    {caseStudy.technicalApproach.map((item, idx) => (
-                      <div key={idx} className="py-3 flex items-start space-x-3">
-                        <span className="text-[11px] font-mono font-semibold text-ink-subtle mt-0.5">
-                          0{idx + 1}
-                        </span>
-                        <p className="text-[13px] text-ink-muted leading-relaxed">
-                          {item}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </EditorialSection>
-        )}
-
-        {/* ============================================================ */}
-        {/* 05 / TECHNICAL IMPLEMENTATION                                */}
+        {/* 03 / IMPLEMENTATION CHAPTERS                                 */}
         {/* ============================================================ */}
         {caseStudy?.technicalImplementation && (
-          <EditorialSection labelledBy="implementation-heading">
-            <SectionIndex
-              id="implementation-heading"
-              number="05"
-              title="TECHNICAL IMPLEMENTATION CHAPTERS"
-              icon={<Cpu className="w-3.5 h-3.5" />}
-              sideText={`${caseStudy.technicalImplementation.length} CHAPTERS`}
-            />
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-[#242830] pt-10">
+            <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-2">
+              <div className="text-3xl sm:text-4xl font-mono font-light tracking-tighter text-[#666B73]">
+                03
+              </div>
+              <div className="text-[clamp(1.25rem,2.2vw,1.75rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA]">
+                IMPLEMENTATION
+              </div>
+              <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-widest">
+                TECHNICAL CHAPTERS
+              </div>
+            </div>
 
-            <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
-              {caseStudy.technicalImplementation.map((section, idx) => (
-                <div key={idx} className="py-8 space-y-4">
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-                      CHAPTER 0{idx + 1}
-                    </span>
-                    <h3 className="text-[18px] sm:text-[20px] font-semibold text-ink">
-                      {section.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-[14px] text-ink-muted leading-relaxed max-w-3xl">
-                    {section.description}
+            <div className="lg:col-span-8 space-y-8 divide-y divide-[#242830]">
+              {caseStudy.technicalImplementation.map((chapter, idx) => (
+                <div key={idx} className={`${idx > 0 ? "pt-8" : ""} space-y-3`}>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] block">
+                    CHAPTER 0{idx + 1}
+                  </span>
+                  <h4 className="text-xl font-mono font-bold text-[#F4F1EA]">
+                    {chapter.title}
+                  </h4>
+                  <p className="text-[14px] text-[#C5C8CE] leading-relaxed">
+                    {chapter.description}
                   </p>
-
-                  {section.points && (
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-[13px] text-ink-muted">
-                      {section.points.map((point, pIdx) => (
-                        <li key={pIdx} className="flex items-start space-x-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-ink/60 mt-2 shrink-0" />
-                          <span className="leading-relaxed">{point}</span>
-                        </li>
+                  {chapter.points && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-[12px] font-mono text-[#9A9DA3]">
+                      {chapter.points.map((p, pIdx) => (
+                        <div key={pIdx} className="flex items-start space-x-2">
+                          <span className="text-[#666B73] select-none">—</span>
+                          <span>{p}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   )}
                 </div>
               ))}
             </div>
-          </EditorialSection>
+          </section>
         )}
 
         {/* ============================================================ */}
-        {/* 06 / KEY ENGINEERING DECISIONS                               */}
+        {/* 04 / TRADEOFFS & ENGINEERING DECISIONS                       */}
         {/* ============================================================ */}
         {caseStudy?.engineeringDecisions && caseStudy.engineeringDecisions.length > 0 && (
-          <EditorialSection labelledBy="decisions-heading">
-            <SectionIndex
-              id="decisions-heading"
-              number="06"
-              title="KEY ENGINEERING DECISIONS & TRADEOFFS"
-              icon={<Terminal className="w-3.5 h-3.5" />}
-            />
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-[#242830] pt-10">
+            <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-2">
+              <div className="text-3xl sm:text-4xl font-mono font-light tracking-tighter text-[#666B73]">
+                04
+              </div>
+              <div className="text-[clamp(1.25rem,2.2vw,1.75rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA]">
+                TRADEOFFS
+              </div>
+              <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-widest">
+                ARCHITECTURAL DECISIONS
+              </div>
+            </div>
 
-            <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
+            <div className="lg:col-span-8 divide-y divide-[#242830]">
               {caseStudy.engineeringDecisions.map((decision, idx) => (
-                <div key={idx} className="py-6 space-y-3">
-                  <div className="flex items-baseline space-x-3">
-                    <span className="text-[11px] font-mono font-semibold text-ink-subtle">
-                      0{idx + 1}
-                    </span>
-                    <h4 className="text-[16px] font-semibold text-ink font-mono">
-                      {decision.decision}
-                    </h4>
+                <div key={idx} className="py-6 first:pt-0 space-y-3">
+                  <div className="flex items-baseline space-x-2 font-mono text-[12px] uppercase">
+                    <span className="text-[#666B73]">DECISION 0{idx + 1}:</span>
+                    <span className="text-[#F4F1EA] font-bold">{decision.decision}</span>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[13px] leading-relaxed pl-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[13px] pt-1">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold block">
-                        Rationale & Constraints
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#666B73] block">
+                        RATIONALE:
                       </span>
-                      <p className="text-ink-muted">{decision.rationale}</p>
+                      <p className="text-[#C5C8CE]">{decision.rationale}</p>
                     </div>
-
                     {decision.outcome && (
                       <div className="space-y-1">
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold block">
-                          Verified Outcome
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#FF718C] block">
+                          OUTCOME & ARCHITECTURAL IMPACT:
                         </span>
-                        <p className="text-ink">{decision.outcome}</p>
+                        <p className="text-[#9A9DA3]">{decision.outcome}</p>
                       </div>
                     )}
                   </div>
                 </div>
               ))}
             </div>
-          </EditorialSection>
+          </section>
         )}
 
         {/* ============================================================ */}
-        {/* 07 / CHALLENGES & ROOT-CAUSE FIXES                           */}
+        {/* 05 / RESULTS & LESSONS                                        */}
         {/* ============================================================ */}
-        {caseStudy?.challengesAndSolutions && caseStudy.challengesAndSolutions.length > 0 && (
-          <EditorialSection labelledBy="challenges-heading">
-            <SectionIndex
-              id="challenges-heading"
-              number="07"
-              title="CHALLENGES & ROOT-CAUSE RESOLUTIONS"
-              icon={<AlertCircle className="w-3.5 h-3.5" />}
-            />
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-[#242830] pt-10">
+          <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-2">
+            <div className="text-3xl sm:text-4xl font-mono font-light tracking-tighter text-[#666B73]">
+              05
+            </div>
+            <div className="text-[clamp(1.25rem,2.2vw,1.75rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA]">
+              RESULT
+            </div>
+            <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-widest">
+              VALIDATION & LESSONS
+            </div>
+          </div>
 
-            <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
-              {caseStudy.challengesAndSolutions.map((item, idx) => (
-                <div key={idx} className="py-6 space-y-3">
-                  <div className="flex items-baseline space-x-3">
-                    <span className="text-[11px] font-mono font-semibold text-ink-subtle">
-                      0{idx + 1}
-                    </span>
-                    <h4 className="text-[15px] font-semibold text-ink">
-                      {item.challenge}
-                    </h4>
-                  </div>
-
-                  <div className="pl-6">
-                    <p className="text-[13px] text-ink-muted leading-relaxed pl-3 border-l border-border-subtle">
-                      <span className="font-semibold text-ink font-mono text-[10px] uppercase tracking-wider block mb-0.5">
-                        Solution & Fix:
-                      </span>
-                      {item.solution}
-                    </p>
-                  </div>
+          <div className="lg:col-span-8 space-y-6">
+            {caseStudy?.whatILearned && caseStudy.whatILearned.length > 0 && (
+              <div className="space-y-3">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] block">
+                  KEY LESSONS LEARNED:
+                </span>
+                <div className="space-y-2 text-[14px] text-[#C5C8CE]">
+                  {caseStudy.whatILearned.map((lesson: string, idx: number) => (
+                    <div key={idx} className="flex items-start space-x-2">
+                      <span className="text-[#45D6A0] font-mono font-bold">✓</span>
+                      <span>{lesson}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </EditorialSection>
-        )}
-
-        {/* ============================================================ */}
-        {/* 08 / WHAT I LEARNED                                          */}
-        {/* ============================================================ */}
-        {caseStudy?.whatILearned && (
-          <EditorialSection labelledBy="learned-heading">
-            <SectionIndex
-              id="learned-heading"
-              number="08"
-              title="WHAT I LEARNED · ENGINEERING TAKEAWAYS"
-              icon={<Lightbulb className="w-3.5 h-3.5" />}
-            />
-
-            <div className="pt-2">
-              <ul className="divide-y divide-border-subtle border-t border-b border-border-subtle">
-                {caseStudy.whatILearned.map((lesson, idx) => (
-                  <li key={idx} className="py-4 flex items-start space-x-3 text-[14px] text-ink leading-relaxed">
-                    <CheckCircle2 className="w-4 h-4 text-ink-muted mt-0.5 shrink-0" />
-                    <span>{lesson}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </EditorialSection>
-        )}
-
-        {/* ============================================================ */}
-        {/* 09 / CURRENT STATE & DEPLOYMENT                              */}
-        {/* ============================================================ */}
-        {caseStudy?.currentState && (
-          <EditorialSection labelledBy="state-heading">
-            <SectionIndex
-              id="state-heading"
-              number="09"
-              title="CURRENT STATE & VERIFICATION"
-              icon={<CheckCircle2 className="w-3.5 h-3.5" />}
-            />
-
-            <div className="p-6 rounded-xl border border-border-subtle bg-canvas-subtle/30 space-y-2">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                SYSTEM STATUS
               </div>
-              <p className="text-[15px] text-ink leading-relaxed">
-                {caseStudy.currentState}
-              </p>
-            </div>
-          </EditorialSection>
-        )}
+            )}
 
-        {/* ============================================================ */}
-        {/* 10 / VERIFIED PROJECT LINKS                                  */}
-        {/* ============================================================ */}
-        {caseStudy?.links && caseStudy.links.length > 0 && (
-          <EditorialSection labelledBy="links-heading">
-            <SectionIndex
-              id="links-heading"
-              number="10"
-              title="VERIFIED ARTIFACTS & LINKS"
-              icon={<Compass className="w-3.5 h-3.5" />}
-            />
-
-            <div className="pt-2 flex flex-wrap gap-4">
-              {caseStudy.links.map((link, idx) => (
-                <a
-                  key={idx}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-md bg-canvas border border-border-strong hover:bg-surface text-ink text-[12px] font-mono font-medium uppercase tracking-wider transition-colors group"
-                >
-                  <span>{link.label}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              ))}
-            </div>
-          </EditorialSection>
-        )}
+            {caseStudy?.futureDirection && caseStudy.futureDirection.length > 0 && (
+              <div className="pt-6 border-t border-[#242830] space-y-2">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] block">
+                  FUTURE HORIZON:
+                </span>
+                <div className="space-y-1.5 text-[13px] text-[#9A9DA3]">
+                  {caseStudy.futureDirection.map((direction: string, dIdx: number) => (
+                    <div key={dIdx} className="flex items-start space-x-2">
+                      <span className="text-[#666B73] select-none">—</span>
+                      <span>{direction}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
       </article>
 
-      {/* Inter-project navigation */}
-      <ProjectNavigation currentSlug={project.slug} />
+      {/* Project Navigation Footer */}
+      <footer className="mt-20 pt-10 border-t border-[#242830]">
+        <ProjectNavigation currentSlug={project.slug} />
+      </footer>
     </PageShell>
   );
 }

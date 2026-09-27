@@ -1,168 +1,151 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Sparkles, FolderGit2 } from "lucide-react";
+import { ArrowUpRight, FolderGit2 } from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
 import { projects } from "@/data/projects";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Projects",
-  description:
-    "Engineering project archive of Himanshu Patro: TraceKit (Autonomous AI browser testing), AI Interviewer, Campus Lost & Found, and e-PMSSS.",
-  alternates: {
-    canonical: "/projects",
-  },
-  openGraph: {
-    title: "Projects — Himanshu Patro",
-    description:
-      "Engineering project archive of Himanshu Patro: TraceKit (Autonomous AI browser testing), AI Interviewer, Campus Lost & Found, and e-PMSSS.",
-    url: "https://himanshupatro.dev/projects",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Projects — Himanshu Patro",
-    description:
-      "Engineering project archive of Himanshu Patro: TraceKit (Autonomous AI browser testing), AI Interviewer, Campus Lost & Found, and e-PMSSS.",
-  },
-};
 
 export default function ProjectsPage() {
+  const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+
+  const projectAccents: Record<string, string> = {
+    tracekit: "#9B7BFF",
+    "ai-interviewer": "#FFB86B",
+    "campus-lost-and-found": "#45D6A0",
+    "e-pmsss": "#5CA8FF",
+  };
+
   return (
     <PageShell activeSection="projects">
       {/* Editorial Opening / Hero Statement */}
-      <header className="pb-10 mb-14 border-b border-border-subtle/80 space-y-6">
-        <div className="flex items-center justify-between">
+      <header className="pb-12 mb-16 border-b border-[#242830] space-y-8">
+        <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
           <div className="flex items-center space-x-2">
-            <span className="text-[10px] font-mono tracking-widest text-ink-muted uppercase px-2.5 py-0.5 rounded-full border border-border-subtle bg-canvas-subtle/80 font-medium">
-              PROJECTS / 01
-            </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-              PORTFOLIO ARCHIVE
-            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB86B]" />
+            <span className="text-[#F4F1EA] font-semibold">WORK / 2026</span>
+            <span>·</span>
+            <span>INDEX & CASE STUDIES</span>
           </div>
-          <span className="text-[11px] font-mono text-ink-subtle hidden sm:inline-block">
-            4 SELECTED SYSTEMS
+          <span className="hidden sm:inline-block">
+            4 ARCHIVAL SYSTEMS
           </span>
         </div>
 
         <div className="space-y-4 max-w-4xl">
-          <h1 className="text-[36px] sm:text-[48px] md:text-[56px] font-semibold tracking-tight text-ink leading-[1.1]">
-            Selected Systems
+          <h1 className="text-[clamp(3rem,6vw,5.5rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] leading-[0.96]">
+            SELECTED<br />
+            <span className="text-[#9A9DA3]">SYSTEMS</span>
           </h1>
 
-          <p className="text-[16px] sm:text-[19px] text-ink-muted leading-relaxed font-sans max-w-3xl">
-            Autonomous testing orchestration, generative AI simulation platforms, and full-stack software applications. Each project is documented as a complete engineering case study.
+          <p className="text-[clamp(1.1rem,1.8vw,1.4rem)] text-[#C5C8CE] font-sans font-light leading-relaxed max-w-3xl pt-2">
+            Autonomous testing orchestration, generative AI simulation platforms, and full-stack software applications documented as deep engineering case studies.
           </p>
         </div>
 
-        <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-ink-subtle border-t border-border-subtle/50">
-          <span>FLAGSHIPS: TRACEKIT & AI INTERVIEWER</span>
+        <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-[#666B73] border-t border-[#242830]">
+          <span>01 & 02: FLAGSHIP AGENTIC ARCHITECTURES</span>
           <span className="hidden sm:inline">·</span>
-          <span>ARCHIVED: CAMPUS RECOVERY & GOVTECH</span>
+          <span>03 & 04: FULL-STACK PRODUCTION SYSTEMS</span>
           <span className="hidden sm:inline">·</span>
-          <span>VERIFIED: PRODUCTION CODE REPOSITORIES</span>
+          <span>NO BOXED CARDS · PURE DIRECTORY</span>
         </div>
       </header>
 
       {/* The Editorial Project Archive (List Pattern, No Box Cards) */}
-      <section aria-labelledby="archive-heading" className="space-y-6">
-        <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+      <section aria-labelledby="archive-heading" className="space-y-4">
+        <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-[#666B73] pb-4">
           <div className="flex items-center space-x-2">
-            <FolderGit2 className="w-3.5 h-3.5 text-ink" />
-            <h2 id="archive-heading">ENGINEERING ARCHIVE DIRECTORY</h2>
+            <FolderGit2 className="w-3.5 h-3.5 text-[#F4F1EA]" />
+            <h2 id="archive-heading">DIRECTORY · CHRONOLOGICAL INDEX</h2>
           </div>
-          <span>CHRONOLOGICAL INDEX</span>
+          <span>TAP OR HOVER TO ILLUMINATE</span>
         </div>
 
-        <div className="divide-y divide-border-subtle border-t-2 border-ink border-b border-border-subtle">
-          {projects.map((project, idx) => (
-            <Link
-              key={project.slug}
-              href={`/projects/${project.slug}`}
-              className="group block py-8 sm:py-10 px-2 -mx-2 hover:bg-canvas-subtle/30 rounded-lg transition-all"
-            >
-              <div className="flex flex-col space-y-4">
-                {/* Meta Row: Number, Category, Year */}
-                <div className="flex items-center justify-between text-[11px] font-mono">
-                  <div className="flex items-center space-x-3">
-                    <span className="font-semibold text-ink">
-                      0{idx + 1}
-                    </span>
-                    <span className="text-ink-subtle">/</span>
-                    <span className="uppercase tracking-wider text-ink-subtle">
-                      {project.category}
-                    </span>
-                    {project.tier === "flagship" && (
-                      <span className="hidden sm:inline-block px-2 py-0.2 rounded bg-surface border border-border-subtle text-[9px] font-semibold text-ink uppercase tracking-widest">
-                        FLAGSHIP
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-ink-subtle">{project.year}</span>
-                </div>
+        <div className="divide-y divide-[#242830] border-t-2 border-[#F4F1EA] border-b border-[#242830]">
+          {projects.map((project, idx) => {
+            const accent = projectAccents[project.slug] || "#9B7BFF";
+            const isHovered = hoveredSlug === project.slug;
 
-                {/* Title & Arrow */}
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-[26px] sm:text-[34px] md:text-[40px] font-semibold text-ink tracking-tight group-hover:translate-x-1.5 transition-transform duration-200">
-                    {project.title}
-                  </h3>
-                  <div className="flex items-center space-x-1 text-[12px] font-mono font-semibold uppercase tracking-wider text-ink shrink-0 group-hover:text-ink transition-colors">
-                    <span className="hidden sm:inline">CASE STUDY</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </div>
-                </div>
-
-                {/* Short Thesis */}
-                <p className="text-[15px] sm:text-[16px] text-ink-muted leading-relaxed font-sans max-w-3xl">
-                  {project.tagline}
-                </p>
-
-                {/* Tech Pills & Highlights Teaser */}
-                <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[11px] font-mono">
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.technologies.slice(0, 5).map((tech) => (
+            return (
+              <Link
+                key={project.slug}
+                href={`/projects/${project.slug}`}
+                onMouseEnter={() => setHoveredSlug(project.slug)}
+                onMouseLeave={() => setHoveredSlug(null)}
+                className="group block py-10 sm:py-14 transition-transform duration-300 hover:translate-x-2"
+              >
+                <div className="space-y-4">
+                  {/* Meta Row: Number, Tier, Year */}
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <div className="flex items-center space-x-3">
                       <span
-                        key={tech}
-                        className="text-[10px] px-2 py-0.5 rounded bg-surface text-ink-muted border border-border-subtle/50"
+                        className="text-xl sm:text-2xl font-mono font-light tracking-tighter transition-colors duration-200"
+                        style={{ color: isHovered ? accent : "#666B73" }}
                       >
-                        {tech}
+                        0{idx + 1}
                       </span>
-                    ))}
+                      <span className="text-[#343943]">/</span>
+                      <span className="uppercase tracking-widest text-[#666B73]">
+                        {project.category}
+                      </span>
+                      {project.tier === "flagship" && (
+                        <span
+                          className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest border"
+                          style={{
+                            borderColor: accent,
+                            color: accent,
+                          }}
+                        >
+                          FLAGSHIP
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center space-x-2 text-[#666B73] group-hover:text-[#F4F1EA] transition-colors">
+                      <span className="text-[11px] font-mono uppercase tracking-wider hidden sm:inline">
+                        VIEW CASE STUDY
+                      </span>
+                      <ArrowUpRight
+                        className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                        style={{ color: isHovered ? accent : "#9A9DA3" }}
+                      />
+                    </div>
                   </div>
 
-                  <span className="text-ink-subtle group-hover:text-ink-muted transition-colors">
-                    {project.highlights[0]}
-                  </span>
+                  {/* Project Title */}
+                  <div className="space-y-1.5">
+                    <h3
+                      className="text-[clamp(2rem,4vw,3.75rem)] font-mono font-bold uppercase tracking-tight transition-colors duration-200"
+                      style={{ color: isHovered ? accent : "#F4F1EA" }}
+                    >
+                      {project.title}
+                    </h3>
+                    <div className="text-[13px] sm:text-[15px] font-mono text-[#9A9DA3] uppercase tracking-wider">
+                      {project.tagline}
+                    </div>
+                  </div>
+
+                  {/* Architecture & Tech Stack Details */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2">
+                    <div className="md:col-span-8">
+                      <p className="text-[14px] sm:text-[15px] text-[#C5C8CE] leading-relaxed max-w-2xl font-sans">
+                        {project.shortDescription}
+                      </p>
+                    </div>
+
+                    <div className="md:col-span-4 flex flex-wrap items-center md:justify-end gap-x-2 gap-y-1 text-[11px] font-mono text-[#666B73]">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span key={tech} className="text-[#9A9DA3]">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Cross Link to Open Source */}
-      <section className="pt-16">
-        <div className="border-t border-border-subtle pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-              COMPILER & AST ANALYSIS
-            </div>
-            <div className="text-[15px] font-semibold text-ink">
-              Looking for Open Source Systems Engineering?
-            </div>
-            <p className="text-[13px] text-ink-muted max-w-xl">
-              Explore 30+ maintainer-reviewed pull requests to Graphify across Tree-Sitter parsers, symbol tables, and incremental build pipelines.
-            </p>
-          </div>
-
-          <Link
-            href="/open-source"
-            className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-md bg-canvas border border-border-strong text-[11px] font-mono font-semibold tracking-widest uppercase text-ink hover:bg-surface transition-colors shrink-0 group"
-          >
-            <span>VIEW OPEN SOURCE</span>
-            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
+              </Link>
+            );
+          })}
         </div>
       </section>
     </PageShell>

@@ -1,25 +1,19 @@
 import React from "react";
 import {
   ArrowUpRight,
-  GitFork,
   ShieldCheck,
   Terminal,
   Cpu,
   FolderGit2,
   BookOpen,
-  CheckCircle2,
-  Workflow,
-  Sparkles,
   GitCommit,
   GitPullRequest,
-  Layers,
-  Compass,
+  Workflow,
 } from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
 import { ContributionGraph } from "@/components/subpage/ContributionGraph";
 import {
   graphifyStory,
-  openSourceRepositories,
   graphifyInvestigations,
   ecosystemContributions,
 } from "@/data/openSource";
@@ -49,7 +43,6 @@ export const metadata: Metadata = {
 };
 
 export default function OpenSourcePage() {
-  // Separate Graphify (Hero case study) from other ecosystem repositories
   const otherEcosystems = ecosystemContributions.filter(
     (eco) => eco.repoName.toLowerCase() !== "graphify"
   );
@@ -60,475 +53,241 @@ export default function OpenSourcePage() {
   return (
     <PageShell activeSection="open-source">
       {/* Editorial Opening / Hero Statement */}
-      <header className="pb-10 mb-14 border-b border-border-subtle/80 space-y-6">
-        <div className="flex items-center justify-between">
+      <header className="pb-12 mb-16 border-b border-[#242830] space-y-8">
+        <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
           <div className="flex items-center space-x-2">
-            <span className="text-[10px] font-mono tracking-widest text-ink-muted uppercase px-2.5 py-0.5 rounded-full border border-border-subtle bg-canvas-subtle/80 font-medium">
-              03 / OPEN SOURCE
-            </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-              ENGINEERING JOURNAL
-            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#45D6A0]" />
+            <span className="text-[#F4F1EA] font-semibold">03 / OPEN SOURCE</span>
+            <span>·</span>
+            <span>ENGINEERING ARCHIVE</span>
           </div>
-          <span className="text-[11px] font-mono text-ink-subtle hidden sm:inline-block">
+          <span className="hidden sm:inline-block">
             GITHUB @HOPSTREAX
           </span>
         </div>
 
-        <div className="space-y-4 max-w-4xl">
-          <h1 className="text-[34px] sm:text-[46px] md:text-[54px] font-semibold tracking-tight text-ink leading-[1.12]">
-            I learn software by getting inside systems I didn’t build.
-          </h1>
+        <div className="space-y-4 max-w-5xl">
+          <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-6">
+            <h1 className="text-[clamp(3rem,6vw,5.5rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] leading-[0.95]">
+              OPEN<br />
+              <span className="text-[#45D6A0]">SOURCE</span>
+            </h1>
 
-          <p className="text-[16px] sm:text-[18px] text-ink-muted leading-relaxed font-sans max-w-3xl">
-            Rather than writing code in a vacuum, contributing to mature, production-grade repositories forces you to respect existing invariants, understand established architectural patterns, and justify every diff under rigorous maintainer review.
+            <div className="space-y-1 md:text-right">
+              <div className="text-[clamp(3rem,5.5vw,4.5rem)] font-mono font-light tracking-tighter text-[#45D6A0] leading-none">
+                50+
+              </div>
+              <div className="text-[12px] font-mono uppercase tracking-widest text-[#F4F1EA] font-semibold">
+                MERGED / CLOSED PRS
+              </div>
+              <div className="text-[10px] font-mono uppercase tracking-widest text-[#666B73]">
+                3+ MONTHS TOTAL OSS HORIZON
+              </div>
+            </div>
+          </div>
+
+          <p className="text-[clamp(1.1rem,1.8vw,1.4rem)] text-[#C5C8CE] font-sans font-light leading-relaxed max-w-3xl pt-4">
+            I learn software by getting inside systems I didn’t build. Rather than writing code in a vacuum, contributing to mature repositories forces you to respect existing invariants and justify every diff under maintainer review.
           </p>
         </div>
 
-        <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-ink-subtle border-t border-border-subtle/50">
-          <span>PRIMARY FOCUS: GRAPHIFY (CODE INTELLIGENCE)</span>
+        <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-[#666B73] border-t border-[#242830]">
+          <span className="text-[#5CA8FF] font-semibold">GRAPHIFY: 30+ MERGED PRS (~2 MONTHS)</span>
           <span className="hidden sm:inline">·</span>
-          <span>SPECIALIZATION: AST EXTRACTION & PARSER GRAMMARS</span>
+          <span>SPECIALIZATION: AST EXTRACTION & SYMBOL RESOLUTION</span>
           <span className="hidden sm:inline">·</span>
-          <span>VERIFIED: 50+ MERGED/CLOSED PRS</span>
+          <span className="text-[#45D6A0]">OVERALL OSS: 50+ MERGED/CLOSED PRS (3+ MONTHS)</span>
         </div>
       </header>
 
-      <div className="flex flex-col space-y-20">
+      <div className="flex flex-col space-y-24">
         {/* ============================================================ */}
-        {/* 01 / CONTRIBUTION SIGNAL (Editorial Metrics Spread + Graph) */}
+        {/* 01 / CONTRIBUTION METRICS COMPARISON                         */}
         {/* ============================================================ */}
-        <section aria-labelledby="signal-heading" className="space-y-10">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <GitPullRequest className="w-3.5 h-3.5 text-ink" />
+        <section aria-labelledby="signal-heading" className="space-y-8">
+          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
+            <GitPullRequest className="w-3.5 h-3.5 text-[#45D6A0]" />
             <h2 id="signal-heading">01 / CONTRIBUTION SIGNAL & VERIFIED OUTPUT</h2>
           </div>
 
-          {/* Asymmetric Editorial Data Spread (Magazine Layout, Thin Rules, No Boxed Cards) */}
-          <div className="border-t-2 border-ink border-b border-border-subtle py-8 space-y-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-              {/* Primary Anchor: Graphify (7 columns) */}
+          {/* Editorial Data Spread (Hairline Rules, Zero Cards) */}
+          <div className="border-t-2 border-[#F4F1EA] border-b border-[#242830] py-10 space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              {/* Primary Anchor: Graphify */}
               <div className="lg:col-span-7 space-y-4">
-                <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-                  <span className="px-2 py-0.5 rounded bg-surface border border-border-subtle font-semibold text-ink">
-                    01 / PRIMARY ENGINE
-                  </span>
-                  <span>GRAPHIFY IMPACT</span>
+                <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-[#5CA8FF] font-semibold">
+                  <span>01 / CODE INTELLIGENCE CORE</span>
+                  <span>·</span>
+                  <span>GRAPHIFY-LABS / GRAPHIFY</span>
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-4 sm:gap-6">
-                  <div className="text-[72px] sm:text-[92px] md:text-[104px] font-light tracking-tighter text-ink leading-none select-none">
+                  <div className="text-[clamp(3.5rem,6vw,5rem)] font-mono font-light tracking-tighter text-[#5CA8FF] leading-none select-none">
                     30+
                   </div>
-                  <div className="space-y-1.5">
-                    <div className="text-[14px] sm:text-[15px] font-mono uppercase tracking-widest font-semibold text-ink leading-tight">
+                  <div className="space-y-1">
+                    <div className="text-lg font-mono uppercase tracking-wider font-bold text-[#F4F1EA]">
                       GRAPHIFY MERGED PRS
                     </div>
-                    <div className="text-[11px] font-mono text-ink-subtle uppercase tracking-wider">
+                    <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-wider">
                       ~2 MONTHS CONTRIBUTION PERIOD
                     </div>
-                    <p className="text-[13px] sm:text-[14px] text-ink-muted leading-relaxed pt-1">
-                      AST extraction, cross-file symbol resolution, and incremental graph merging deduplication.
+                    <p className="text-[13px] text-[#9A9DA3] leading-relaxed pt-1">
+                      AST extraction, multi-language Tree-Sitter resolvers, and incremental graph merging deduplication.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Connecting Rule (desktop) */}
-              <div className="hidden lg:flex lg:col-span-1 h-full justify-center">
-                <div className="w-px h-full min-h-[140px] bg-border-subtle" />
-              </div>
-
-              {/* Secondary Anchor: Overall OSS (4 columns) */}
-              <div className="lg:col-span-4 space-y-4 lg:pl-2">
-                <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-                  <span className="px-2 py-0.5 rounded bg-canvas border border-border-subtle/80 font-medium text-ink-muted">
-                    02 / TOTAL REACH
-                  </span>
-                  <span>BROADER ECOSYSTEM</span>
+              {/* Secondary Anchor: Overall OSS */}
+              <div className="lg:col-span-5 space-y-4 lg:border-l lg:border-[#242830] lg:pl-10">
+                <div className="flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-[#45D6A0] font-semibold">
+                  <span>02 / BROADER ECOSYSTEM</span>
+                  <span>·</span>
+                  <span>CROSS-REPOSITORY REACH</span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-4">
-                  <div className="text-[54px] sm:text-[72px] md:text-[80px] font-light tracking-tighter text-ink leading-none select-none">
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-4">
+                  <div className="text-[clamp(3rem,5vw,4.25rem)] font-mono font-light tracking-tighter text-[#45D6A0] leading-none select-none">
                     50+
                   </div>
                   <div className="space-y-1">
-                    <div className="text-[14px] font-mono uppercase tracking-widest font-semibold text-ink leading-tight">
+                    <div className="text-lg font-mono uppercase tracking-wider font-bold text-[#F4F1EA]">
                       OPEN SOURCE PRS
                     </div>
-                    <div className="text-[10px] font-mono text-ink-subtle uppercase tracking-wider">
+                    <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-wider">
                       MERGED & CLOSED · 3+ MONTHS
                     </div>
                   </div>
                 </div>
 
-                <p className="text-[12px] font-mono text-ink-muted leading-relaxed pt-1">
+                <p className="text-[12px] font-mono text-[#9A9DA3] leading-relaxed pt-1">
                   Spanning Graphify, PDA, Agent Orchestrator, Headroom, Continue, and other repositories.
                 </p>
               </div>
             </div>
 
-            {/* Subordinate Context Sentence */}
-            <div className="pt-6 border-t border-border-subtle/60 text-[12px] sm:text-[13px] text-ink-muted leading-relaxed font-mono">
+            {/* Context Verification Note */}
+            <div className="pt-6 border-t border-[#242830] text-[12px] text-[#666B73] leading-relaxed font-mono">
               30+ merged PRs in Graphify over ~2 months. 50+ merged/closed PRs across 3+ months of open-source contribution, spanning Graphify, PDA, Agent Orchestrator, Headroom, Continue, and other projects.
             </div>
           </div>
 
-          {/* Integrated GitHub Activity Calendar with Editorial Side Annotation */}
-          <div className="pt-2">
+          {/* Integrated GitHub Activity Calendar */}
+          <div className="pt-4">
+            <ContributionGraph />
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 02 / GRAPHIFY ARCHITECTURAL CASE STUDY                       */}
+        {/* ============================================================ */}
+        <section aria-labelledby="graphify-heading" className="space-y-8">
+          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
+            <div className="flex items-center space-x-2">
+              <Cpu className="w-3.5 h-3.5 text-[#5CA8FF]" />
+              <h2 id="graphify-heading">02 / GRAPHIFY ARCHITECTURE & INVESTIGATIONS</h2>
+            </div>
+            <a
+              href="https://github.com/Graphify-Labs/graphify"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-1 text-[#5CA8FF] hover:underline"
+            >
+              <span>GRAPHIFY-LABS / GRAPHIFY</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <div className="border-t border-[#242830] pt-8 space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Side Annotation (3 cols on desktop) */}
-              <div className="lg:col-span-3 space-y-5 pt-1">
-                <div className="space-y-1.5">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold flex items-center space-x-1.5">
-                    <GitCommit className="w-3.5 h-3.5 text-ink" />
-                    <span>03 / DAILY CADENCE</span>
-                  </div>
-                  <div className="text-[17px] font-semibold text-ink tracking-tight">
-                    GitHub Activity
-                  </div>
-                  <a
-                    href={`https://github.com/${githubActivity.username}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1 text-[12px] font-mono text-ink hover:text-ink-muted transition-colors group"
-                  >
-                    <span>@{githubActivity.username}</span>
-                    <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                </div>
-
-                <div className="border-t border-border-subtle pt-4 space-y-3 text-[11px] font-mono">
-                  <div>
-                    <span className="text-ink-subtle uppercase tracking-wider block text-[10px]">
-                      Tracked Horizon
-                    </span>
-                    <span className="font-semibold text-ink text-[13px]">
-                      {githubActivity.days.length} DAYS RECORDED
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-ink-subtle uppercase tracking-wider block text-[10px]">
-                      Annual Contributions
-                    </span>
-                    <span className="font-semibold text-ink text-[13px]">
-                      {totalContributions} COMMITS & PRS
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-ink-subtle uppercase tracking-wider block text-[10px]">
-                      Active Output Days
-                    </span>
-                    <span className="font-semibold text-ink text-[13px]">
-                      {activeDays} ACTIVE DAYS
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Calendar Heatmap Body (9 cols on desktop) */}
-              <div className="lg:col-span-9">
-                <ContributionGraph
-                  hideHeader={true}
-                  className="p-5 sm:p-7 rounded-xl border border-border-subtle bg-surface/30 flex flex-col space-y-5 select-none"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 02 / HOW I GOT HERE (Open Source Progression & Philosophy)   */}
-        {/* ============================================================ */}
-        <section aria-labelledby="progression-heading" className="pt-10 border-t border-border-subtle/80 space-y-8">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <BookOpen className="w-3.5 h-3.5 text-ink" />
-            <h2 id="progression-heading">02 / HOW I GOT HERE · PROGRESSION & PHILOSOPHY</h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left Column: Thesis Quote & Engineering Mindset (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
-              <blockquote className="p-6 rounded-xl border-l-2 border-ink bg-canvas-subtle/40 space-y-3">
-                <p className="text-[15px] sm:text-[16px] text-ink italic leading-relaxed">
-                  “Superficial bug fixes are dangerous: when an import resolver misclassifies a symbol stub or a graph merge duplicates a hyperedge, the error silently pollutes the entire graph downstream.”
-                </p>
-                <cite className="block text-[11px] font-mono uppercase tracking-widest text-ink-subtle not-italic">
-                  — Graphify Engineering Journal
-                </cite>
-              </blockquote>
-
-              <p className="text-[14px] text-ink-muted leading-relaxed">
-                Contributing to open source forced me to move beyond building toys. When thousands of developers depend on a parser or runtime, every assumption must be verified through minimal test fixtures and automated regression suites.
-              </p>
-            </div>
-
-            {/* Right Column: 3-Stage Progression Timeline (7 cols) */}
-            <div className="lg:col-span-7 divide-y divide-border-subtle/80 border-t border-b border-border-subtle/80">
-              {/* Stage 1 */}
-              <div className="py-5 space-y-2 group">
-                <div className="flex items-baseline justify-between text-[11px] font-mono">
-                  <span className="font-semibold text-ink tracking-wider uppercase group-hover:translate-x-1 transition-transform inline-block">
-                    PHASE 01 / EXPLORATION & DIAGNOSTIC LAYERS
-                  </span>
-                  <span className="text-ink-subtle">Continue · Headroom</span>
-                </div>
-                <p className="text-[13px] text-ink-muted leading-relaxed">
-                  Investigated nested error payloads in Continue (AI code assistant), unwrapping deep JSON provider errors to replace opaque alerts. In Headroom Labs, resolved premature SSE streaming disconnects during long-running LLM completions using transport-level keepalive frames.
-                </p>
-              </div>
-
-              {/* Stage 2 */}
-              <div className="py-5 space-y-2 group">
-                <div className="flex items-baseline justify-between text-[11px] font-mono">
-                  <span className="font-semibold text-ink tracking-wider uppercase group-hover:translate-x-1 transition-transform inline-block">
-                    PHASE 02 / STATE MACHINES & GATE LOGIC
-                  </span>
-                  <span className="text-ink-subtle">ProteinDeficientsAnonymous (PDA)</span>
-                </div>
-                <p className="text-[13px] text-ink-muted leading-relaxed">
-                  Resolved waitlist party promotion edge cases (PR #1024) where plus-one guests were split during seat reallocations. Enforced strict RSVP gate validations, normalized phone numbers to international E.164 database standards, and hardened Playwright E2E suites.
-                </p>
-              </div>
-
-              {/* Stage 3 */}
-              <div className="py-5 space-y-2 group">
-                <div className="flex items-baseline justify-between text-[11px] font-mono">
-                  <span className="font-semibold text-ink tracking-wider uppercase group-hover:translate-x-1 transition-transform inline-block">
-                    PHASE 03 / CODE INTELLIGENCE & SYMBOL GRAPHS
-                  </span>
-                  <span className="text-ink-subtle">Graphify (Core Contributor)</span>
-                </div>
-                <p className="text-[13px] text-ink-muted leading-relaxed">
-                  Sustained core contributions across Tree-Sitter AST parsers, cross-file import resolution, carried-hyperedge deduplication in incremental builds, fail-closed semantic node protection, and headless Windows subprocess management.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 03 / GRAPHIFY (THE HERO CASE STUDY)                          */}
-        {/* ============================================================ */}
-        <section aria-labelledby="graphify-hero-heading" className="pt-10 border-t border-border-subtle/80 space-y-12">
-          {/* Hero Case Study Header */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-                <GitFork className="w-3.5 h-3.5 text-ink" />
-                <h2 id="graphify-hero-heading">03 / PRIMARY CASE STUDY — THE GRAPHIFY ENGINE</h2>
-              </div>
-              <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-surface border border-border-strong font-semibold text-ink">
-                FLAGSHIP OSS STORY
-              </span>
-            </div>
-
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 border-b border-border-subtle/80 pb-8">
-              <div className="space-y-2 max-w-3xl">
-                <div className="text-[12px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                  CODE INTELLIGENCE & SYMBOL GRAPH ENGINE
-                </div>
-                <h3 className="text-[36px] sm:text-[48px] md:text-[54px] font-semibold text-ink tracking-tight leading-none">
-                  Graphify
+              <div className="lg:col-span-5 space-y-3">
+                <h3 className="text-3xl sm:text-4xl font-mono font-bold uppercase tracking-tight text-[#F4F1EA]">
+                  Deterministic Code Intelligence
                 </h3>
-                <p className="text-[15px] sm:text-[17px] text-ink-muted leading-relaxed pt-2">
-                  {graphifyStory.longDescription}
+                <p className="text-[14px] text-[#9A9DA3] leading-relaxed">
+                  Building code intelligence requires transforming arbitrary source files into deterministic symbol dependency graphs without silent failures.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-3 shrink-0">
-                <div className="text-[11px] font-mono text-ink-subtle text-left lg:text-right">
-                  <span className="text-ink font-semibold">30+ MERGED PRS</span> · ~2 MONTHS
+              <div className="lg:col-span-7 space-y-4 font-mono text-[13px] border-l border-[#242830] pl-6 text-[#C5C8CE]">
+                <div className="text-[11px] uppercase tracking-widest text-[#5CA8FF] font-semibold">
+                  CORE MODULE CONTRIBUTIONS:
                 </div>
-                <a
-                  href={graphifyStory.repositoryUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-md bg-canvas border border-border-strong hover:bg-surface text-ink text-[11px] font-mono font-semibold uppercase tracking-wider transition-colors group"
-                >
-                  <span>GITHUB REPO</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
+                <div>• AST Extraction: Multi-language Tree-Sitter visitors (Python, JS, TS)</div>
+                <div>• Symbol Resolution: Normalized cross-file tables across definition files</div>
+                <div>• Graph Deduplication: Scoped carried-hyperedge deduplication & cycle checks</div>
+                <div>• Build Cache: Incremental re-extraction preventing memory bloat</div>
               </div>
             </div>
 
-            {/* Technology tags strip */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle mr-2">
-                CORE STACK:
-              </span>
-              {graphifyStory.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface text-ink border border-border-subtle/70"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Pipeline Scope Index (6 Pipeline Areas as Architectural Matrix) */}
-          <div className="space-y-4">
-            <div className="text-[11px] font-mono uppercase tracking-widest text-ink font-semibold flex items-center space-x-2">
-              <Cpu className="w-3.5 h-3.5 text-ink" />
-              <span>INVESTIGATED PIPELINE DOMAINS</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border-subtle border-t border-b border-border-subtle">
-              {graphifyStory.coreAreas.map((area, idx) => (
-                <div
-                  key={idx}
-                  className="py-4 sm:px-4 first:sm:pl-0 last:sm:pr-0 space-y-1 group"
-                >
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle group-hover:text-ink transition-colors">
-                    DOMAIN 0{idx + 1}
-                  </span>
-                  <div className="text-[13px] font-medium text-ink leading-snug">
-                    {area}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Technical Investigations as Engineering Chapters */}
-          <div className="space-y-8 pt-4">
-            <div className="flex items-center justify-between border-b border-border-subtle/80 pb-3">
-              <div className="text-[11px] font-mono uppercase tracking-widest text-ink font-semibold flex items-center space-x-2">
-                <Workflow className="w-3.5 h-3.5 text-ink" />
-                <span>ENGINEERING CHAPTERS · INVESTIGATION LOGS</span>
+            {/* Resolved Engineering Investigations (Zero Cards, Editorial Split) */}
+            <div className="space-y-6 pt-4">
+              <div className="text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
+                VERIFIED INVESTIGATION RECORDS:
               </div>
-              <span className="text-[11px] font-mono text-ink-subtle">
-                4 DOCUMENTED ROOT-CAUSE FIXES
-              </span>
-            </div>
 
-            <div className="space-y-12">
-              {graphifyInvestigations.map((inv, idx) => (
-                <article
-                  key={idx}
-                  className="pb-10 border-b border-border-subtle/80 last:border-b-0 space-y-6"
-                >
-                  {/* Chapter Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
-                    <div className="space-y-1">
-                      <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle flex items-center space-x-2">
-                        <span className="font-semibold text-ink">CHAPTER 0{idx + 1}</span>
-                        <span>·</span>
-                        <span>{inv.scope}</span>
-                        {inv.prReference && (
-                          <>
-                            <span>·</span>
-                            <span className="text-ink-muted">{inv.prReference}</span>
-                          </>
-                        )}
+              <div className="divide-y divide-[#242830] border-t border-b border-[#242830]">
+                {graphifyInvestigations.map((inv, idx) => (
+                  <div key={idx} className="py-6 space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                      <div className="flex items-center space-x-2 font-mono text-[13px] font-bold text-[#F4F1EA]">
+                        <span className="text-[#5CA8FF]">INV_0{idx + 1}</span>
+                        <span className="text-[#343943]">/</span>
+                        <span>{inv.title}</span>
                       </div>
-                      <h4 className="text-[20px] sm:text-[23px] font-semibold text-ink tracking-tight">
-                        {inv.title}
-                      </h4>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#45D6A0]">
+                        VERIFIED PR MERGED
+                      </span>
                     </div>
-                    <div className="flex flex-wrap gap-1 shrink-0">
-                      {inv.technologies.map((t) => (
-                        <span
-                          key={t}
-                          className="text-[9px] font-mono px-2 py-0.5 rounded bg-canvas text-ink-subtle border border-border-subtle/60"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
 
-                  {/* 4-Step Narrative Flow (Problem → Investigation → Change → Validation) */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-[13px] leading-relaxed pt-1">
-                    {/* Left Column: Problem & Root-Cause */}
-                    <div className="space-y-6">
-                      <div className="space-y-1.5">
-                        <div className="text-[10px] font-mono uppercase tracking-wider font-semibold text-ink flex items-center space-x-2">
-                          <span className="text-ink-subtle">01</span>
-                          <span>Problem & Invariant Violation</span>
-                        </div>
-                        <p className="text-ink-muted pl-4 border-l border-border-subtle">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[13px] pt-1">
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#666B73] block">
+                          FAILURE MODE & INVESTIGATION:
+                        </span>
+                        <p className="text-[#9A9DA3] leading-relaxed">
                           {inv.problem}
                         </p>
                       </div>
 
-                      <div className="space-y-1.5">
-                        <div className="text-[10px] font-mono uppercase tracking-wider font-semibold text-ink flex items-center space-x-2">
-                          <span className="text-ink-subtle">02</span>
-                          <span>Investigation & Root Cause</span>
-                        </div>
-                        <p className="text-ink-muted pl-4 border-l border-border-subtle">
-                          {inv.investigation}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right Column: Code Change & Validation */}
-                    <div className="space-y-6">
-                      <div className="space-y-1.5">
-                        <div className="text-[10px] font-mono uppercase tracking-wider font-semibold text-ink flex items-center space-x-2">
-                          <span className="text-ink-subtle">03</span>
-                          <span>Structural Code Change</span>
-                        </div>
-                        <p className="text-ink-muted pl-4 border-l border-border-subtle">
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#45D6A0] block">
+                          ENGINEERING RESOLUTION:
+                        </span>
+                        <p className="text-[#C5C8CE] leading-relaxed">
                           {inv.change}
                         </p>
                       </div>
-
-                      <div className="space-y-1.5">
-                        <div className="text-[10px] font-mono uppercase tracking-wider font-semibold text-ink flex items-center space-x-2">
-                          <span className="text-ink-subtle">04</span>
-                          <span>Regression Test & Validation</span>
-                        </div>
-                        <p className="text-ink-muted pl-4 border-l border-border-subtle">
-                          {inv.validation}
-                        </p>
-                      </div>
                     </div>
                   </div>
-
-                  {/* Result Bar */}
-                  <div className="pt-3 border-t border-border-subtle/80 flex items-start space-x-2.5 text-[13px]">
-                    <CheckCircle2 className="w-4 h-4 text-ink mt-0.5 shrink-0" />
-                    <div>
-                      <span className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider mr-2">
-                        Verified Outcome:
-                      </span>
-                      <span className="text-ink-muted">{inv.result}</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 04 / OTHER SYSTEMS (Ecosystem Work)                          */}
+        {/* 03 / ECOSYSTEM CONTRIBUTIONS                                 */}
         {/* ============================================================ */}
-        <section aria-labelledby="other-systems-heading" className="pt-10 border-t border-border-subtle/80 space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-            <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-              <FolderGit2 className="w-3.5 h-3.5 text-ink" />
-              <h2 id="other-systems-heading">04 / OTHER SYSTEMS & ECOSYSTEM WORK</h2>
+        <section aria-labelledby="ecosystem-heading" className="space-y-8">
+          <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
+            <div className="flex items-center space-x-2">
+              <Workflow className="w-3.5 h-3.5 text-[#45D6A0]" />
+              <h2 id="ecosystem-heading">03 / ECOSYSTEM REPOSITORY TIMELINE</h2>
             </div>
-            <span className="text-[11px] font-mono text-ink-subtle">
-              AGENT RUNTIMES · COMMUNITY PLATFORMS · AI PROXIES
-            </span>
+            <span>CONTRIBUTOR ARCHIVE</span>
           </div>
 
-          <div className="divide-y divide-border-subtle/80 border-t border-b border-border-subtle/80">
-            {otherEcosystems.map((eco) => (
-              <article key={eco.repoName} className="py-8 space-y-6">
-                {/* Repo Header Row */}
+          <div className="divide-y divide-[#242830] border-t border-b border-[#242830]">
+            {otherEcosystems.map((eco, idx) => (
+              <div key={idx} className="py-8 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
                   <div className="space-y-1">
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle">
-                      {eco.organization} · {eco.role}
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-[#45D6A0] font-semibold">
+                      ECOSYSTEM RECORD 0{idx + 1} · {eco.organization}
                     </div>
-                    <h3 className="text-[22px] font-semibold text-ink">
+                    <h3 className="text-2xl font-mono font-bold uppercase text-[#F4F1EA]">
                       {eco.repoName}
                     </h3>
                   </div>
@@ -537,218 +296,29 @@ export default function OpenSourcePage() {
                     href={eco.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-md bg-canvas border border-border-subtle hover:border-border-strong text-ink text-[11px] font-mono font-medium uppercase tracking-wider transition-colors group shrink-0"
-                    aria-label={`View ${eco.repoName} on GitHub`}
+                    className="inline-flex items-center space-x-1 text-[11px] font-mono uppercase tracking-wider text-[#9A9DA3] hover:text-[#F4F1EA]"
                   >
-                    <span>GITHUB REPO</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <span>VIEW REPOSITORY</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
-                <p className="text-[14px] text-ink-muted leading-relaxed max-w-3xl">
+                <p className="text-[14px] text-[#C5C8CE] leading-relaxed max-w-3xl">
                   {eco.description || eco.summary}
                 </p>
 
-                {/* 2-Column Split Details without nested card boxes */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-[13px] leading-relaxed pt-1">
-                  {/* Left Column: Context & Focus */}
-                  <div className="space-y-4">
-                    {eco.whyInteresting && (
-                      <div className="space-y-1">
-                        <div className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider">
-                          Why It Was Interesting
-                        </div>
-                        <p className="text-ink-muted pl-3 border-l border-border-subtle text-[13px]">
-                          {eco.whyInteresting}
-                        </p>
+                {eco.contributionAreas && eco.contributionAreas.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-[12px] font-mono text-[#9A9DA3]">
+                    {eco.contributionAreas.map((area: string, aIdx: number) => (
+                      <div key={aIdx} className="flex items-start space-x-2">
+                        <span className="text-[#45D6A0] select-none">—</span>
+                        <span>{area}</span>
                       </div>
-                    )}
-
-                    {eco.contributionAreas && eco.contributionAreas.length > 0 && (
-                      <div className="space-y-1.5">
-                        <div className="text-[10px] font-mono uppercase tracking-wider text-ink-subtle font-semibold">
-                          Contribution Areas:
-                        </div>
-                        <div className="flex flex-wrap gap-1">
-                          {eco.contributionAreas.map((area) => (
-                            <span
-                              key={area}
-                              className="text-[10px] font-mono px-2 py-0.5 rounded bg-canvas text-ink border border-border-subtle"
-                            >
-                              {area}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                    ))}
                   </div>
-
-                  {/* Right Column: Concrete Work & Learnings */}
-                  <div className="space-y-4">
-                    <div className="space-y-1">
-                      <div className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider">
-                        Technical Work & Invariant Fixed
-                      </div>
-                      <p className="text-ink-muted pl-3 border-l border-border-subtle text-[13px]">
-                        {eco.technicalWork}
-                      </p>
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="font-semibold text-ink font-mono uppercase text-[10px] tracking-wider">
-                        What I Learned
-                      </div>
-                      <p className="text-ink-muted pl-3 border-l border-border-subtle text-[13px]">
-                        {eco.whatILearned}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Tech Badges */}
-                <div className="flex flex-wrap gap-1 pt-1">
-                  {eco.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-surface text-ink-subtle border border-border-subtle/50"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 05 / ENGINEERING DISCIPLINE & COMPLETE DIRECTORY            */}
-        {/* ============================================================ */}
-        <section aria-labelledby="discipline-heading" className="pt-10 border-t border-border-subtle/80 space-y-10">
-          <div className="flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <Compass className="w-3.5 h-3.5 text-ink" />
-            <h2 id="discipline-heading">05 / WHAT I LEARNED · ENGINEERING DISCIPLINE</h2>
-          </div>
-
-          {/* 4 Core Lessons as Sleek 4-Column Strip (No Boxed Cards) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-border-subtle border-t border-b border-border-subtle py-6">
-            <div className="sm:px-4 first:sm:pl-0 space-y-2 py-3 sm:py-0">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                PRINCIPLE 01
-              </span>
-              <h4 className="text-[14px] font-semibold text-ink">
-                Map Before Modifying
-              </h4>
-              <p className="text-[12px] text-ink-muted leading-relaxed">
-                Trace data flow and AST structures end-to-end before proposing diffs to respect existing invariants.
-              </p>
-            </div>
-
-            <div className="sm:px-4 space-y-2 py-3 sm:py-0">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                PRINCIPLE 02
-              </span>
-              <h4 className="text-[14px] font-semibold text-ink">
-                Minimal Test Fixtures
-              </h4>
-              <p className="text-[12px] text-ink-muted leading-relaxed">
-                Reproduce complex regressions with the smallest isolated code snippet before changing implementation.
-              </p>
-            </div>
-
-            <div className="sm:px-4 space-y-2 py-3 sm:py-0">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                PRINCIPLE 03
-              </span>
-              <h4 className="text-[14px] font-semibold text-ink">
-                Root-Cause Precision
-              </h4>
-              <p className="text-[12px] text-ink-muted leading-relaxed">
-                Fix structural root causes rather than applying surface-level patches that mask deeper state corruption.
-              </p>
-            </div>
-
-            <div className="sm:px-4 last:sm:pr-0 space-y-2 py-3 sm:py-0">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle font-semibold">
-                PRINCIPLE 04
-              </span>
-              <h4 className="text-[14px] font-semibold text-ink">
-                Automated Invariant Locks
-              </h4>
-              <p className="text-[12px] text-ink-muted leading-relaxed">
-                Lock every resolved edge case into the automated regression suite so fixes remain permanent across builds.
-              </p>
-            </div>
-          </div>
-
-          {/* Complete Directory Table */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-              <span className="font-semibold text-ink flex items-center space-x-2">
-                <Terminal className="w-3.5 h-3.5 text-ink" />
-                <span>COMPLETE OPEN SOURCE DIRECTORY</span>
-              </span>
-              <span>5 REPOSITORIES</span>
-            </div>
-
-            <div className="divide-y divide-border-subtle border-t border-b border-border-subtle">
-              {openSourceRepositories.map((repo) => (
-                <div
-                  key={repo.url}
-                  className="py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 hover:bg-canvas-subtle/30 px-2 -mx-2 rounded transition-colors group"
-                >
-                  <div className="flex items-baseline space-x-3">
-                    <span className="text-[14px] font-semibold text-ink font-mono">
-                      {repo.name}
-                    </span>
-                    <span className="text-[11px] font-mono text-ink-subtle">
-                      {repo.organization}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center space-x-4">
-                    <span className="text-[11px] font-mono text-ink-muted hidden md:inline">
-                      {repo.focusAreas[0]}
-                    </span>
-                    <a
-                      href={repo.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center space-x-1 text-[11px] font-mono font-medium text-ink hover:text-ink-muted transition-colors"
-                      aria-label={`Open ${repo.name} repository`}
-                    >
-                      <span>GITHUB</span>
-                      <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Verification Banner (Intentionally Bordered Feature Block) */}
-          <div className="p-6 rounded-xl border border-border-strong bg-surface/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center space-x-3">
-              <ShieldCheck className="w-5 h-5 text-ink shrink-0" />
-              <div>
-                <div className="text-[15px] font-semibold text-ink">
-                  Verified GitHub Commits & Pull Requests
-                </div>
-                <div className="text-[13px] text-ink-muted">
-                  Review commit signatures, pull request discussions, and merged changes on GitHub under @hopstreax.
-                </div>
+                )}
               </div>
-            </div>
-
-            <a
-              href="https://github.com/hopstreax"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-md bg-canvas border border-border-strong text-[11px] font-mono font-semibold tracking-widest uppercase text-ink hover:bg-surface transition-colors shrink-0 group"
-            >
-              <span>GITHUB @HOPSTREAX</span>
-              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+            ))}
           </div>
         </section>
       </div>

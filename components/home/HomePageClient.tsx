@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Code, MapPin, Sparkles } from "lucide-react";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { EvidenceStrip } from "@/components/home/EvidenceStrip";
 import { SystemConstellation } from "@/components/home/SystemConstellation";
@@ -12,61 +12,82 @@ import { PersonalCraft } from "@/components/home/PersonalCraft";
 
 export function HomePageClient() {
   const shouldReduceMotion = useReducedMotion();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-canvas text-ink flex flex-col justify-between selection:bg-[#E8E5DC] selection:text-ink overflow-x-hidden">
-      {/* 1. Global Navigation Bar */}
+    <div className="min-h-screen bg-[#08090B] text-[#F4F1EA] flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA] overflow-x-hidden relative">
+      {/* Ambient background technical coordinate grid & cursor glow */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #F4F1EA 1px, transparent 1px), linear-gradient(to bottom, #F4F1EA 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+
+      {/* Subtle cursor-reactive glow */}
+      <div
+        className="fixed pointer-events-none w-[600px] h-[600px] rounded-full blur-[140px] opacity-15 transition-transform duration-700 ease-out z-0"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(155, 123, 255, 0.25) 0%, rgba(92, 168, 255, 0.15) 40%, transparent 70%)",
+          transform: `translate(${mousePos.x - 300}px, ${mousePos.y - 300}px)`,
+        }}
+      />
+
+      {/* 1. Minimal Editorial Navigation Header */}
       <header
         role="banner"
-        className="sticky top-0 z-40 w-full bg-canvas/92 backdrop-blur-md border-b border-border-subtle/80 px-5 sm:px-10 md:px-14 py-3.5 sm:py-4 transition-colors"
+        className="sticky top-0 z-50 w-full bg-[#08090B]/90 backdrop-blur-md border-b border-[#242830] px-5 sm:px-10 md:px-14 py-4"
       >
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="group flex items-baseline space-x-2 text-ink hover:text-ink-muted transition-colors select-none"
-              aria-label="Himanshu Patro Home"
-            >
-              <span className="text-[13px] sm:text-[14px] font-semibold tracking-editorial uppercase font-mono">
-                HIMANSHU PATRO
-              </span>
-              <span className="text-[10px] font-mono text-ink-subtle uppercase tracking-widest hidden md:inline">
-                / SYSTEMS & CODE INTELLIGENCE
-              </span>
-            </Link>
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center space-x-2 text-[#F4F1EA] hover:text-[#9B7BFF] transition-colors"
+            aria-label="Himanshu Patro Home"
+          >
+            <span className="text-[13px] sm:text-[14px] font-mono font-bold uppercase tracking-wider">
+              HIMANSHU PATRO
+            </span>
+            <span className="text-[9px] font-mono uppercase tracking-widest text-[#666B73] hidden sm:inline">
+              / ROOT_00
+            </span>
+          </Link>
 
-            <div className="sm:hidden flex items-center space-x-1.5 text-[10px] font-mono text-ink-subtle">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>ACTIVE</span>
-            </div>
-          </div>
-
-          {/* Navigation Links */}
           <nav
             aria-label="Primary Navigation"
-            className="flex items-center justify-start sm:justify-end space-x-5 sm:space-x-6 text-[11px] font-mono uppercase tracking-editorial overflow-x-auto pb-0.5 sm:pb-0"
+            className="flex items-center space-x-6 sm:space-x-8 text-[11px] font-mono uppercase tracking-widest"
           >
             <Link
               href="/about"
-              className="text-ink-muted hover:text-ink transition-colors py-0.5 whitespace-nowrap"
+              className="text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors"
             >
               ABOUT
             </Link>
             <Link
               href="/projects"
-              className="text-ink-muted hover:text-ink transition-colors py-0.5 whitespace-nowrap"
+              className="text-[#9A9DA3] hover:text-[#FFB86B] transition-colors"
             >
-              PROJECTS
+              WORK
             </Link>
             <Link
               href="/open-source"
-              className="text-ink-muted hover:text-ink transition-colors py-0.5 whitespace-nowrap"
+              className="text-[#9A9DA3] hover:text-[#45D6A0] transition-colors"
             >
-              OPEN SOURCE
+              OSS
             </Link>
             <Link
               href="/connect"
-              className="text-ink-muted hover:text-ink transition-colors py-0.5 whitespace-nowrap"
+              className="text-[#9A9DA3] hover:text-[#FF718C] transition-colors"
             >
               CONNECT
             </Link>
@@ -75,213 +96,194 @@ export function HomePageClient() {
       </header>
 
       {/* Main Content Stream */}
-      <main className="w-full flex-1">
-        {/* 2. Dominant Hero Section */}
+      <main className="w-full flex-1 relative z-10">
+        {/* 1. IMMERSIVE HERO */}
         <section
           aria-label="Engineering Positioning and Identity"
-          className="w-full pt-14 sm:pt-20 md:pt-24 pb-12 sm:pb-16 px-5 sm:px-10 md:px-14"
+          className="w-full pt-16 sm:pt-24 md:pt-32 pb-16 sm:pb-24 px-5 sm:px-10 md:px-14 border-b border-[#242830] relative"
         >
-          <div className="max-w-5xl mx-auto space-y-8">
-            <motion.div
-              initial={
-                shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }
-              }
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-4"
-            >
-              <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-                <span className="px-2 py-0.5 rounded bg-canvas-subtle border border-border-subtle text-ink font-medium">
-                  FULL-STACK SYSTEMS
-                </span>
-                <span>·</span>
-                <span className="px-2 py-0.5 rounded bg-canvas-subtle border border-border-subtle text-ink font-medium">
-                  AI / AGENTS
-                </span>
-                <span>·</span>
-                <span className="px-2 py-0.5 rounded bg-canvas-subtle border border-border-subtle text-ink font-medium">
-                  DEVELOPER TOOLING
-                </span>
-                <span>·</span>
-                <span className="px-2 py-0.5 rounded bg-canvas-subtle border border-border-subtle text-ink font-medium">
-                  CODE INTELLIGENCE
-                </span>
-              </div>
+          <div className="max-w-6xl mx-auto space-y-10 sm:space-y-14">
+            {/* Small Technical Metadata */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
+              <span className="flex items-center space-x-2 text-[#9A9DA3]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#45D6A0] animate-pulse" />
+                <span>JAMSHEDPUR / INDIA</span>
+              </span>
+              <span>·</span>
+              <span className="text-[#9A9DA3]">CSIT / 2026</span>
+              <span>·</span>
+              <span className="text-[#45D6A0] font-semibold">
+                AVAILABLE FOR ENGINEERING WORK
+              </span>
+            </div>
 
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-mono font-bold text-ink uppercase tracking-tight leading-[1.05]">
-                HIMANSHU PATRO
+            {/* Enormous Typography Display */}
+            <motion.div
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-6"
+            >
+              <h1 className="text-[clamp(4.5rem,10vw,9rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] leading-[0.92] select-none">
+                <div>HIMANSHU</div>
+                <div className="text-[#9A9DA3]">PATRO</div>
               </h1>
 
-              <p className="text-[17px] sm:text-[20px] md:text-[22px] text-ink leading-relaxed font-sans max-w-3xl font-normal">
-                Software engineer building reliable systems around code, AI
-                agents, developer tooling, and open-source code intelligence.
-              </p>
-            </motion.div>
-
-            {/* Identity and Location Brief */}
-            <motion.div
-              initial={
-                shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }
-              }
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.35,
-                delay: 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="pt-2 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-[12px] font-mono text-ink-muted">
-                <div className="flex items-center space-x-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-ink shrink-0" />
-                  <span>Jamshedpur, Jharkhand, India</span>
-                </div>
-                <div className="hidden sm:inline text-border-subtle">|</div>
-                <div className="flex items-center space-x-1.5">
-                  <Code className="w-3.5 h-3.5 text-ink shrink-0" />
-                  <span>B.Tech CSIT · Class of 2026</span>
-                </div>
-                <div className="hidden sm:inline text-border-subtle">|</div>
-                <div className="text-[11px] text-ink-subtle">
-                  ITER, Siksha &apos;O&apos; Anusandhan (SOA) University
-                </div>
-              </div>
-
-              {/* Fast Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 md:pt-0">
-                <a
-                  href="#system-constellation"
-                  className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-ink text-canvas hover:bg-ink-muted transition-colors text-[11px] font-mono uppercase tracking-editorial"
-                >
-                  <span>SYSTEM MAP</span>
-                  <ArrowDown className="w-3.5 h-3.5" />
-                </a>
-                <a
-                  href="#selected-work"
-                  className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-lg border border-border-subtle hover:border-ink transition-colors text-[11px] font-mono uppercase tracking-editorial text-ink"
-                >
-                  <span>SELECTED WORK</span>
-                  <ArrowDown className="w-3.5 h-3.5" />
-                </a>
-                <Link
-                  href="/connect"
-                  className="inline-flex items-center space-x-1 px-4 py-2 rounded-lg border border-border-subtle hover:border-ink transition-colors text-[11px] font-mono uppercase tracking-editorial text-ink"
-                >
-                  <span>CONTACT</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </Link>
+              <div className="pt-4 max-w-3xl">
+                <p className="text-[clamp(1.25rem,2vw,2rem)] text-[#F4F1EA] font-sans font-light leading-relaxed">
+                  Software engineer building reliable systems around code, AI agents, developer tooling and open-source code intelligence.
+                </p>
               </div>
             </motion.div>
+
+            {/* Restrained Domain Signals & Scroll Target */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-6 border-t border-[#242830]">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-mono uppercase tracking-wider text-[#666B73]">
+                <span className="text-[#9B7BFF]">AI / AGENTS</span>
+                <span>·</span>
+                <span className="text-[#5CA8FF]">CODE INTELLIGENCE</span>
+                <span>·</span>
+                <span className="text-[#45D6A0]">OPEN SOURCE</span>
+                <span>·</span>
+                <span className="text-[#FFB86B]">SYSTEMS ARCHITECTURE</span>
+                <span>·</span>
+                <span className="text-[#FF718C]">HUMAN CRAFT</span>
+              </div>
+
+              <a
+                href="#system-constellation"
+                className="inline-flex items-center space-x-2 text-[11px] font-mono uppercase tracking-widest text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors"
+              >
+                <span>EXPLORE SYSTEM MAP</span>
+                <ArrowDown className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* 3. Evidence Strip (50+ / 30+ / 2026) */}
+        {/* 2. EVIDENCE (Large Typographic Numbers Separated by Hairline Rules) */}
         <section aria-label="Verified Contribution Signals">
           <EvidenceStrip />
         </section>
 
-        {/* 4. Interactive Visual Centerpiece: System Constellation */}
+        {/* 3. SYSTEM CONSTELLATION (Architecture Diagram Network) */}
         <section
           id="system-constellation"
-          className="w-full py-16 sm:py-24 px-5 sm:px-10 md:px-14 border-b border-border-subtle/80"
+          className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
         >
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <SystemConstellation />
           </div>
         </section>
 
-        {/* 5. Substantial Selected Work Section */}
+        {/* 4. SELECTED WORK (Vertical Editorial Sequence, 3 Distinct Compositions) */}
         <section
           id="selected-work"
-          className="w-full py-16 sm:py-24 px-5 sm:px-10 md:px-14 border-b border-border-subtle/80"
+          className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
         >
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <SelectedWork />
           </div>
         </section>
 
-        {/* 6. Open Source Ecosystem Section */}
+        {/* 5. OPEN SOURCE (Engineering Contribution Map & Repository Tree) */}
         <section
           id="open-source-preview"
-          className="w-full py-16 sm:py-24 px-5 sm:px-10 md:px-14 border-b border-border-subtle/80"
+          className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
         >
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <OpenSourcePreview />
           </div>
         </section>
 
-        {/* 7. Personal Section: Discipline Beyond Code */}
+        {/* 6. PERSONAL SECTION (BEYOND CODE Typography & Abstract Representations) */}
         <section
           id="personal-craft"
-          className="w-full py-16 sm:py-24 px-5 sm:px-10 md:px-14"
+          className="w-full py-20 sm:py-28 px-5 sm:px-10 md:px-14 border-b border-[#242830]"
         >
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <PersonalCraft />
+          </div>
+        </section>
+
+        {/* 7. FINAL CTA (Large Typography, Generous Whitespace, Zero Cards) */}
+        <section
+          aria-label="Direct Engagement and Channels"
+          className="w-full py-24 sm:py-36 px-5 sm:px-10 md:px-14"
+        >
+          <div className="max-w-6xl mx-auto space-y-16">
+            <div className="space-y-4">
+              <div className="text-[11px] font-mono uppercase tracking-widest text-[#666B73]">
+                COLLABORATION & ENGINEERING /
+              </div>
+              <h2 className="text-[clamp(3rem,6.5vw,5.5rem)] font-mono font-bold uppercase tracking-tight text-[#F4F1EA] leading-[0.95]">
+                LET&apos;S<br />
+                BUILD<br />
+                SOMETHING<br />
+                USEFUL.
+              </h2>
+            </div>
+
+            {/* Large Interactive Typographic Links */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-[#242830]">
+              {[
+                {
+                  label: "GITHUB",
+                  url: "https://github.com/hopstreax",
+                  accent: "#5CA8FF",
+                  desc: "Source code & repositories",
+                },
+                {
+                  label: "LINKEDIN",
+                  url: "https://www.linkedin.com/in/himanshupatro/",
+                  accent: "#9B7BFF",
+                  desc: "Professional history",
+                },
+                {
+                  label: "EMAIL",
+                  url: "mailto:himanshupatro4@gmail.com",
+                  accent: "#45D6A0",
+                  desc: "himanshupatro4@gmail.com",
+                },
+                {
+                  label: "X",
+                  url: "https://x.com/hopstreax",
+                  accent: "#FF718C",
+                  desc: "Technical observations",
+                },
+              ].map((channel) => (
+                <a
+                  key={channel.label}
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block space-y-2 py-4 border-b border-[#242830] transition-colors"
+                >
+                  <div className="flex items-center justify-between text-2xl sm:text-3xl font-mono font-bold uppercase text-[#F4F1EA] group-hover:text-[#9B7BFF] transition-colors">
+                    <span>{channel.label}</span>
+                    <ArrowUpRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </div>
+                  <div className="text-[11px] font-mono text-[#666B73]">
+                    {channel.desc}
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </section>
       </main>
 
-      {/* 8. Editorial Footer */}
+      {/* Editorial Footer with Hairline Rule */}
       <footer
         role="contentinfo"
-        className="w-full border-t border-border-subtle/80 px-5 sm:px-10 md:px-14 pt-12 pb-14 text-ink-muted select-none bg-canvas-subtle/30"
+        className="w-full border-t border-[#242830] py-10 px-5 sm:px-10 md:px-14 bg-[#08090B] text-[#666B73] text-[11px] font-mono uppercase tracking-widest select-none"
       >
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="space-y-2 max-w-md">
-            <div className="text-[13px] font-semibold text-ink uppercase tracking-editorial font-mono">
-              HIMANSHU PATRO
-            </div>
-            <p className="text-[13px] text-ink-muted leading-relaxed font-sans">
-              Building systems. Learning in public.
-              <br />
-              Based in Jamshedpur, Jharkhand, India.
-            </p>
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-baseline justify-between gap-4">
+          <div>
+            <span>HIMANSHU PATRO</span> · <span>JAMSHEDPUR, INDIA</span>
           </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center md:items-end gap-4 sm:gap-6 text-[11px] font-mono text-ink-subtle">
-            <div className="flex items-center space-x-4">
-              <a
-                href="https://github.com/hopstreax"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-ink transition-colors inline-flex items-center space-x-0.5"
-              >
-                <span>GITHUB</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </a>
-              <span>·</span>
-              <a
-                href="https://www.linkedin.com/in/himanshupatro/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-ink transition-colors inline-flex items-center space-x-0.5"
-              >
-                <span>LINKEDIN</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </a>
-              <span>·</span>
-              <a
-                href="mailto:himanshupatro4@gmail.com"
-                className="hover:text-ink transition-colors inline-flex items-center space-x-0.5"
-              >
-                <span>EMAIL</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </a>
-              <span>·</span>
-              <a
-                href="https://x.com/hopstreax"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-ink transition-colors inline-flex items-center space-x-0.5"
-              >
-                <span>X / TWITTER</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </a>
-            </div>
-
-            <div className="text-ink-subtle">
-              <span>© 2026 HIMANSHU PATRO</span>
-            </div>
+          <div>
+            <span>© 2026</span> · <span>ALL SYSTEMS ARCHIVAL RECORD</span>
           </div>
         </div>
       </footer>

@@ -10,13 +10,13 @@ interface PageShellProps {
 
 export function PageShell({ children, activeSection }: PageShellProps) {
   return (
-    <div className="min-h-screen bg-canvas text-ink flex flex-col justify-between selection:bg-[#E8E5DC] selection:text-ink">
+    <div className="min-h-screen bg-canvas text-ink flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA]">
       {/* Editorial Global Navigation */}
       <header
         role="banner"
         className="sticky top-0 z-30 w-full bg-canvas/92 backdrop-blur-md border-b border-border-subtle/80 px-5 sm:px-10 md:px-14 py-3.5 sm:py-4 transition-colors"
       >
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <div className="flex items-center justify-between">
             <Link
               href="/"
@@ -110,7 +110,7 @@ export function PageShell({ children, activeSection }: PageShellProps) {
       </header>
 
       {/* Main Content Area */}
-      <main className="w-full max-w-4xl mx-auto px-5 sm:px-10 md:px-14 py-10 sm:py-16 md:py-20 flex-1">
+      <main className="w-full max-w-5xl mx-auto px-5 sm:px-10 md:px-14 py-10 sm:py-16 md:py-20 flex-1">
         <PageTransition>
           {children}
         </PageTransition>
@@ -121,7 +121,7 @@ export function PageShell({ children, activeSection }: PageShellProps) {
         role="contentinfo"
         className="w-full border-t border-border-subtle/80 px-5 sm:px-10 md:px-14 pt-12 pb-14 text-ink-muted select-none"
       >
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           {/* Identity & Closing Statement */}
           <div className="space-y-2 max-w-md">
             <div className="text-[13px] font-semibold text-ink uppercase tracking-editorial font-mono">

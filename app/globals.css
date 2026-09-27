@@ -3,15 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --color-canvas: #F9F8F5;
-  --color-canvas-subtle: #F4F2EC;
-  --color-ink: #111111;
-  --color-ink-muted: #73716D;
-  --color-ink-subtle: #8C8984;
-  --color-border-subtle: #E5E2DA;
-  --color-border-strong: #D8D4C8;
-  --color-surface: #F1EFEA;
-  --color-surface-hover: #EAE6DF;
+  --color-canvas: #08090B;
+  --color-canvas-subtle: #0D1014;
+  --color-surface: #0E1217;
+  --color-surface-hover: #141920;
+
+  --color-ink: #F4F1EA;
+  --color-ink-muted: #9A9DA3;
+  --color-ink-subtle: #666B73;
+  --color-ink-body: #C5C8CE;
+
+  --color-border-subtle: #242830;
+  --color-border-strong: #343943;
+
+  /* Semantic Domain Accent Tokens (Light / Signal on dark surface) */
+  --accent-ai: #9B7BFF;
+  --accent-ai-subtle: #171328;
+  --accent-ai-border: #352B57;
+
+  --accent-code: #5CA8FF;
+  --accent-code-subtle: #101B2B;
+  --accent-code-border: #233E63;
+
+  --accent-oss: #45D6A0;
+  --accent-oss-subtle: #0D2119;
+  --accent-oss-border: #1F523E;
+
+  --accent-build: #FFB86B;
+  --accent-build-subtle: #251B10;
+  --accent-build-border: #5C4124;
+
+  --accent-craft: #FF718C;
+  --accent-craft-subtle: #251217;
+  --accent-craft-border: #5C2733;
 }
 
 @layer base {
@@ -33,8 +57,8 @@
   }
 
   ::selection {
-    background-color: #E8E5DC;
-    color: #111111;
+    background-color: #273142;
+    color: #F4F1EA;
   }
 }
 
