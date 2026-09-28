@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: "Himanshu Patro — AI / Software / Open Source",
     description:
       "Personal portfolio and engineering work of Himanshu Patro. Full Stack AI Developer and Open Source Contributor.",
-    creator: "@himanshupatro",
+    creator: "@hopstreax",
   },
 };
 

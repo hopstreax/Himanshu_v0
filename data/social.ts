@@ -31,8 +31,8 @@ export const primarySocialLinks: readonly SocialLinkItem[] = [
   {
     platform: "Email",
     label: "Email",
-    url: "mailto:akashpatra.334@gmail.com",
-    handle: "akashpatra.334@gmail.com",
+    url: "mailto:himanshupatro4@gmail.com",
+    handle: "himanshupatro4@gmail.com",
     isExternal: false,
     isPrimary: true,
     actionText: "Direct Communication",
