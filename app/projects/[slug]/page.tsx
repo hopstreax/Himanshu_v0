@@ -72,9 +72,11 @@ export default async function ProjectCaseStudyPage({
 
   const isFlagship = project.tier === "flagship";
   const caseStudy = project.caseStudy;
+  const architectureFlow = caseStudy?.architectureFlow;
 
   const projectAccents: Record<string, string> = {
     tracekit: "#9B7BFF",
+    codealign: "#38BDF8",
     "ai-interviewer": "#FFB86B",
     "campus-lost-and-found": "#45D6A0",
     "e-pmsss": "#5CA8FF",
@@ -247,7 +249,7 @@ export default async function ProjectCaseStudyPage({
         {/* ============================================================ */}
         {/* 02 / SYSTEM PIPELINE                                         */}
         {/* ============================================================ */}
-        {caseStudy?.architectureFlow && caseStudy.architectureFlow.length > 0 && (
+        {architectureFlow && architectureFlow.length > 0 && (
           <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-t border-[#242830] pt-10">
             <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-2">
               <div className="text-3xl sm:text-4xl font-mono font-light tracking-tighter text-[#666B73]">
@@ -274,14 +276,44 @@ export default async function ProjectCaseStudyPage({
               )}
 
               {/* Connected Pipeline Flow */}
-              <div className="border border-[#242830] bg-[#08090B] p-6 space-y-4">
-                <div className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] pb-2 flex items-center space-x-2">
+              <div className="border border-[#242830] bg-[#08090B] p-6 space-y-5">
+                {/* Visual Pipeline Topology Ribbon */}
+                <div className="pb-4 border-b border-[#242830] space-y-2">
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-[#666B73]">
+                    PIPELINE TOPOLOGY · STAGE SEQUENCE
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-[#F4F1EA]">
+                    {architectureFlow.map((step, idx) => {
+                      const colonIndex = step.indexOf(":");
+                      const stepTitle =
+                        colonIndex !== -1
+                          ? step.slice(0, colonIndex).replace(/^\d+\.\s*/, "").trim()
+                          : `STAGE 0${idx + 1}`;
+                      const isLast = idx === architectureFlow.length - 1;
+                      return (
+                        <React.Fragment key={idx}>
+                          <span
+                            className="px-2 py-0.5 border border-[#242830] bg-[#0F1117] text-[10px] sm:text-[11px]"
+                            style={{ color: idx === 0 || isLast ? accent : "#F4F1EA" }}
+                          >
+                            {stepTitle}
+                          </span>
+                          {!isLast && (
+                            <span className="text-[#666B73] font-normal select-none">→</span>
+                          )}
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] pb-1 flex items-center space-x-2">
                   <Workflow className="w-3.5 h-3.5" style={{ color: accent }} />
                   <span>STEP-BY-STEP EXECUTION TRACE:</span>
                 </div>
 
                 <div className="space-y-4">
-                  {caseStudy.architectureFlow.map((step, idx) => {
+                  {architectureFlow.map((step, idx) => {
                     const colonIndex = step.indexOf(":");
                     const stepTitle =
                       colonIndex !== -1
@@ -419,6 +451,17 @@ export default async function ProjectCaseStudyPage({
           </div>
 
           <div className="lg:col-span-8 space-y-6">
+            {caseStudy?.currentState && (
+              <div className="space-y-2 pb-4">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] block">
+                  PROJECT STATUS & MATURITY:
+                </span>
+                <p className="text-[15px] sm:text-[16px] text-[#C5C8CE] font-sans leading-relaxed">
+                  {caseStudy.currentState}
+                </p>
+              </div>
+            )}
+
             {caseStudy?.whatILearned && caseStudy.whatILearned.length > 0 && (
               <div className="space-y-3">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#666B73] block">

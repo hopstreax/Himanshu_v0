@@ -31,6 +31,7 @@ function resolveThemeFromPath(pathname: string): BackgroundThemeKey {
 
   if (pathname === "/projects") return "projects";
   if (pathname === "/projects/tracekit") return "tracekit";
+  if (pathname === "/projects/codealign") return "codealign";
   if (pathname === "/projects/ai-interviewer") return "ai-interviewer";
   if (pathname === "/projects/campus-lost-and-found") return "campus-lost-and-found";
   if (pathname === "/projects/e-pmsss") return "e-pmsss";

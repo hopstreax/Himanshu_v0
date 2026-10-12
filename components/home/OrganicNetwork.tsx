@@ -43,7 +43,7 @@ const MAJOR_NODES: readonly NetworkNode[] = [
     name: "Projects",
     subtitle: "Archival Systems",
     destination: "/projects",
-    metric: "4 Systems · Case Studies",
+    metric: "5 Systems · Case Studies",
     accent: "#5CA8FF",
     accentSubtle: "rgba(92, 168, 255, 0.18)",
     x: 710,

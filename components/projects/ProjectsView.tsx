@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, FolderGit2 } from "lucide-react";
+import { ArrowUpRight, FolderGit2, Github } from "lucide-react";
 import { PageShell } from "@/components/subpage/PageShell";
 import { useAtmosphere } from "@/components/background/AtmosphereContext";
 import { BackgroundThemeKey } from "@/components/background/themes";
@@ -14,6 +14,7 @@ export function ProjectsView() {
 
   const projectAccents: Record<string, string> = {
     tracekit: "#9B7BFF",
+    codealign: "#38BDF8",
     "ai-interviewer": "#FFB86B",
     "campus-lost-and-found": "#45D6A0",
     "e-pmsss": "#5CA8FF",
@@ -31,7 +32,7 @@ export function ProjectsView() {
             <span>INDEX & CASE STUDIES</span>
           </div>
           <span className="hidden sm:inline-block">
-            4 ARCHIVAL SYSTEMS
+            {projects.length} ARCHIVAL SYSTEMS
           </span>
         </div>
 
@@ -42,14 +43,14 @@ export function ProjectsView() {
           </h1>
 
           <p className="text-[clamp(1.1rem,1.8vw,1.4rem)] text-[#C5C8CE] font-sans font-light leading-relaxed max-w-3xl pt-2">
-            Autonomous testing orchestration, generative AI simulation platforms, and full-stack software applications documented as deep engineering case studies.
+            Autonomous testing orchestration, intent-aligned developer CLI tooling, generative AI simulation platforms, and full-stack software applications documented as deep engineering case studies.
           </p>
         </div>
 
         <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-[#666B73] border-t border-[#242830]">
-          <span>01 & 02: FLAGSHIP AGENTIC ARCHITECTURES</span>
+          <span>01 - 03: FLAGSHIP DEVELOPER & AGENTIC ARCHITECTURES</span>
           <span className="hidden sm:inline">·</span>
-          <span>03 & 04: FULL-STACK PRODUCTION SYSTEMS</span>
+          <span>04 & 05: FULL-STACK PRODUCTION SYSTEMS</span>
           <span className="hidden sm:inline">·</span>
           <span>NO BOXED CARDS · PURE DIRECTORY</span>
         </div>
@@ -71,9 +72,8 @@ export function ProjectsView() {
             const isHovered = hoveredSlug === project.slug;
 
             return (
-              <Link
+              <div
                 key={project.slug}
-                href={`/projects/${project.slug}`}
                 onMouseEnter={() => {
                   setHoveredSlug(project.slug);
                   setAtmosphere(project.slug as BackgroundThemeKey);
@@ -84,6 +84,13 @@ export function ProjectsView() {
                 }}
                 className="group relative block py-10 sm:py-14 transition-transform duration-300 hover:translate-x-2"
               >
+                {/* Overlay link for full row navigation */}
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="absolute inset-0 z-0"
+                  aria-label={`View ${project.title} case study`}
+                />
+
                 {/* Subtle localized aura behind hovered project row - NO card borders, pure diffused light */}
                 <div
                   aria-hidden="true"
@@ -94,8 +101,8 @@ export function ProjectsView() {
                   }}
                 />
 
-                <div className="space-y-4">
-                  {/* Meta Row: Number, Tier, Year */}
+                <div className="space-y-4 relative z-10 pointer-events-none">
+                  {/* Meta Row: Number, Tier, Year, Open Source indicator, Link buttons */}
                   <div className="flex items-center justify-between text-[11px] font-mono">
                     <div className="flex items-center space-x-3">
                       <span
@@ -119,16 +126,37 @@ export function ProjectsView() {
                           FLAGSHIP
                         </span>
                       )}
+                      {project.repositoryUrl && (
+                        <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[9px] font-mono uppercase tracking-widest border border-[#242830] text-[#9A9DA3] bg-[#0E1015]">
+                          OPEN SOURCE
+                        </span>
+                      )}
                     </div>
 
-                    <div className="flex items-center space-x-2 text-[#666B73] group-hover:text-[#F4F1EA] transition-colors">
-                      <span className="text-[11px] font-mono uppercase tracking-wider hidden sm:inline">
-                        VIEW CASE STUDY
-                      </span>
-                      <ArrowUpRight
-                        className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                        style={{ color: isHovered ? accent : "#9A9DA3" }}
-                      />
+                    <div className="flex items-center space-x-4 pointer-events-auto">
+                      {project.repositoryUrl && (
+                        <a
+                          href={project.repositoryUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center space-x-1.5 text-[#666B73] hover:text-[#F4F1EA] transition-colors py-1 text-[11px] font-mono uppercase tracking-wider"
+                          title={`View ${project.title} repository on GitHub`}
+                          aria-label={`View ${project.title} repository on GitHub`}
+                        >
+                          <Github className="w-3.5 h-3.5" />
+                          <span className="hidden md:inline">GITHUB</span>
+                          <ArrowUpRight className="w-3 h-3 text-[#666B73]" />
+                        </a>
+                      )}
+                      <div className="flex items-center space-x-2 text-[#666B73] group-hover:text-[#F4F1EA] transition-colors">
+                        <span className="text-[11px] font-mono uppercase tracking-wider hidden sm:inline">
+                          VIEW CASE STUDY
+                        </span>
+                        <ArrowUpRight
+                          className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                          style={{ color: isHovered ? accent : "#9A9DA3" }}
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -147,14 +175,14 @@ export function ProjectsView() {
 
                   {/* Architecture & Tech Stack Details */}
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2">
-                    <div className="md:col-span-8">
+                    <div className="md:col-span-7">
                       <p className="text-[14px] sm:text-[15px] text-[#C5C8CE] leading-relaxed max-w-2xl font-sans">
                         {project.shortDescription}
                       </p>
                     </div>
 
-                    <div className="md:col-span-4 flex flex-wrap items-center md:justify-end gap-x-2 gap-y-1 text-[11px] font-mono text-[#666B73]">
-                      {project.technologies.slice(0, 4).map((tech) => (
+                    <div className="md:col-span-5 flex flex-wrap items-center md:justify-end gap-x-2 gap-y-1 text-[11px] font-mono text-[#666B73]">
+                      {project.technologies.slice(0, 6).map((tech) => (
                         <span key={tech} className="text-[#9A9DA3]">
                           {tech}
                         </span>
@@ -162,7 +190,7 @@ export function ProjectsView() {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>

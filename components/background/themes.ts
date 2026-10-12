@@ -3,6 +3,7 @@ export type BackgroundThemeKey =
   | "about"
   | "projects"
   | "tracekit"
+  | "codealign"
   | "graphify"
   | "ai-interviewer"
   | "campus-lost-and-found"
@@ -50,6 +51,14 @@ export const BACKGROUND_THEMES: Record<BackgroundThemeKey, BackgroundTheme> = {
     secondary: "#5CA8FF",     // Blue (Chrome DevTools Protocol)
     tertiary: "#38BDF8",      // Cyan (Network telemetry)
     cursorAccent: "#9B7BFF",
+    intensity: 1.05,
+  },
+  codealign: {
+    name: "CodeAlign Intent & Baseline Engine",
+    primary: "#38BDF8",       // Cyan (Developer tooling & intent alignment)
+    secondary: "#5CA8FF",     // Electric Blue (AST / Git verification)
+    tertiary: "#45D6A0",      // Mint (Passing invariants)
+    cursorAccent: "#38BDF8",
     intensity: 1.05,
   },
   graphify: {

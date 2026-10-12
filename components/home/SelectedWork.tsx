@@ -31,7 +31,7 @@ export function SelectedWork() {
           href="/projects"
           className="group inline-flex items-center space-x-1.5 text-[11px] font-mono uppercase tracking-wider text-ink-subtle hover:text-ink transition-colors"
         >
-          <span>VIEW FULL ARCHIVE (4 SYSTEMS)</span>
+          <span>VIEW FULL ARCHIVE (5 SYSTEMS)</span>
           <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </Link>
       </div>
