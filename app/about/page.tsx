@@ -182,7 +182,7 @@ export default function AboutPage() {
                     SUSTAINED CORE CONTRIBUTIONS
                   </div>
                   <p className="text-[12px] text-[#9A9DA3] font-sans leading-relaxed">
-                    30+ maintainer PRs to Graphify code intelligence core; 50+ overall merged PRs across open source.
+                    45+ maintainer-reviewed PRs to Graphify code intelligence core; over 60 merged pull requests overall within 4 months of building in public.
                   </p>
                 </div>
               </div>

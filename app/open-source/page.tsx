@@ -23,14 +23,14 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Open Source",
   description:
-    "Open-source engineering case studies across Graphify (30+ PRs in code intelligence & AST analysis), Agent Orchestrator, PDA, Continue, and Headroom.",
+    "Open-source engineering case studies across Graphify (45+ merged/closed PRs in code intelligence & AST analysis, over 60 merged PRs overall within 4 months of building in public), Agent Orchestrator, PDA, Continue, and Headroom.",
   alternates: {
     canonical: "/open-source",
   },
   openGraph: {
     title: "Open Source — Himanshu Patro",
     description:
-      "Open-source engineering case studies across Graphify (30+ PRs in code intelligence & AST analysis), Agent Orchestrator, PDA, Continue, and Headroom.",
+      "Open-source engineering case studies across Graphify (45+ merged/closed PRs in code intelligence & AST analysis, over 60 merged PRs overall within 4 months of building in public), Agent Orchestrator, PDA, Continue, and Headroom.",
     url: "https://himanshupatro.dev/open-source",
     type: "website",
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Open Source — Himanshu Patro",
     description:
-      "Open-source engineering case studies across Graphify (30+ PRs in code intelligence & AST analysis), Agent Orchestrator, PDA, Continue, and Headroom.",
+      "Open-source engineering case studies across Graphify (45+ merged/closed PRs in code intelligence & AST analysis, over 60 merged PRs overall within 4 months of building in public), Agent Orchestrator, PDA, Continue, and Headroom.",
   },
 };
 
@@ -75,13 +75,13 @@ export default function OpenSourcePage() {
 
             <div className="space-y-1 md:text-right">
               <div className="text-[clamp(3rem,5.5vw,4.5rem)] font-mono font-light tracking-tighter text-[#45D6A0] leading-none">
-                50+
+                60+
               </div>
               <div className="text-[12px] font-mono uppercase tracking-widest text-[#F4F1EA] font-semibold">
                 MERGED / CLOSED PRS
               </div>
               <div className="text-[10px] font-mono uppercase tracking-widest text-[#666B73]">
-                3+ MONTHS TOTAL OSS HORIZON
+                4 MONTHS OF BUILDING IN PUBLIC
               </div>
             </div>
           </div>
@@ -92,11 +92,11 @@ export default function OpenSourcePage() {
         </div>
 
         <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] font-mono text-[#666B73] border-t border-[#242830]">
-          <span className="text-[#5CA8FF] font-semibold">GRAPHIFY: 30+ MERGED PRS (~2 MONTHS)</span>
+          <span className="text-[#5CA8FF] font-semibold">GRAPHIFY: 45+ MERGED/CLOSED PRS</span>
           <span className="hidden sm:inline">·</span>
           <span>SPECIALIZATION: AST EXTRACTION & SYMBOL RESOLUTION</span>
           <span className="hidden sm:inline">·</span>
-          <span className="text-[#45D6A0]">OVERALL OSS: 50+ MERGED/CLOSED PRS (3+ MONTHS)</span>
+          <span className="text-[#45D6A0]">OVERALL OSS: 60+ MERGED PULL REQUESTS (4 MONTHS)</span>
         </div>
       </header>
 
@@ -123,14 +123,14 @@ export default function OpenSourcePage() {
 
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-4 sm:gap-6">
                   <div className="text-[clamp(3.5rem,6vw,5rem)] font-mono font-light tracking-tighter text-[#5CA8FF] leading-none select-none">
-                    30+
+                    45+
                   </div>
                   <div className="space-y-1">
                     <div className="text-lg font-mono uppercase tracking-wider font-bold text-[#F4F1EA]">
-                      GRAPHIFY MERGED PRS
+                      GRAPHIFY MERGED/CLOSED PRS
                     </div>
                     <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-wider">
-                      ~2 MONTHS CONTRIBUTION PERIOD
+                      4 MONTHS CONTRIBUTION PERIOD
                     </div>
                     <p className="text-[13px] text-[#9A9DA3] leading-relaxed pt-1">
                       AST extraction, multi-language Tree-Sitter resolvers, and incremental graph merging deduplication.
@@ -149,14 +149,14 @@ export default function OpenSourcePage() {
 
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-4">
                   <div className="text-[clamp(3rem,5vw,4.25rem)] font-mono font-light tracking-tighter text-[#45D6A0] leading-none select-none">
-                    50+
+                    60+
                   </div>
                   <div className="space-y-1">
                     <div className="text-lg font-mono uppercase tracking-wider font-bold text-[#F4F1EA]">
                       OPEN SOURCE PRS
                     </div>
                     <div className="text-[11px] font-mono text-[#666B73] uppercase tracking-wider">
-                      MERGED & CLOSED · 3+ MONTHS
+                      MERGED & CLOSED · 4 MONTHS
                     </div>
                   </div>
                 </div>
@@ -169,7 +169,7 @@ export default function OpenSourcePage() {
 
             {/* Context Verification Note */}
             <div className="pt-6 border-t border-[#242830] text-[12px] text-[#666B73] leading-relaxed font-mono">
-              30+ merged PRs in Graphify over ~2 months. 50+ merged/closed PRs across 3+ months of open-source contribution, spanning Graphify, PDA, Agent Orchestrator, Headroom, Continue, and other projects.
+              45+ merged/closed PRs for Graphify and over 60 merged pull requests overall within the span of 4 months of building in public, spanning Graphify, PDA, Agent Orchestrator, Headroom, Continue, and other projects.
             </div>
           </div>
 

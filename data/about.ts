@@ -107,7 +107,7 @@ export const whatIBuild: readonly WhatIBuildItem[] = [
     domain: "Code Intelligence & Compilers",
     headline: "AST Analysis & Dependency Graphs",
     description:
-      "Active core contributor to Graphify with 30+ merged pull requests. Investigates multi-language AST extraction (Tree-Sitter), symbol table construction, cross-file import resolution, and incremental graph merging deduplication.",
+      "Active core contributor to Graphify with over 45+ merged/closed pull requests (and over 60 merged pull requests overall within the span of 4 months of building in public). Investigates multi-language AST extraction (Tree-Sitter), symbol table construction, cross-file import resolution, and incremental graph merging deduplication.",
     competencies: [
       "Tree-Sitter Multi-Language Parsers",
       "NetworkX Dependency Graph Construction",
@@ -224,7 +224,7 @@ export const openSourceJourney: OpenSourceJourneySection = {
       phase: "Stage 3: Core Contributions to Graphify",
       focus: "Code intelligence, multi-language AST parsing, and graph determinism",
       description:
-        "Became an active core contributor to Graphify with 30+ maintainer-reviewed pull requests. Tackled complex problems across AST parsing (Python, TypeScript, C#, Razor, Ruby, Terraform), cross-file symbol and import resolution, incremental graph merging deduplication, fail-closed semantic node protection, and Windows process isolation.",
+        "Became an active core contributor to Graphify with over 45+ maintainer-reviewed pull requests (and over 60 merged pull requests overall within the span of 4 months of building in public). Tackled complex problems across AST parsing (Python, TypeScript, C#, Razor, Ruby, Terraform), cross-file symbol and import resolution, incremental graph merging deduplication, fail-closed semantic node protection, and Windows process isolation.",
     },
   ],
 };
@@ -305,7 +305,7 @@ export const currentWork: readonly CurrentWorkItem[] = [
     title: "Graphify — Code Intelligence & AST Parsing",
     detail:
       "Continuing core open-source contributions to Graphify. Focused on multi-language symbol resolution, incremental graph merging deduplication, and fail-closed parser robustness across modular codebases.",
-    status: "30+ Merged Pull Requests",
+    status: "45+ Merged Pull Requests",
     linkUrl: "https://github.com/Graphify-Labs/graphify",
     linkLabel: "GitHub Repository",
   },
@@ -346,7 +346,7 @@ export const aboutData: AboutData = {
   longBio: [
     "I am a Software Engineer based in Jamshedpur, Jharkhand, India, graduating in Computer Science and Information Technology (CSIT, B.Tech 2022–2026) from the Institute of Technical Education and Research (ITER), Siksha 'O' Anusandhan (SOA) University, Bhubaneswar, Odisha, India. My engineering work sits at the intersection of full-stack web platforms, autonomous testing systems, and open-source code intelligence.",
     "Across corporate software engineering internships at Celebal Technologies and Tata Steel Ltd., I developed production-grade web applications, designed secure RESTful APIs with role-based access control (RBAC), and optimized frontend responsiveness and database query indexing for hundreds of organizational users.",
-    "As an active open-source contributor with 30+ maintainer-reviewed pull requests in Graphify (a code intelligence and AST analysis framework) alongside work in Agent Orchestrator, Continue, and Headroom, I thrive in complex, unfamiliar codebases—reproducing subtle bugs, strengthening regression suites, and engineering robust, platform-agnostic fixes.",
+    "As an active open-source contributor with over 45+ maintainer-reviewed pull requests in Graphify (a code intelligence and AST analysis framework) and over 60 merged pull requests overall within the span of 4 months of building in public, alongside work in Agent Orchestrator, Continue, and Headroom, I thrive in complex, unfamiliar codebases—reproducing subtle bugs, strengthening regression suites, and engineering robust, platform-agnostic fixes.",
   ],
   currentFocus:
     "Autonomous browser test orchestration with Patchright and deterministic DOM assertions, multi-language code graph extraction engines, and resilient full-stack web architectures.",

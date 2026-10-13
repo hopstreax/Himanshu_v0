@@ -137,11 +137,11 @@ export function HomePageClient() {
 
               {/* Factual Output Quick Strip */}
               <div className="pt-6 border-t border-[#242830] flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-mono text-[#666B73]">
-                <span className="text-[#45D6A0]">50+ MERGED/CLOSED PRS</span>
+                <span className="text-[#45D6A0]">60+ MERGED/CLOSED PRS</span>
                 <span className="text-[#343943]">·</span>
-                <span className="text-[#5CA8FF]">30+ GRAPHIFY PRS</span>
+                <span className="text-[#5CA8FF]">45+ GRAPHIFY PRS</span>
                 <span className="text-[#343943]">·</span>
-                <span className="text-[#FFB86B]">4 SYSTEMS</span>
+                <span className="text-[#FFB86B]">5 SYSTEMS</span>
               </div>
             </motion.div>
 

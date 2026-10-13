@@ -2,6 +2,164 @@ import { ProjectItem } from "@/types/portfolio";
 
 export const projects: readonly ProjectItem[] = [
   {
+    slug: "codealign",
+    title: "CodeAlign",
+    year: "2026",
+    tier: "flagship",
+    category: "Developer Tooling / OSS",
+    tagline: "Keep implementations aligned with developer intent.",
+    shortDescription:
+      "Open-source developer CLI that analyzes implementation plans against codebase structure, establishes a pre-execution baseline, and catches scope drift during coding-agent sessions.",
+    longDescription:
+      "An open-source developer CLI that analyzes an implementation plan against the actual codebase, creates an implementation baseline, and verifies whether the resulting code aligns with the original intent. Built for developers working with coding agents (Gemini CLI, Antigravity CLI), CodeAlign provides deterministic, Git-aware verification to detect unexpected scope changes and implementation drift without relying on subjective AI quality scores.",
+    technologies: [
+      "Python",
+      "Typer",
+      "Pydantic",
+      "Git",
+      "pytest",
+      "Ruff",
+      "CLI Tooling",
+      "Gemini CLI",
+      "Antigravity CLI",
+    ],
+    highlights: [
+      "Analyzes implementation plans against repository structure to establish verified pre-session baselines",
+      "Generates contextual handoffs for coding agents running through Gemini CLI and Antigravity CLI",
+      "Verifies expected files, symbols, tests, and constraints with deterministic, evidence-based checks",
+      "Tracks Git-aware changes across implementation sessions to catch abstraction and behavioral drift",
+      "Read-only codealign status command surfacing baseline telemetry and scope-drift findings",
+    ],
+    repositoryUrl: "https://github.com/hopstreax/CodeAlign",
+    featured: true,
+    caseStudy: {
+      overview:
+        "CodeAlign is an open-source developer CLI engineered to keep coding-agent implementations aligned with developer intent. When working with agents like Gemini CLI or Antigravity CLI, generated code can compile and pass tests while silently violating intended architecture—altering untouched interfaces, creating unnecessary abstractions, or introducing unexpected files. CodeAlign establishes a deterministic baseline before an agent runs, prepares a structured handoff, and verifies the session output against the developer's original implementation plan.",
+      problem:
+        "Successful code generation alone does not establish whether an implementation followed the intended plan, respected scope boundaries, or preserved existing behavior. Coding agents frequently produce working code that introduces subtle architectural drift: touching files outside the intended scope, exposing unplanned public symbols, or refactoring existing Python functions unnecessarily. Traditional testing misses this because tests only validate what they assert, not what changed around them. Furthermore, evaluating agent outputs using another LLM produces non-deterministic, hallucinatory 'code quality scores' rather than concrete evidence of alignment.",
+      motivation:
+        "I built CodeAlign because coding agents are only as reliable as their alignment with developer intent. While agents excel at localized code synthesis, they lack architectural restraint without an explicit contract. I wanted a lightweight, deterministic developer tool that provides agents with clear context before execution and gives developers empirical verification afterwards—without requiring separate API keys or black-box evaluation frameworks.",
+      whyBuilt:
+        "To give developers working with autonomous coding agents a deterministic, Git-aware verification harness that detects scope drift, validates file and symbol contracts, and preserves codebase integrity.",
+      solution:
+        "CodeAlign enforces an evidence-based five-stage workflow: Implementation Plan → Repository Analysis → Baseline → Agent Implementation → Verification. It reads developer plans, analyzes target files and symbol signatures, records a pre-execution snapshot with Git tracking, hands off context to external coding agents via their existing CLI environments, and performs deterministic checks on files, public symbols, test runs, and scope boundaries.",
+      whatSystemDoes: [
+        "Parses developer implementation plans to extract target files, expected symbols, test requirements, and constraints.",
+        "Analyzes existing repository structure and symbol signatures before agent execution begins.",
+        "Establishes an immutable session baseline capturing Git HEAD status, clean worktree state, and symbol inventory.",
+        "Generates a contextual handoff payload for coding agents executed through Gemini CLI or Antigravity CLI.",
+        "Runs deterministic verification comparing post-implementation state against the baseline and plan constraints.",
+        "Provides a read-only codealign status command that reports baseline metrics, scope drift, and fresh verification findings.",
+      ],
+      technicalApproach: [
+        "Deterministic, evidence-based verification pipeline built with Python, Typer, and Pydantic—strictly avoiding subjective AI-generated quality grading.",
+        "Git-aware session diffing that tracks all modified, created, and deleted paths during an active implementation run.",
+        "AST-level symbol inspection for Python files detecting unexpected public symbols and signature alterations.",
+        "Zero-credential agent invocation leveraging already-authenticated external CLI tools (Gemini CLI, Antigravity CLI) rather than managing third-party API keys.",
+      ],
+      architectureFlow: [
+        "1. PLAN ANALYSIS: Parses developer implementation plan markdown to extract target filepaths, symbol definitions, test commands, and architectural constraints.",
+        "2. REPOSITORY ANALYSIS: Inspects active repository tree, validates file existence, and analyzes existing Python AST symbol signatures.",
+        "3. BASELINE CAPTURE: Records pre-session Git status, commit hash, tracked symbols, and prepares structured agent handoff context.",
+        "4. AGENT IMPLEMENTATION: Dispatches contextual handoff to external coding agents (Gemini CLI / Antigravity CLI) running with developer's existing authentication.",
+        "5. DETERMINISTIC VERIFICATION: Compares modified working tree against baseline invariants—validating expected files, symbol contracts, test outcomes, and scope boundaries.",
+      ],
+      keyFeatures: [
+        "Deterministic plan-to-code verification harness",
+        "Pre-session baseline generation and structured agent handoff",
+        "Support for Gemini CLI and Antigravity CLI agent workflows",
+        "Git-aware scope drift and unexpected public symbol detection",
+        "Read-only codealign status command for instant session inspection",
+        "Opt-in end-to-end real-agent acceptance test suite",
+      ],
+      technicalImplementation: [
+        {
+          title: "Deterministic Verification Pipeline",
+          description:
+            "Verification in CodeAlign is grounded entirely in empirical evidence rather than heuristic model evaluations. The verification engine checks four distinct invariant dimensions: file existence and boundary adherence, AST symbol contracts, test suite execution results, and constraint compliance. By using AST parsing and Git status queries instead of prompt-based grading, verification results remain 100% reproducible and explainable.",
+          points: [
+            "Python AST visitor extracting module-level functions, classes, and method signatures",
+            "Strict boundary enforcement reporting any file modified outside the declared plan scope",
+            "Verification result models serialized as structured Pydantic schemas with actionable diff output",
+          ],
+        },
+        {
+          title: "Git-Aware Session Tracking & Scope Drift",
+          description:
+            "CodeAlign hooks directly into the repository's Git state to maintain session awareness without requiring persistent daemon processes. When an implementation session starts, CodeAlign captures the starting commit, dirty file state, and tracked symbols. Upon completion, session-aware diffing isolates precisely the changes introduced during the session.",
+          points: [
+            "Subprocess-driven Git repository abstraction checking index status and untracked files",
+            "Detection of unexpected public symbols introduced into existing Python modules",
+            "Read-only codealign status command surfacing baseline metadata, scope-drift findings, and fresh checks",
+          ],
+        },
+        {
+          title: "External Coding Agent Integration",
+          description:
+            "Rather than acting as an AI proxy or requiring users to manage and configure separate model API keys, CodeAlign delegates execution directly to external CLI tools—specifically Gemini CLI and Antigravity CLI. It formats the implementation plan and repository baseline into a structured contextual prompt and hands off execution to the agent in the developer's pre-authenticated environment.",
+          points: [
+            "Zero-key architecture: relies entirely on existing developer CLI authentication",
+            "Contextual handoff generator framing tasks with clear file boundaries and acceptance criteria",
+            "Execution isolation ensuring failed agent runs leave traceable session status for developer inspection",
+          ],
+        },
+        {
+          title: "Testing Harness & Real-Agent Acceptance Tests",
+          description:
+            "CodeAlign maintains a comprehensive pytest suite verifying each pipeline stage in isolation using temporary Git fixtures and synthetic repositories. In addition to fast unit tests, the codebase includes an opt-in end-to-end real-agent acceptance test that validates the full plan-to-verification lifecycle against actual CLI agent execution when enabled.",
+          points: [
+            "Pytest fixtures spinning up isolated temporary Git repositories with clean worktrees",
+            "Mocked agent runners verifying status command reporting and scope drift categorization",
+            "Opt-in E2E acceptance test suite executing real agent runs without polluting unit test velocity",
+          ],
+        },
+      ],
+      engineeringDecisions: [
+        {
+          decision: "Deterministic Evidence Over AI Quality Scores",
+          rationale:
+            "Evaluating coding agent output with another LLM introduces non-determinism, hallucinations, and unhelpful scores like '8/10 code quality'. Developers need concrete facts: Did the agent touch files outside the plan? Did it alter function signatures? Did tests pass?",
+          outcome:
+            "Built verification around Python AST parsing, Git status diffs, and subprocess test execution, ensuring 100% reproducible pass/fail findings.",
+        },
+        {
+          decision: "External CLI Delegation Over Managing Model API Keys",
+          rationale:
+            "Managing LLM API keys inside developer CLI tools introduces configuration friction, credential leakage risks, and vendor lock-in. Developers already authenticate tools like Gemini CLI and Antigravity CLI on their workstations.",
+          outcome:
+            "CodeAlign generates structured contextual handoffs and executes existing CLI binaries directly, keeping credentials entirely in the developer's hands.",
+        },
+        {
+          decision: "Separation of Session-Aware Tracking from Repository Inspection",
+          rationale:
+            "Running verification on an ad-hoc repo without prior session context can only check static state, whereas detecting drift requires comparing against a known pre-execution baseline.",
+          outcome:
+            "Architected CodeAlign with an explicit baseline phase that snapshots pre-session state, enabling both standalone checks and rich before-and-after session diffing.",
+        },
+      ],
+      currentState:
+        "CodeAlign is actively developed as an open-source project on GitHub (https://github.com/hopstreax/CodeAlign). Its core verification pipeline, baseline generation, Git-aware session tracking, and read-only status command are operational and covered by automated test suites. As an evolving developer tool, capabilities continue to expand, with development focused on refining symbol drift heuristics, expanding agent integrations, and hardening edge-case handling across complex repository topologies.",
+      whatILearned: [
+        "Designing enforceable contracts between human developer intent and autonomous agent execution.",
+        "Building deterministic, evidence-based verification layers around non-deterministic coding-agent workflows.",
+        "Architecting session-aware Git tracking that cleanly separates pre-execution baselines from standalone repository inspection.",
+        "Testing failure modes and ensuring tool operations preserve existing repository state without destructive side effects.",
+      ],
+      futureDirection: [
+        "Extending AST symbol parsing and boundary verification to TypeScript, JavaScript, and Go codebases.",
+        "Interactive terminal diff viewer for inspecting detected public symbol alterations before accepting agent changes.",
+        "Pre-commit and CI/CD hook integrations for automated pull request scope-drift gating.",
+      ],
+      links: [
+        {
+          label: "GitHub Repository",
+          url: "https://github.com/hopstreax/CodeAlign",
+          type: "github",
+        },
+      ],
+    },
+  },
+  {
     slug: "tracekit",
     title: "TraceKit",
     year: "2025",
@@ -167,164 +325,6 @@ export const projects: readonly ProjectItem[] = [
           label: "Notion Architecture Documentation",
           url: "https://app.notion.com/p/TraceKit-AI-web-testing-that-acts-verifies-and-explains-40f91c3ec4e94f44b103db3b555f9500?source=copy_link",
           type: "demo",
-        },
-      ],
-    },
-  },
-  {
-    slug: "codealign",
-    title: "CodeAlign",
-    year: "2026",
-    tier: "flagship",
-    category: "Developer Tooling / OSS",
-    tagline: "Keep implementations aligned with developer intent.",
-    shortDescription:
-      "Open-source developer CLI that analyzes implementation plans against codebase structure, establishes a pre-execution baseline, and catches scope drift during coding-agent sessions.",
-    longDescription:
-      "An open-source developer CLI that analyzes an implementation plan against the actual codebase, creates an implementation baseline, and verifies whether the resulting code aligns with the original intent. Built for developers working with coding agents (Gemini CLI, Antigravity CLI), CodeAlign provides deterministic, Git-aware verification to detect unexpected scope changes and implementation drift without relying on subjective AI quality scores.",
-    technologies: [
-      "Python",
-      "Typer",
-      "Pydantic",
-      "Git",
-      "pytest",
-      "Ruff",
-      "CLI Tooling",
-      "Gemini CLI",
-      "Antigravity CLI",
-    ],
-    highlights: [
-      "Analyzes implementation plans against repository structure to establish verified pre-session baselines",
-      "Generates contextual handoffs for coding agents running through Gemini CLI and Antigravity CLI",
-      "Verifies expected files, symbols, tests, and constraints with deterministic, evidence-based checks",
-      "Tracks Git-aware changes across implementation sessions to catch abstraction and behavioral drift",
-      "Read-only codealign status command surfacing baseline telemetry and scope-drift findings",
-    ],
-    repositoryUrl: "https://github.com/hopstreax/CodeAlign",
-    featured: true,
-    caseStudy: {
-      overview:
-        "CodeAlign is an open-source developer CLI engineered to keep coding-agent implementations aligned with developer intent. When working with agents like Gemini CLI or Antigravity CLI, generated code can compile and pass tests while silently violating intended architecture—altering untouched interfaces, creating unnecessary abstractions, or introducing unexpected files. CodeAlign establishes a deterministic baseline before an agent runs, prepares a structured handoff, and verifies the session output against the developer's original implementation plan.",
-      problem:
-        "Successful code generation alone does not establish whether an implementation followed the intended plan, respected scope boundaries, or preserved existing behavior. Coding agents frequently produce working code that introduces subtle architectural drift: touching files outside the intended scope, exposing unplanned public symbols, or refactoring existing Python functions unnecessarily. Traditional testing misses this because tests only validate what they assert, not what changed around them. Furthermore, evaluating agent outputs using another LLM produces non-deterministic, hallucinatory 'code quality scores' rather than concrete evidence of alignment.",
-      motivation:
-        "I built CodeAlign because coding agents are only as reliable as their alignment with developer intent. While agents excel at localized code synthesis, they lack architectural restraint without an explicit contract. I wanted a lightweight, deterministic developer tool that provides agents with clear context before execution and gives developers empirical verification afterwards—without requiring separate API keys or black-box evaluation frameworks.",
-      whyBuilt:
-        "To give developers working with autonomous coding agents a deterministic, Git-aware verification harness that detects scope drift, validates file and symbol contracts, and preserves codebase integrity.",
-      solution:
-        "CodeAlign enforces an evidence-based five-stage workflow: Implementation Plan → Repository Analysis → Baseline → Agent Implementation → Verification. It reads developer plans, analyzes target files and symbol signatures, records a pre-execution snapshot with Git tracking, hands off context to external coding agents via their existing CLI environments, and performs deterministic checks on files, public symbols, test runs, and scope boundaries.",
-      whatSystemDoes: [
-        "Parses developer implementation plans to extract target files, expected symbols, test requirements, and constraints.",
-        "Analyzes existing repository structure and symbol signatures before agent execution begins.",
-        "Establishes an immutable session baseline capturing Git HEAD status, clean worktree state, and symbol inventory.",
-        "Generates a contextual handoff payload for coding agents executed through Gemini CLI or Antigravity CLI.",
-        "Runs deterministic verification comparing post-implementation state against the baseline and plan constraints.",
-        "Provides a read-only codealign status command that reports baseline metrics, scope drift, and fresh verification findings.",
-      ],
-      technicalApproach: [
-        "Deterministic, evidence-based verification pipeline built with Python, Typer, and Pydantic—strictly avoiding subjective AI-generated quality grading.",
-        "Git-aware session diffing that tracks all modified, created, and deleted paths during an active implementation run.",
-        "AST-level symbol inspection for Python files detecting unexpected public symbols and signature alterations.",
-        "Zero-credential agent invocation leveraging already-authenticated external CLI tools (Gemini CLI, Antigravity CLI) rather than managing third-party API keys.",
-      ],
-      architectureFlow: [
-        "1. PLAN ANALYSIS: Parses developer implementation plan markdown to extract target filepaths, symbol definitions, test commands, and architectural constraints.",
-        "2. REPOSITORY ANALYSIS: Inspects active repository tree, validates file existence, and analyzes existing Python AST symbol signatures.",
-        "3. BASELINE CAPTURE: Records pre-session Git status, commit hash, tracked symbols, and prepares structured agent handoff context.",
-        "4. AGENT IMPLEMENTATION: Dispatches contextual handoff to external coding agents (Gemini CLI / Antigravity CLI) running with developer's existing authentication.",
-        "5. DETERMINISTIC VERIFICATION: Compares modified working tree against baseline invariants—validating expected files, symbol contracts, test outcomes, and scope boundaries.",
-      ],
-      keyFeatures: [
-        "Deterministic plan-to-code verification harness",
-        "Pre-session baseline generation and structured agent handoff",
-        "Support for Gemini CLI and Antigravity CLI agent workflows",
-        "Git-aware scope drift and unexpected public symbol detection",
-        "Read-only codealign status command for instant session inspection",
-        "Opt-in end-to-end real-agent acceptance test suite",
-      ],
-      technicalImplementation: [
-        {
-          title: "Deterministic Verification Pipeline",
-          description:
-            "Verification in CodeAlign is grounded entirely in empirical evidence rather than heuristic model evaluations. The verification engine checks four distinct invariant dimensions: file existence and boundary adherence, AST symbol contracts, test suite execution results, and constraint compliance. By using AST parsing and Git status queries instead of prompt-based grading, verification results remain 100% reproducible and explainable.",
-          points: [
-            "Python AST visitor extracting module-level functions, classes, and method signatures",
-            "Strict boundary enforcement reporting any file modified outside the declared plan scope",
-            "Verification result models serialized as structured Pydantic schemas with actionable diff output",
-          ],
-        },
-        {
-          title: "Git-Aware Session Tracking & Scope Drift",
-          description:
-            "CodeAlign hooks directly into the repository's Git state to maintain session awareness without requiring persistent daemon processes. When an implementation session starts, CodeAlign captures the starting commit, dirty file state, and tracked symbols. Upon completion, session-aware diffing isolates precisely the changes introduced during the session.",
-          points: [
-            "Subprocess-driven Git repository abstraction checking index status and untracked files",
-            "Detection of unexpected public symbols introduced into existing Python modules",
-            "Read-only codealign status command surfacing baseline metadata, scope-drift findings, and fresh checks",
-          ],
-        },
-        {
-          title: "External Coding Agent Integration",
-          description:
-            "Rather than acting as an AI proxy or requiring users to manage and configure separate model API keys, CodeAlign delegates execution directly to external CLI tools—specifically Gemini CLI and Antigravity CLI. It formats the implementation plan and repository baseline into a structured contextual prompt and hands off execution to the agent in the developer's pre-authenticated environment.",
-          points: [
-            "Zero-key architecture: relies entirely on existing developer CLI authentication",
-            "Contextual handoff generator framing tasks with clear file boundaries and acceptance criteria",
-            "Execution isolation ensuring failed agent runs leave traceable session status for developer inspection",
-          ],
-        },
-        {
-          title: "Testing Harness & Real-Agent Acceptance Tests",
-          description:
-            "CodeAlign maintains a comprehensive pytest suite verifying each pipeline stage in isolation using temporary Git fixtures and synthetic repositories. In addition to fast unit tests, the codebase includes an opt-in end-to-end real-agent acceptance test that validates the full plan-to-verification lifecycle against actual CLI agent execution when enabled.",
-          points: [
-            "Pytest fixtures spinning up isolated temporary Git repositories with clean worktrees",
-            "Mocked agent runners verifying status command reporting and scope drift categorization",
-            "Opt-in E2E acceptance test suite executing real agent runs without polluting unit test velocity",
-          ],
-        },
-      ],
-      engineeringDecisions: [
-        {
-          decision: "Deterministic Evidence Over AI Quality Scores",
-          rationale:
-            "Evaluating coding agent output with another LLM introduces non-determinism, hallucinations, and unhelpful scores like '8/10 code quality'. Developers need concrete facts: Did the agent touch files outside the plan? Did it alter function signatures? Did tests pass?",
-          outcome:
-            "Built verification around Python AST parsing, Git status diffs, and subprocess test execution, ensuring 100% reproducible pass/fail findings.",
-        },
-        {
-          decision: "External CLI Delegation Over Managing Model API Keys",
-          rationale:
-            "Managing LLM API keys inside developer CLI tools introduces configuration friction, credential leakage risks, and vendor lock-in. Developers already authenticate tools like Gemini CLI and Antigravity CLI on their workstations.",
-          outcome:
-            "CodeAlign generates structured contextual handoffs and executes existing CLI binaries directly, keeping credentials entirely in the developer's hands.",
-        },
-        {
-          decision: "Separation of Session-Aware Tracking from Repository Inspection",
-          rationale:
-            "Running verification on an ad-hoc repo without prior session context can only check static state, whereas detecting drift requires comparing against a known pre-execution baseline.",
-          outcome:
-            "Architected CodeAlign with an explicit baseline phase that snapshots pre-session state, enabling both standalone checks and rich before-and-after session diffing.",
-        },
-      ],
-      currentState:
-        "CodeAlign is actively developed as an open-source project on GitHub (https://github.com/hopstreax/CodeAlign). Its core verification pipeline, baseline generation, Git-aware session tracking, and read-only status command are operational and covered by automated test suites. As an evolving developer tool, capabilities continue to expand, with development focused on refining symbol drift heuristics, expanding agent integrations, and hardening edge-case handling across complex repository topologies.",
-      whatILearned: [
-        "Designing enforceable contracts between human developer intent and autonomous agent execution.",
-        "Building deterministic, evidence-based verification layers around non-deterministic coding-agent workflows.",
-        "Architecting session-aware Git tracking that cleanly separates pre-execution baselines from standalone repository inspection.",
-        "Testing failure modes and ensuring tool operations preserve existing repository state without destructive side effects.",
-      ],
-      futureDirection: [
-        "Extending AST symbol parsing and boundary verification to TypeScript, JavaScript, and Go codebases.",
-        "Interactive terminal diff viewer for inspecting detected public symbol alterations before accepting agent changes.",
-        "Pre-commit and CI/CD hook integrations for automated pull request scope-drift gating.",
-      ],
-      links: [
-        {
-          label: "GitHub Repository",
-          url: "https://github.com/hopstreax/CodeAlign",
-          type: "github",
         },
       ],
     },

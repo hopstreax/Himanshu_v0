@@ -12,8 +12,8 @@ export function OpenSourcePreview() {
       id: "graphify",
       name: "GRAPHIFY",
       org: "Graphify-Labs",
-      role: "Core Contributor · 30+ Merged PRs (~2 mos)",
-      metric: "30+ MERGED PRS",
+      role: "Core Contributor · 45+ Merged/Closed PRs (4 mos)",
+      metric: "45+ MERGED/CLOSED PRS",
       color: "#5CA8FF",
       description:
         "Code intelligence & multi-language AST parsing. Resolved cross-file symbol lookups, scoped carried-hyperedge deduplication, and protected against AST node eviction on parse errors.",
@@ -119,13 +119,13 @@ export function OpenSourcePreview() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline border-b border-border-subtle pb-10">
         <div className="md:col-span-4 space-y-1">
           <div className="text-[clamp(3.5rem,6vw,5.5rem)] font-mono font-light tracking-tighter text-[#45D6A0] leading-none">
-            50+
+            60+
           </div>
           <div className="text-[13px] font-mono font-semibold uppercase tracking-wider text-ink">
             MERGED / CLOSED PRS
           </div>
           <div className="text-[11px] font-mono text-ink-subtle uppercase tracking-widest">
-            3+ MONTHS TOTAL OSS HORIZON
+            4 MONTHS OF BUILDING IN PUBLIC
           </div>
         </div>
 
@@ -134,7 +134,7 @@ export function OpenSourcePreview() {
             I learn software by getting inside systems I didn’t build. Contributing to mature codebases requires respecting established invariants and defending diffs under maintainer scrutiny.
           </p>
           <div className="text-[11px] font-mono text-ink-subtle pt-1">
-            <span className="text-[#5CA8FF] font-semibold">30+ PRs in Graphify</span> (~2 months) · <span className="text-[#45D6A0] font-semibold">50+ total PRs</span> across Graphify, PDA, Continue, Headroom & others.
+            <span className="text-[#5CA8FF] font-semibold">45+ PRs in Graphify</span> · <span className="text-[#45D6A0] font-semibold">60+ total merged PRs</span> across 4 months of building in public (Graphify, PDA, Continue, Headroom & others).
           </div>
         </div>
       </div>

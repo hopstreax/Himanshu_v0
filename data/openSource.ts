@@ -157,7 +157,7 @@ export const ecosystemContributions: readonly EcosystemContribution[] = [
       "Enterprise-grade code intelligence engine constructing queryable symbol and dependency graphs from multi-language repositories.",
     whyInteresting:
       "Operates at the intersection of compiler theory, syntax tree parsing (Tree-Sitter), cross-file reference resolution, and large-scale graph persistence.",
-    role: "Core Contributor (30+ Merged PRs)",
+    role: "Core Contributor (45+ Merged/Closed PRs)",
     contributionAreas: [
       "AST Extraction & Multi-Language Parsers",
       "Cross-File Import & Symbol Resolution",
@@ -173,7 +173,7 @@ export const ecosystemContributions: readonly EcosystemContribution[] = [
       "Automated Regression Test Suites",
     ],
     technicalWork:
-      "Authored 30+ maintainer-reviewed PRs resolving critical issues across import resolution, hyperedge deduplication during incremental builds, semantic node preservation during partial parse timeouts, and Windows headless subprocess execution.",
+      "Authored 45+ maintainer-reviewed PRs resolving critical issues across import resolution, hyperedge deduplication during incremental builds, semantic node preservation during partial parse timeouts, and Windows headless subprocess execution.",
     whatILearned:
       "Building resilient code intelligence tools where precision is paramount, debugging deep AST and symbol resolution issues, and maintaining backwards compatibility across multi-language ecosystems.",
     technologies: [
@@ -303,15 +303,15 @@ export const graphifyStory: OSSContribution = {
   role: "Core Contributor",
   period: "2026",
   metrics: [
-    { label: "GRAPHIFY PRs", value: "30+" },
-    { label: "GRAPHIFY CONTRIBUTION PERIOD", value: "~2 Months" },
-    { label: "OVERALL OSS CONTRIBUTIONS", value: "50+ PRs" },
+    { label: "GRAPHIFY PRs", value: "45+" },
+    { label: "BUILDING IN PUBLIC", value: "4 Months" },
+    { label: "OVERALL OSS CONTRIBUTIONS", value: "60+ PRs" },
   ],
   metricsExplanation:
-    "30+ merged PRs in Graphify over ~2 months. 50+ merged/closed PRs across 3+ months of open-source contribution, spanning Graphify, PDA, Agent Orchestrator, Headroom, Continue, and other projects.",
+    "45+ merged/closed PRs in Graphify and over 60 merged pull requests overall within the span of 4 months of building in public, spanning Graphify, PDA, Agent Orchestrator, Headroom, Continue, and other projects.",
   tagline: "Code intelligence & symbol graph infrastructure",
   summary:
-    "30+ maintainer-reviewed contributions to Graphify across AST extraction, multi-language parsers, incremental build processing, and interactive HTML export.",
+    "45+ maintainer-reviewed contributions to Graphify across AST extraction, multi-language parsers, incremental build processing, and interactive HTML export.",
   longDescription:
     "Graphify is an open-source code intelligence and symbol graph engine that parses multi-language source repositories into traversable, queryable dependency graphs. Contributions span the entire processing pipeline: multi-language AST extraction (Python, TypeScript, C#, Razor, Ruby, Terraform), cross-file symbol and import resolution, incremental graph merging deduplication, fail-closed regression assertions, and cross-platform process isolation.",
   coreAreas: [

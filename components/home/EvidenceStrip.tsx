@@ -8,10 +8,10 @@ export function EvidenceStrip() {
 
   const metrics = [
     {
-      number: "50+",
+      number: "60+",
       label: "MERGED / CLOSED",
       sublabel: "OPEN SOURCE PRs",
-      annotation: "3+ MONTHS HORIZON",
+      annotation: "4 MONTHS HORIZON",
       detail:
         "Sustained contributions spanning Graphify, PDA, Agent Orchestrator, Headroom, and Continue.",
       accentClass: "text-[#45D6A0]",
@@ -19,10 +19,10 @@ export function EvidenceStrip() {
       dotClass: "bg-[#45D6A0]",
     },
     {
-      number: "30+",
+      number: "45+",
       label: "GRAPHIFY CORE",
       sublabel: "MERGED PRs",
-      annotation: "~2 MONTHS FOCUS",
+      annotation: "4 MONTHS IN PUBLIC",
       detail:
         "Multi-language AST parsing, Tree-Sitter resolvers, and incremental graph merging deduplication.",
       accentClass: "text-[#5CA8FF]",

@@ -37,10 +37,152 @@ export function SelectedWork() {
       </div>
 
       {/* ===================================================================== */}
-      {/* PROJECT 01: TRACEKIT (Asymmetrical Browser Pipeline Layout)           */}
+      {/* PROJECT 01: CODEALIGN (Intent Alignment & Baseline Engine)           */}
       {/* ===================================================================== */}
       <section
-        aria-label="Project 01: TraceKit"
+        aria-label="Project 01: CodeAlign"
+        className="w-full relative group"
+        onMouseEnter={() => {
+          setHoveredProject("codealign");
+          setAtmosphere("codealign");
+        }}
+        onMouseLeave={() => {
+          setHoveredProject(null);
+          setAtmosphere(null);
+        }}
+      >
+        {/* Subtle localized aura behind CodeAlign section */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-12 -left-12 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-opacity duration-1000 -z-10"
+          style={{
+            background: "#38BDF8",
+            opacity: hoveredProject === "codealign" ? 0.08 : 0,
+          }}
+        />
+        <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
+          {/* Top Metadata Row */}
+          <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+            <div className="flex items-center space-x-3">
+              <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
+                01
+              </span>
+              <span className="text-border-strong">/</span>
+              <span className="text-[#38BDF8] font-semibold">FLAGSHIP INTENT-VERIFICATION CLI</span>
+              <span className="text-border-strong">·</span>
+              <span className="text-ink-subtle">2026</span>
+            </div>
+            <div className="flex items-center space-x-4 pt-2 sm:pt-0">
+              <Link
+                href="/projects/codealign"
+                className="inline-flex items-center space-x-1 text-[#38BDF8] hover:underline uppercase tracking-wider font-semibold"
+              >
+                <span>CASE STUDY</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+              <span>·</span>
+              <a
+                href="https://github.com/hopstreax/CodeAlign"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1 text-ink-muted hover:text-ink uppercase tracking-wider"
+              >
+                <span>GITHUB</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+
+          {/* Asymmetric Split: Massive Typography (Left) vs Architectural Brief (Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7 space-y-3">
+              <h3 className="text-[clamp(2.25rem,4.2vw,3.75rem)] font-mono font-bold uppercase tracking-tight text-ink transition-transform duration-300 group-hover:translate-x-1">
+                CODEALIGN
+              </h3>
+              <div className="text-lg sm:text-xl font-mono text-[#38BDF8] uppercase tracking-wider">
+                INTENT-ALIGNED IMPLEMENTATION CLI
+              </div>
+              <p className="text-[15px] sm:text-[16px] text-ink-body font-sans leading-relaxed pt-2 max-w-xl">
+                Open-source developer CLI that analyzes implementation plans against repository structure, establishes verifiable session baselines, and catches scope drift during coding-agent execution.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5 space-y-4 pt-2 border-l border-border-subtle pl-6">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle block">
+                  CORE INVARIANT
+                </span>
+                <p className="text-[13px] text-ink-muted leading-relaxed">
+                  Working code generation alone does not prove plan alignment. CodeAlign enforces deterministic AST symbol contracts and Git-aware boundary checks across coding-agent workflows.
+                </p>
+              </div>
+
+              <div className="space-y-1 pt-2">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle block">
+                  TECH STACK
+                </span>
+                <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] font-mono text-ink-muted">
+                  <span>Python 3.11</span>
+                  <span>·</span>
+                  <span>Typer</span>
+                  <span>·</span>
+                  <span>Pydantic</span>
+                  <span>·</span>
+                  <span>Git</span>
+                  <span>·</span>
+                  <span>pytest</span>
+                  <span>·</span>
+                  <span>Ruff</span>
+                  <span>·</span>
+                  <span>Gemini CLI</span>
+                  <span>·</span>
+                  <span>Antigravity CLI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Visual Execution Pipeline: PLAN ── ANALYZE ── BASELINE ── IMPLEMENT ── VERIFY */}
+          <div className="pt-6 space-y-3">
+            <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle flex items-center space-x-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
+              <span>EXECUTION PIPELINE · FIVE-STAGE VERIFICATION HARNESS</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 pt-2">
+              {[
+                { stage: "01", name: "PLAN", detail: "Task Intent & Scope Limits" },
+                { stage: "02", name: "ANALYZE", detail: "Codebase Structure & AST" },
+                { stage: "03", name: "BASELINE", detail: "Symbol Contracts & Handoff" },
+                { stage: "04", name: "IMPLEMENT", detail: "Coding Agent Execution" },
+                { stage: "05", name: "VERIFY", detail: "Scope Drift & Diff Auditing" },
+              ].map((step, idx) => (
+                <div
+                  key={idx}
+                  className="border-t border-border-subtle pt-3 space-y-1 group/step transition-colors duration-200 hover:border-[#38BDF8]"
+                >
+                  <div className="flex items-center justify-between text-[10px] font-mono text-ink-subtle">
+                    <span>{step.stage}</span>
+                    <span className="text-border-strong">—</span>
+                  </div>
+                  <div className="text-[13px] font-mono font-bold uppercase tracking-wider text-ink group-hover/step:text-[#38BDF8] transition-colors">
+                    {step.name}
+                  </div>
+                  <p className="text-[11px] text-ink-muted font-mono leading-tight">
+                    {step.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===================================================================== */}
+      {/* PROJECT 02: TRACEKIT (Asymmetrical Browser Pipeline Layout)           */}
+      {/* ===================================================================== */}
+      <section
+        aria-label="Project 02: TraceKit"
         className="w-full relative group"
         onMouseEnter={() => {
           setHoveredProject("tracekit");
@@ -65,10 +207,12 @@ export function SelectedWork() {
           <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
             <div className="flex items-center space-x-3">
               <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
-                01
+                02
               </span>
               <span className="text-border-strong">/</span>
               <span className="text-[#9B7BFF] font-semibold">FLAGSHIP AGENTIC SYSTEM</span>
+              <span className="text-border-strong">·</span>
+              <span className="text-ink-subtle">2025</span>
             </div>
             <div className="flex items-center space-x-4 pt-2 sm:pt-0">
               <Link
@@ -183,10 +327,10 @@ export function SelectedWork() {
       </section>
 
       {/* ===================================================================== */}
-      {/* PROJECT 02: GRAPHIFY (Code Intelligence Tree Composition)             */}
+      {/* PROJECT 03: GRAPHIFY (Code Intelligence Tree Composition)             */}
       {/* ===================================================================== */}
       <section
-        aria-label="Project 02: Graphify"
+        aria-label="Project 03: Graphify"
         className="w-full relative group"
         onMouseEnter={() => {
           setHoveredProject("graphify");
@@ -211,12 +355,12 @@ export function SelectedWork() {
           <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
             <div className="flex items-center space-x-3">
               <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
-                02
+                03
               </span>
               <span className="text-border-strong">/</span>
               <span className="text-[#5CA8FF] font-semibold">CODE INTELLIGENCE CORE</span>
               <span className="text-border-strong">·</span>
-              <span className="text-ink-subtle">30+ MERGED PRS</span>
+              <span className="text-ink-subtle">45+ MERGED PRS</span>
             </div>
             <div className="flex items-center space-x-4 pt-2 sm:pt-0">
               <Link
@@ -292,10 +436,10 @@ export function SelectedWork() {
       </section>
 
       {/* ===================================================================== */}
-      {/* PROJECT 03: AI INTERVIEWER (Speech Stream & Latency Composition)      */}
+      {/* PROJECT 04: AI INTERVIEWER (Speech Stream & Latency Composition)      */}
       {/* ===================================================================== */}
       <section
-        aria-label="Project 03: AI Interviewer"
+        aria-label="Project 04: AI Interviewer"
         className="w-full relative group"
         onMouseEnter={() => {
           setHoveredProject("ai-interviewer");
@@ -320,7 +464,7 @@ export function SelectedWork() {
           <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
             <div className="flex items-center space-x-3">
               <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
-                03
+                04
               </span>
               <span className="text-border-strong">/</span>
               <span className="text-[#FFB86B] font-semibold">REAL-TIME SIMULATION SYSTEM</span>
@@ -429,3 +573,4 @@ export function SelectedWork() {
     </div>
   );
 }
+
