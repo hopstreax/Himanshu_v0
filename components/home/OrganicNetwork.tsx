@@ -339,7 +339,7 @@ export function OrganicNetwork() {
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[520px] sm:h-[580px] lg:h-[640px] flex items-center justify-center select-none overflow-visible"
+      className="relative w-full h-[360px] sm:h-[480px] md:h-[540px] lg:h-[640px] flex items-center justify-center select-none overflow-hidden rounded-2xl"
       aria-label="Interactive Knowledge & Engineering Ecosystem"
     >
       {/* Diffuse Ambient Color Fields Behind Network */}
@@ -361,7 +361,7 @@ export function OrganicNetwork() {
       />
 
       <svg
-        className="w-full h-full overflow-visible"
+        className="w-full h-full max-w-full overflow-hidden"
         viewBox="0 0 900 680"
         preserveAspectRatio="xMidYMid meet"
       >

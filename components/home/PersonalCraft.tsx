@@ -75,10 +75,10 @@ export function PersonalCraft() {
                   key={key}
                   onClick={() => setActiveCraft(key)}
                   onMouseEnter={() => setActiveCraft(key)}
-                  className="cursor-pointer group flex items-baseline space-x-4 transition-transform duration-200 hover:translate-x-2"
+                  className="cursor-pointer group flex flex-wrap items-baseline gap-x-4 gap-y-1 transition-transform duration-200 hover:translate-x-2"
                 >
                   <span
-                    className="text-[clamp(2.5rem,4.5vw,4.5rem)] font-mono font-bold uppercase tracking-tighter transition-colors duration-200"
+                    className="text-[clamp(1.75rem,4.5vw,4.5rem)] font-mono font-bold uppercase tracking-tighter transition-colors duration-200"
                     style={{
                       color: isSelected ? craft.accent : "#343943",
                     }}

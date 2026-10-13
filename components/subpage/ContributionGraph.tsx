@@ -119,7 +119,7 @@ export function ContributionGraph({
             <span className="text-[#9A9DA3]">@{activity.username}</span>
           </div>
 
-          <div className="flex items-center space-x-3 text-[11px] font-mono text-[#666B73]">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-mono text-[#666B73]">
             <span>{totalCount} CONTRIBUTIONS RECORDED</span>
             <span>·</span>
             <span>{activeDaysCount} ACTIVE DAYS</span>
@@ -130,9 +130,14 @@ export function ContributionGraph({
       {/* Heatmap Layout with Seamless Dark Integrated Styling (No Box Card) */}
       <div className="relative border border-[#242830] bg-[#08090B] p-4 sm:p-6 overflow-hidden">
         {/* Subtle grid metadata */}
-        <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-[#666B73] pb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono uppercase tracking-widest text-[#666B73] pb-4">
           <span>CADENCE · 52 WEEKS</span>
           <span>{dateRangeLabel || "LAST 12 MONTHS"}</span>
+        </div>
+
+        {/* Mobile scroll hint */}
+        <div className="text-[9.5px] font-mono text-[#666B73] block sm:hidden pb-2 uppercase tracking-wider">
+          SWIPE HORIZONTALLY TO VIEW 52-WEEK TIMELINE →
         </div>
 
         {/* Scrollable Container for small screens */}

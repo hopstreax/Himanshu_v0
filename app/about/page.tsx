@@ -359,7 +359,7 @@ export default function AboutPage() {
               <p className="text-[14px] text-[#9A9DA3] max-w-2xl leading-relaxed">
                 Technical competencies categorized by engineering domains and architectural depth. Every capability pairs concrete systems scope with verified production and open-source provenance:
               </p>
-              <div className="flex items-center space-x-2 text-[10.5px] font-mono text-[#666B73] shrink-0 uppercase tracking-widest">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] font-mono text-[#666B73] uppercase tracking-widest">
                 <span className="text-[#45D6A0]">30 SPECIFICATIONS</span>
                 <span>·</span>
                 <span className="text-[#9B7BFF]">6 DOMAINS</span>
@@ -494,7 +494,7 @@ export default function AboutPage() {
               <p className="text-[14px] text-[#9A9DA3] max-w-2xl leading-relaxed">
                 {aboutData.openSourceJourney?.summary}
               </p>
-              <div className="flex items-center space-x-2 text-[10.5px] font-mono text-[#666B73] shrink-0 uppercase tracking-widest">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] font-mono text-[#666B73] uppercase tracking-widest">
                 <span className="text-[#45D6A0]">45+ GRAPHIFY</span>
                 <span>·</span>
                 <span className="text-[#5CA8FF]">60+ TOTAL OSS</span>

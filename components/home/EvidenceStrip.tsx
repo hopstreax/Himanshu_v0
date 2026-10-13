@@ -63,7 +63,7 @@ export function EvidenceStrip() {
               key={idx}
               initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
               className={`group flex flex-col justify-between ${
                 idx === 0

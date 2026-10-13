@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Menu, X } from "lucide-react";
 import { PageTransition } from "./PageTransition";
 
 interface PageShellProps {
@@ -9,6 +11,8 @@ interface PageShellProps {
 }
 
 export function PageShell({ children, activeSection }: PageShellProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-transparent text-ink flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA]">
       {/* Editorial Global Navigation */}
@@ -16,35 +20,24 @@ export function PageShell({ children, activeSection }: PageShellProps) {
         role="banner"
         className="sticky top-0 z-30 w-full bg-[#08090B]/85 backdrop-blur-md border-b border-[#242830]/80 px-5 sm:px-10 md:px-14 py-3.5 sm:py-4 transition-colors"
       >
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-          <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="group flex items-baseline space-x-2 text-ink hover:text-ink-muted transition-colors select-none"
-              aria-label="Return to portfolio overview"
-            >
-              <span className="text-[13px] sm:text-[14px] font-semibold tracking-editorial uppercase">
-                HIMANSHU PATRO
-              </span>
-              <span className="text-[10px] font-mono text-ink-subtle uppercase tracking-widest hidden md:inline">
-                / JOURNAL
-              </span>
-            </Link>
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <Link
+            href="/"
+            className="group flex items-baseline space-x-2 text-ink hover:text-ink-muted transition-colors select-none"
+            aria-label="Return to portfolio overview"
+          >
+            <span className="text-[13px] sm:text-[14px] font-semibold tracking-editorial uppercase">
+              HIMANSHU PATRO
+            </span>
+            <span className="text-[10px] font-mono text-ink-subtle uppercase tracking-widest hidden md:inline">
+              / JOURNAL
+            </span>
+          </Link>
 
-            {/* Mobile Back shortcut */}
-            <Link
-              href="/"
-              className="sm:hidden inline-flex items-center space-x-1 text-[10px] font-mono uppercase tracking-widest text-ink-subtle hover:text-ink"
-            >
-              <ArrowLeft className="w-3 h-3" />
-              <span>OVERVIEW</span>
-            </Link>
-          </div>
-
-          {/* Minimal Section Links */}
+          {/* Desktop Section Links */}
           <nav
             aria-label="Portfolio Navigation"
-            className="flex items-center justify-start sm:justify-end space-x-4 sm:space-x-6 text-[11px] font-mono uppercase tracking-editorial overflow-x-auto pb-1 sm:pb-0"
+            className="hidden sm:flex items-center space-x-6 text-[11px] font-mono uppercase tracking-editorial"
           >
             <Link
               href="/about"
@@ -106,7 +99,84 @@ export function PageShell({ children, activeSection }: PageShellProps) {
               )}
             </Link>
           </nav>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="sm:hidden p-1.5 -mr-1.5 text-ink-muted hover:text-ink transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#9B7BFF]"
+            aria-expanded={isMobileMenuOpen}
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5 text-ink" />
+            ) : (
+              <Menu className="w-5 h-5 text-ink" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Navigation Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="sm:hidden max-w-5xl mx-auto pt-4 pb-2 border-t border-[#242830] mt-3 space-y-2 font-mono text-[12px] uppercase tracking-widest">
+            <Link
+              href="/about"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] transition-colors ${
+                activeSection === "about"
+                  ? "text-[#E2C08D] font-bold bg-[#12161D]/60"
+                  : "text-[#C5C8CE] hover:text-[#E2C08D]"
+              }`}
+            >
+              <span>01 / ABOUT</span>
+              <span className="text-[10px] text-[#666B73]">DOSSIER</span>
+            </Link>
+            <Link
+              href="/projects"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] transition-colors ${
+                activeSection === "projects"
+                  ? "text-[#5CA8FF] font-bold bg-[#12161D]/60"
+                  : "text-[#C5C8CE] hover:text-[#5CA8FF]"
+              }`}
+            >
+              <span>02 / PROJECTS</span>
+              <span className="text-[10px] text-[#666B73]">SYSTEMS</span>
+            </Link>
+            <Link
+              href="/open-source"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] transition-colors ${
+                activeSection === "open-source"
+                  ? "text-[#45D6A0] font-bold bg-[#12161D]/60"
+                  : "text-[#C5C8CE] hover:text-[#45D6A0]"
+              }`}
+            >
+              <span>03 / OPEN SOURCE</span>
+              <span className="text-[10px] text-[#666B73]">60+ PRS</span>
+            </Link>
+            <Link
+              href="/connect"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] transition-colors ${
+                activeSection === "connect"
+                  ? "text-[#FF718C] font-bold bg-[#12161D]/60"
+                  : "text-[#C5C8CE] hover:text-[#FF718C]"
+              }`}
+            >
+              <span>04 / CONNECT</span>
+              <span className="text-[10px] text-[#666B73]">SIGNALS</span>
+            </Link>
+            <Link
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center space-x-1.5 py-2 px-2 text-[10px] text-ink-subtle hover:text-ink pt-2 border-t border-[#242830]/60"
+            >
+              <ArrowLeft className="w-3 h-3" />
+              <span>RETURN TO OVERVIEW</span>
+            </Link>
+          </div>
+        )}
       </header>
 
       {/* Main Content Area */}

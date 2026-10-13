@@ -82,7 +82,7 @@ export function ProjectsView() {
                   setHoveredSlug(null);
                   setAtmosphere(null);
                 }}
-                className="group relative block py-10 sm:py-14 transition-transform duration-300 hover:translate-x-2"
+                className="group relative block py-10 sm:py-14 transition-transform duration-300 hover:translate-x-2 overflow-hidden"
               >
                 {/* Overlay link for full row navigation */}
                 <Link
@@ -103,8 +103,8 @@ export function ProjectsView() {
 
                 <div className="space-y-4 relative z-10 pointer-events-none">
                   {/* Meta Row: Number, Tier, Year, Open Source indicator, Link buttons */}
-                  <div className="flex items-center justify-between text-[11px] font-mono">
-                    <div className="flex items-center space-x-3">
+                  <div className="flex flex-wrap items-center justify-between gap-y-2 text-[11px] font-mono">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                       <span
                         className="text-xl sm:text-2xl font-mono font-light tracking-tighter transition-colors duration-200"
                         style={{ color: isHovered ? accent : "#666B73" }}

@@ -129,7 +129,7 @@ export function OpenSourcePreview() {
           </div>
         </div>
 
-        <div className="md:col-span-8 space-y-2 border-l border-border-subtle pl-6">
+        <div className="md:col-span-8 space-y-2 border-t md:border-t-0 md:border-l border-border-subtle pt-6 md:pt-0 pl-0 md:pl-6">
           <p className="text-[16px] sm:text-[18px] text-ink font-sans leading-relaxed">
             I learn software by getting inside systems I didn’t build. Contributing to mature codebases requires respecting established invariants and defending diffs under maintainer scrutiny.
           </p>

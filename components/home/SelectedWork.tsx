@@ -41,7 +41,7 @@ export function SelectedWork() {
       {/* ===================================================================== */}
       <section
         aria-label="Project 01: CodeAlign"
-        className="w-full relative group"
+        className="w-full relative group overflow-hidden"
         onMouseEnter={() => {
           setHoveredProject("codealign");
           setAtmosphere("codealign");
@@ -62,8 +62,8 @@ export function SelectedWork() {
         />
         <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
           {/* Top Metadata Row */}
-          <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-between gap-y-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
                 01
               </span>
@@ -183,7 +183,7 @@ export function SelectedWork() {
       {/* ===================================================================== */}
       <section
         aria-label="Project 02: TraceKit"
-        className="w-full relative group"
+        className="w-full relative group overflow-hidden"
         onMouseEnter={() => {
           setHoveredProject("tracekit");
           setAtmosphere("tracekit");
@@ -204,8 +204,8 @@ export function SelectedWork() {
         />
         <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
           {/* Top Metadata Row */}
-          <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-between gap-y-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
                 02
               </span>
@@ -331,7 +331,7 @@ export function SelectedWork() {
       {/* ===================================================================== */}
       <section
         aria-label="Project 03: Graphify"
-        className="w-full relative group"
+        className="w-full relative group overflow-hidden"
         onMouseEnter={() => {
           setHoveredProject("graphify");
           setAtmosphere("graphify");
@@ -352,8 +352,8 @@ export function SelectedWork() {
         />
         <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
           {/* Top Metadata Row */}
-          <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-between gap-y-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
                 03
               </span>
@@ -397,8 +397,8 @@ export function SelectedWork() {
           </div>
 
           {/* Pipeline: SOURCE → PARSE → RESOLVE → MERGE → EMIT */}
-          <div className="py-4 border-y border-border-subtle">
-            <div className="flex flex-wrap items-center justify-between gap-y-2 text-[12px] font-mono font-bold uppercase tracking-wider text-ink">
+          <div className="py-4 border-y border-border-subtle overflow-x-auto">
+            <div className="flex items-center sm:justify-between gap-3 text-[12px] font-mono font-bold uppercase tracking-wider text-ink min-w-max">
               <span className="text-[#5CA8FF]">SOURCE</span>
               <span className="text-border-strong">→</span>
               <span>PARSE (TREE-SITTER)</span>
@@ -440,7 +440,7 @@ export function SelectedWork() {
       {/* ===================================================================== */}
       <section
         aria-label="Project 04: AI Interviewer"
-        className="w-full relative group"
+        className="w-full relative group overflow-hidden"
         onMouseEnter={() => {
           setHoveredProject("ai-interviewer");
           setAtmosphere("ai-interviewer");
@@ -461,8 +461,8 @@ export function SelectedWork() {
         />
         <div className="border-t border-border-subtle pt-8 sm:pt-12 space-y-8">
           {/* Top Metadata Row */}
-          <div className="flex flex-wrap items-center justify-between text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
-            <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-between gap-y-2 text-[11px] font-mono uppercase tracking-widest text-ink-subtle">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="text-3xl sm:text-4xl font-mono font-light text-ink">
                 04
               </span>

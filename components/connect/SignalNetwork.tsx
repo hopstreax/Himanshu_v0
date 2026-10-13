@@ -70,7 +70,7 @@ export function SignalNetwork() {
   const activeChannel = PRIMARY_CHANNELS.find((c) => c.id === activeChannelId);
 
   return (
-    <div className="relative w-full select-none">
+    <div className="relative w-full select-none overflow-hidden rounded-2xl">
       {/* =================================================================== */}
       {/* 1. CONTROLLED NEON AURA (Outer / Background Atmosphere)            */}
       {/* Violet / Blue / Mint / Coral glowing softly behind the content     */}

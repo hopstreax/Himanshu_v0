@@ -45,16 +45,16 @@ export function SectionIndex({
 }: SectionIndexProps) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 pb-3 border-b border-border-subtle">
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-3 min-w-0">
         {icon && <span className={`${accentClass} shrink-0`}>{icon}</span>}
-        <h2 id={id} className="font-mono font-bold text-[clamp(1.25rem,2.2vw,1.85rem)] text-ink uppercase tracking-tight flex items-baseline space-x-2">
+        <h2 id={id} className="font-mono font-bold text-[clamp(1.15rem,2.2vw,1.85rem)] text-ink uppercase tracking-tight flex flex-wrap items-baseline gap-x-2 gap-y-0.5 min-w-0">
           <span className={`text-[clamp(1rem,1.8vw,1.5rem)] font-bold ${accentClass}`}>{number}</span>
           <span className="text-border-strong font-light">/</span>
           <span>{title}</span>
         </h2>
       </div>
       {sideText && (
-        <span className="text-[10px] font-mono text-ink-subtle uppercase tracking-widest">
+        <span className="text-[10px] font-mono text-ink-subtle uppercase tracking-widest shrink-0">
           {sideText}
         </span>
       )}

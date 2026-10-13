@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Menu, X } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { EvidenceStrip } from "@/components/home/EvidenceStrip";
 import { OrganicNetwork } from "@/components/home/OrganicNetwork";
@@ -12,11 +12,12 @@ import { PersonalCraft } from "@/components/home/PersonalCraft";
 
 export function HomePageClient() {
   const shouldReduceMotion = useReducedMotion();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-transparent text-[#F4F1EA] flex flex-col justify-between selection:bg-[#273142] selection:text-[#F4F1EA] overflow-x-hidden relative">
 
-      {/* 1. Integrated Editorial Header (Matching Reference Image) */}
+      {/* 1. Integrated Editorial Header (Responsive Desktop & Mobile) */}
       <header
         role="banner"
         className="sticky top-0 z-50 w-full bg-[#08090B]/85 backdrop-blur-md border-b border-[#242830]/80 px-5 sm:px-10 md:px-14 py-4"
@@ -35,9 +36,10 @@ export function HomePageClient() {
             </span>
           </Link>
 
+          {/* Desktop Navigation */}
           <nav
             aria-label="Primary Navigation"
-            className="flex items-center space-x-6 sm:space-x-8 text-[11px] font-mono uppercase tracking-widest"
+            className="hidden sm:flex items-center space-x-6 sm:space-x-8 text-[11px] font-mono uppercase tracking-widest"
           >
             <Link
               href="/about"
@@ -64,7 +66,60 @@ export function HomePageClient() {
               CONNECT
             </Link>
           </nav>
+
+          {/* Mobile Navigation Toggle */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="sm:hidden p-1.5 -mr-1.5 text-[#9A9DA3] hover:text-[#F4F1EA] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#9B7BFF]"
+            aria-expanded={isMobileMenuOpen}
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5 text-[#F4F1EA]" />
+            ) : (
+              <Menu className="w-5 h-5 text-[#F4F1EA]" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Navigation Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="sm:hidden max-w-7xl mx-auto pt-4 pb-2 border-t border-[#242830] mt-3 space-y-2 font-mono text-[12px] uppercase tracking-widest">
+            <Link
+              href="/about"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] text-[#C5C8CE] hover:text-[#E2C08D] transition-colors"
+            >
+              <span>01 / ABOUT</span>
+              <span className="text-[10px] text-[#666B73]">DOSSIER</span>
+            </Link>
+            <Link
+              href="/projects"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] text-[#C5C8CE] hover:text-[#5CA8FF] transition-colors"
+            >
+              <span>02 / PROJECTS</span>
+              <span className="text-[10px] text-[#666B73]">SYSTEMS</span>
+            </Link>
+            <Link
+              href="/open-source"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] text-[#C5C8CE] hover:text-[#45D6A0] transition-colors"
+            >
+              <span>03 / OPEN SOURCE</span>
+              <span className="text-[10px] text-[#666B73]">60+ PRS</span>
+            </Link>
+            <Link
+              href="/connect"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between py-2.5 px-2 rounded hover:bg-[#12161D] text-[#C5C8CE] hover:text-[#FF718C] transition-colors"
+            >
+              <span>04 / CONNECT</span>
+              <span className="text-[10px] text-[#666B73]">SIGNALS</span>
+            </Link>
+          </div>
+        )}
       </header>
 
       {/* Main Content Stream */}
@@ -146,7 +201,7 @@ export function HomePageClient() {
             </motion.div>
 
             {/* RIGHT COLUMN: Large Interactive Organic Network Visualization (60-65%) */}
-            <div className="lg:col-span-7 relative z-10 w-full lg:-ml-6">
+            <div className="lg:col-span-7 relative z-10 w-full lg:pl-2">
               <OrganicNetwork />
             </div>
           </div>
