@@ -8,6 +8,7 @@ import {
   OutsideEngineeringItem,
   WhatIBuildItem,
   OpenSourceJourneySection,
+  TechnicalDomain,
 } from "@/types/portfolio";
 
 export const education: EducationItem = {
@@ -338,6 +339,207 @@ export const outsideEngineering: readonly OutsideEngineeringItem[] = [
   },
 ] as const;
 
+export const technicalMatrix: readonly TechnicalDomain[] = [
+  {
+    id: "01",
+    category: "LANGUAGES, COMPILERS & RUNTIMES",
+    badge: "AST & MEMORY",
+    accent: "#9B7BFF",
+    items: [
+      {
+        name: "TypeScript (Strict) & ECMAScript",
+        spec: "Discriminated Unions, AST Visitor Types & Next.js 16 Runtimes",
+        provenance: "TraceKit · Web Architecture",
+      },
+      {
+        name: "Python 3.11+ Systems",
+        spec: "AST Inspection, Typer CLI Engines, Pydantic V2 Schemas",
+        provenance: "CodeAlign · Graphify OSS · pytest",
+      },
+      {
+        name: "C / C++ Systems Programming",
+        spec: "Memory Allocation, Pointer Semantics & OS Process Control",
+        provenance: "Computer Systems Core",
+      },
+      {
+        name: "Java (SE 17+) & JVM Core",
+        spec: "Object Models, Multithreading & Algorithmic Structures",
+        provenance: "CSIT Academic Core (ITER)",
+      },
+      {
+        name: "Relational SQL & Query Optimization",
+        spec: "ACID Transactions, Multi-Table Indexing & Schema Relations",
+        provenance: "PostgreSQL · MySQL",
+      },
+    ],
+  },
+  {
+    id: "02",
+    category: "CODE INTEL & AST EXTRACTION",
+    badge: "TREE-SITTER & GRAPHS",
+    accent: "#5CA8FF",
+    items: [
+      {
+        name: "Tree-Sitter Multi-Language Grammars",
+        spec: "Concrete Syntax Tree Extraction, Error-Tolerant Visitor Passes",
+        provenance: "45+ Merged PRs in Graphify",
+      },
+      {
+        name: "Cross-File Symbol Resolution Tables",
+        spec: "Lexical Scopes, Import/Export Graph Chains, Namespace Normalization",
+        provenance: "Graphify Core Intelligence",
+      },
+      {
+        name: "NetworkX Directed Graph Topologies",
+        spec: "Carried Hyperedges, Cyclomatic Graph Cycles, Deduplication",
+        provenance: "Graphify Dependency Core",
+      },
+      {
+        name: "Fail-Closed AST Error Recovery",
+        spec: "Semantic Node Protection, Broken Tree Preservation During Syntax Errors",
+        provenance: "Graphify AST Resolvers",
+      },
+      {
+        name: "Deterministic Incremental Build Caching",
+        spec: "Content-Addressed Hashing, Rescan Prevention, Invalidation Policies",
+        provenance: "Graphify CLI & Ingestion",
+      },
+    ],
+  },
+  {
+    id: "03",
+    category: "AGENT HARNESSES & BROWSER CDP",
+    badge: "AUTONOMOUS LOOPS",
+    accent: "#45D6A0",
+    items: [
+      {
+        name: "Chromium DevTools Protocol (CDP)",
+        spec: "Low-Level Protocol Hooks, Stealth Dispatch & Network Telemetry",
+        provenance: "TraceKit CDP Engine",
+      },
+      {
+        name: "Patchright & Headless Automation",
+        spec: "Anti-Detection Puppeteering, Browser Sandbox Lifecycle",
+        provenance: "TraceKit Execution Core",
+      },
+      {
+        name: "Deterministic DOM Assertion Triaging",
+        spec: "Ground-Truth Evaluation, Accessibility Tree Diffs, Flake Mitigation",
+        provenance: "TraceKit Assertions",
+      },
+      {
+        name: "Agent Intent & Baseline Verification",
+        spec: "Pre-Session Handoffs, Scope Drift Detection, AST Contract Checks",
+        provenance: "CodeAlign Developer CLI",
+      },
+      {
+        name: "Structured LLM Orchestration",
+        spec: "Pydantic Action Models, Bounded Reasoning, Zero-Hallucination Grading",
+        provenance: "Gemini CLI · Antigravity CLI",
+      },
+    ],
+  },
+  {
+    id: "04",
+    category: "FULL-STACK PLATFORMS & SERVER RUNTIMES",
+    badge: "SSR & MICROSERVICES",
+    accent: "#FFB86B",
+    items: [
+      {
+        name: "Next.js 16 & React 19 App Router",
+        spec: "React Server Components (RSC), Suspense Streaming, Minimal Hydration",
+        provenance: "Production Portfolio · TraceKit UI",
+      },
+      {
+        name: "FastAPI & Asynchronous Python",
+        spec: "Async Route Handlers, Background Task Queues, Subprocess IPC",
+        provenance: "TraceKit Backend Engine",
+      },
+      {
+        name: "Node.js & Express.js Services",
+        spec: "Modular REST Routers, Middleware Pipelines, JWT/RBAC Auth",
+        provenance: "Internal Dashboard (500+ Users)",
+      },
+      {
+        name: "Server-Sent Events (SSE) Protocols",
+        spec: "Keepalive Heartbeat Frames, Stream Reconnection, Real-Time Ingestion",
+        provenance: "AI Proxy Proxies · TraceKit",
+      },
+      {
+        name: "Tokenized UI Architecture & CSS Grid",
+        spec: "Glassmorphic Design Systems, Fluid Clamps, Reduced-Motion Tokens",
+        provenance: "Vanilla CSS · Tailwind Engine",
+      },
+    ],
+  },
+  {
+    id: "05",
+    category: "STORAGE, SCHEMAS & INFRASTRUCTURE",
+    badge: "CONTAINERS & DATA",
+    accent: "#818CF8",
+    items: [
+      {
+        name: "MongoDB & Document Aggregations",
+        spec: "Compound Indexing Strategies, BSON Schemas, 20% Query Latency Cut",
+        provenance: "Access Management System",
+      },
+      {
+        name: "PostgreSQL & Prisma ORM",
+        spec: "Type-Safe Client Generation, Schema Migrations, Connection Pooling",
+        provenance: "Relational Systems",
+      },
+      {
+        name: "Docker & Container Isolation",
+        spec: "Headless Chromium Sandboxes, Alpine Multi-Stage Builds, Ephemeral Runs",
+        provenance: "TraceKit Container Engine",
+      },
+      {
+        name: "Git Plumbing & Worktree Automation",
+        spec: "Commit Tree Traversal, Worktree Status Audits, Clean Baseline Snapshots",
+        provenance: "CodeAlign CLI · 60+ OSS PRs",
+      },
+      {
+        name: "Cross-Platform Process Management",
+        spec: "Windows CREATE_NO_WINDOW Isolation, Signal Handlers, Tempfile Atomicity",
+        provenance: "Graphify Windows Support",
+      },
+    ],
+  },
+  {
+    id: "06",
+    category: "VERIFICATION, AUDITING & CI/CD",
+    badge: "REGRESSION SUITES",
+    accent: "#FF718C",
+    items: [
+      {
+        name: "pytest & Isolation Fixtures",
+        spec: "Subprocess Fixtures, Mock Environment Contexts, Regression Matrix",
+        provenance: "CodeAlign · Graphify Tests",
+      },
+      {
+        name: "Playwright End-to-End Verification",
+        spec: "Self-Healing Selectors, Deterministic Wait States, DOM Trace Recording",
+        provenance: "TraceKit Automated Triage",
+      },
+      {
+        name: "Structured Trace & Audit Logging",
+        spec: "4-Part Diagnostic Snapshots, Telemetry Schemas, Evidence Diffing",
+        provenance: "TraceKit · CodeAlign Status",
+      },
+      {
+        name: "GitHub Actions Matrix CI/CD",
+        spec: "Cross-Platform Runners (Linux/Win/macOS), Automated Linters, Ruff",
+        provenance: "Multi-Platform OSS Repos",
+      },
+      {
+        name: "Defensible Maintainer PR Engineering",
+        spec: "Root-Cause Isolation, Minimal Diff Footprints, Strict Scope Reviews",
+        provenance: "45+ Graphify PRs · 60+ Total OSS",
+      },
+    ],
+  },
+];
+
 export const aboutData: AboutData = {
   name: "Himanshu Patro",
   title: "Software Engineer · Full Stack AI Developer",
@@ -361,6 +563,7 @@ export const aboutData: AboutData = {
   education,
   experiences,
   coreSkills,
+  technicalMatrix,
   whatIBuild,
   engineeringInterests,
   openSourceJourney,

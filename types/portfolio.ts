@@ -218,6 +218,20 @@ export interface OpenSourceJourneySection {
   }[];
 }
 
+export interface TechnicalCompetency {
+  name: string;
+  spec: string;
+  provenance: string;
+}
+
+export interface TechnicalDomain {
+  id: string;
+  category: string;
+  badge: string;
+  accent: string;
+  items: readonly TechnicalCompetency[];
+}
+
 export interface AboutData {
   name: string;
   title: string;
@@ -230,6 +244,7 @@ export interface AboutData {
   education: EducationItem;
   experiences: readonly ExperienceItem[];
   coreSkills: readonly string[];
+  technicalMatrix?: readonly TechnicalDomain[];
   whatIBuild?: readonly WhatIBuildItem[];
   engineeringInterests?: readonly EngineeringInterestItem[];
   openSourceJourney?: OpenSourceJourneySection;

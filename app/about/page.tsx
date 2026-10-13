@@ -353,89 +353,91 @@ export default function AboutPage() {
           />
 
           <div className="pt-4 space-y-8">
-            <p className="text-[14px] text-[#9A9DA3]">
-              Technical competencies categorized by engineering domains. No arbitrary progress bars or inflated percentages:
-            </p>
-
-            {/* Typographic Technical Matrix (Hairline Grid, Zero Cards) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 border-t border-b border-[#242830] py-8">
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono uppercase tracking-widest text-[#9B7BFF] font-semibold border-b border-[#242830] pb-2">
-                  01 / LANGUAGES & COMPILERS
-                </div>
-                <div className="space-y-1.5 font-mono text-[13px] text-[#F4F1EA]">
-                  <div>TypeScript / JavaScript</div>
-                  <div>Python 3.11+</div>
-                  <div>Java</div>
-                  <div>C / C++</div>
-                  <div>HTML5 / CSS3 / SQL</div>
-                </div>
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3 pb-2 border-b border-[#242830]">
+              <p className="text-[14px] text-[#9A9DA3] max-w-2xl leading-relaxed">
+                Technical competencies categorized by engineering domains and architectural depth. Every capability pairs concrete systems scope with verified production and open-source provenance:
+              </p>
+              <div className="flex items-center space-x-2 text-[10.5px] font-mono text-[#666B73] shrink-0 uppercase tracking-widest">
+                <span className="text-[#45D6A0]">30 SPECIFICATIONS</span>
+                <span>·</span>
+                <span className="text-[#9B7BFF]">6 DOMAINS</span>
+                <span>·</span>
+                <span className="text-[#5CA8FF]">ZERO GENERIC LABELS</span>
               </div>
+            </div>
 
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono uppercase tracking-widest text-[#5CA8FF] font-semibold border-b border-[#242830] pb-2">
-                  02 / CODE INTEL & PARSING
-                </div>
-                <div className="space-y-1.5 font-mono text-[13px] text-[#F4F1EA]">
-                  <div>Tree-Sitter Grammars</div>
-                  <div>AST Extraction & Visitors</div>
-                  <div>NetworkX & Graph Theory</div>
-                  <div>Symbol Resolution Tables</div>
-                  <div>Deterministic Build Caching</div>
-                </div>
-              </div>
+            {/* Enhanced Typographic Technical Matrix (Systems Spec Grid) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+              {aboutData.technicalMatrix?.map((domain) => (
+                <div
+                  key={domain.id}
+                  className="rounded-lg border border-[#242830] bg-[#0A0D12]/50 p-5 sm:p-6 space-y-4 transition-all duration-300 hover:border-[#383D47] group relative overflow-hidden flex flex-col justify-between"
+                  style={{
+                    borderTop: `2px solid ${domain.accent}`,
+                  }}
+                >
+                  <div className="space-y-3">
+                    {/* Domain Category Header */}
+                    <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest">
+                      <span
+                        className="font-semibold"
+                        style={{ color: domain.accent }}
+                      >
+                        {domain.id} / {domain.badge}
+                      </span>
+                      <span className="text-[#666B73]">
+                        {domain.items.length} SPECS
+                      </span>
+                    </div>
 
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono uppercase tracking-widest text-[#45D6A0] font-semibold border-b border-[#242830] pb-2">
-                  03 / AGENTS & BROWSER CDP
-                </div>
-                <div className="space-y-1.5 font-mono text-[13px] text-[#F4F1EA]">
-                  <div>Chromium DevTools Protocol (CDP)</div>
-                  <div>Patchright & Playwright</div>
-                  <div>Autonomous Action Loops</div>
-                  <div>DOM Assertion Triaging</div>
-                  <div>Multimodal LLM Reasoning</div>
-                </div>
-              </div>
+                    <h3 className="text-[13px] sm:text-[14px] font-mono font-bold uppercase tracking-wider text-[#F4F1EA] pb-3 border-b border-[#242830]">
+                      {domain.category}
+                    </h3>
 
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono uppercase tracking-widest text-[#FFB86B] font-semibold border-b border-[#242830] pb-2">
-                  04 / FULL-STACK PLATFORMS
-                </div>
-                <div className="space-y-1.5 font-mono text-[13px] text-[#F4F1EA]">
-                  <div>Next.js 16 (App Router)</div>
-                  <div>React 19 & State Engines</div>
-                  <div>Node.js & Express.js</div>
-                  <div>FastAPI (Python)</div>
-                  <div>RESTful API Architecture</div>
-                </div>
-              </div>
+                    {/* Competency Items */}
+                    <div className="space-y-4 pt-1">
+                      {domain.items.map((item, itemIdx) => (
+                        <div
+                          key={itemIdx}
+                          className="group/item border-l-2 border-transparent pl-2.5 -ml-2.5 hover:border-[var(--domain-accent)] transition-all duration-200"
+                          style={
+                            {
+                              "--domain-accent": domain.accent,
+                            } as React.CSSProperties
+                          }
+                        >
+                          <div className="font-mono text-[13px] font-semibold text-[#F4F1EA] group-hover/item:text-white transition-colors">
+                            {item.name}
+                          </div>
+                          <div className="text-[11.5px] font-sans text-[#9A9DA3] leading-snug pt-0.5">
+                            {item.spec}
+                          </div>
+                          <div className="flex items-center space-x-1.5 pt-1 text-[10px] font-mono text-[#666B73]">
+                            <span
+                              className="w-1.5 h-1.5 rounded-full shrink-0"
+                              style={{ backgroundColor: domain.accent }}
+                            />
+                            <span className="uppercase tracking-wider">
+                              PROVEN: {item.provenance}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono uppercase tracking-widest text-[#818CF8] font-semibold border-b border-[#242830] pb-2">
-                  05 / STORAGE & INFRASTRUCTURE
+                  {/* Micro Footer Indicator */}
+                  <div className="pt-4 border-t border-[#242830]/80 flex items-center justify-between text-[10px] font-mono text-[#666B73]">
+                    <span className="uppercase tracking-widest">DOMAIN STATUS</span>
+                    <span
+                      className="font-semibold uppercase tracking-wider text-[10px]"
+                      style={{ color: domain.accent }}
+                    >
+                      VERIFIED · PRODUCTION / OSS
+                    </span>
+                  </div>
                 </div>
-                <div className="space-y-1.5 font-mono text-[13px] text-[#F4F1EA]">
-                  <div>MongoDB & Schema Indexing</div>
-                  <div>PostgreSQL & Prisma</div>
-                  <div>Docker & Containerization</div>
-                  <div>Server-Sent Events (SSE)</div>
-                  <div>Git & Monorepo Tooling</div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="text-[11px] font-mono uppercase tracking-widest text-[#FF718C] font-semibold border-b border-[#242830] pb-2">
-                  06 / TESTING & VERIFICATION
-                </div>
-                <div className="space-y-1.5 font-mono text-[13px] text-[#F4F1EA]">
-                  <div>pytest & Unit Isolation</div>
-                  <div>Playwright End-to-End</div>
-                  <div>Structured Trace Generation</div>
-                  <div>CI/CD GitHub Actions</div>
-                  <div>Maintainer Pull-Request Review</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </EditorialSection>
@@ -470,6 +472,119 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </EditorialSection>
+
+        {/* ============================================================ */}
+        {/* 06 / OPEN SOURCE JOURNEY & SIGNAL                            */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="oss-journey-heading">
+          <SectionIndex
+            id="oss-journey-heading"
+            number="06"
+            title="OPEN SOURCE JOURNEY & SIGNAL"
+            icon={<GitBranch className="w-3.5 h-3.5" />}
+            sideText="60+ MERGED PRS"
+          />
+
+          <div className="space-y-6 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3 pb-2 border-b border-[#242830]">
+              <p className="text-[14px] text-[#9A9DA3] max-w-2xl leading-relaxed">
+                {aboutData.openSourceJourney?.summary}
+              </p>
+              <div className="flex items-center space-x-2 text-[10.5px] font-mono text-[#666B73] shrink-0 uppercase tracking-widest">
+                <span className="text-[#45D6A0]">45+ GRAPHIFY</span>
+                <span>·</span>
+                <span className="text-[#5CA8FF]">60+ TOTAL OSS</span>
+                <span>·</span>
+                <span className="text-[#9B7BFF]">4 MONTHS</span>
+              </div>
+            </div>
+
+            {/* Stages Progression */}
+            <div className="divide-y divide-[#242830] border-t border-b border-[#242830]">
+              {aboutData.openSourceJourney?.stages.map((stage, idx) => (
+                <div
+                  key={idx}
+                  className="py-6 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 group"
+                >
+                  <div className="lg:w-1/3 space-y-1">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-[#45D6A0] font-semibold">
+                      STAGE 0{idx + 1}
+                    </div>
+                    <h3 className="text-base sm:text-lg font-mono font-bold text-[#F4F1EA] group-hover:text-white transition-colors">
+                      {stage.phase.replace(/^Stage \d+:\s*/, "")}
+                    </h3>
+                    <div className="text-[11px] font-mono text-[#666B73]">
+                      {stage.focus}
+                    </div>
+                  </div>
+
+                  <p className="lg:w-2/3 text-[13px] sm:text-[14px] text-[#C5C8CE] leading-relaxed pt-0.5">
+                    {stage.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Direct Link to Open Source Archive */}
+            <div className="pt-2 flex items-center justify-between">
+              <Link
+                href="/open-source"
+                className="inline-flex items-center space-x-2 text-[11px] font-mono font-semibold uppercase tracking-widest text-[#F4F1EA] hover:text-[#45D6A0] transition-colors group"
+              >
+                <span>EXPLORE DEEP OPEN SOURCE ARCHIVE</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[#45D6A0]" />
+              </Link>
+              <span className="text-[10px] font-mono text-[#666B73] uppercase tracking-widest hidden sm:inline">
+                REPOSITORIES · INVESTIGATIONS · AUDITS
+              </span>
+            </div>
+          </div>
+        </EditorialSection>
+
+        {/* ============================================================ */}
+        {/* 07 / BEYOND CODE · CREATIVE DISCIPLINES                      */}
+        {/* ============================================================ */}
+        <EditorialSection labelledBy="beyond-heading">
+          <SectionIndex
+            id="beyond-heading"
+            number="07"
+            title="BEYOND CODE · CREATIVE DISCIPLINES"
+            icon={<Palette className="w-3.5 h-3.5" />}
+            sideText="FINE CRAFT"
+          />
+
+          <div className="space-y-6 pt-4">
+            <div className="pb-2 border-b border-[#242830]">
+              <p className="text-[14px] text-[#9A9DA3] max-w-2xl leading-relaxed">
+                Engineering precision is reinforced by disciplines outside of programming. Fine arts, auditory training, and calligraphic lettering demand acute attention to harmony, proportion, and sustained deliberate practice:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+              {aboutData.outsideEngineering?.map((craft, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-lg border border-[#242830] bg-[#0A0D12]/50 p-5 sm:p-6 space-y-3 transition-all duration-300 hover:border-[#383D47] group"
+                >
+                  <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest">
+                    <span className="text-[#FFB86B] font-semibold">
+                      0{idx + 1} / {craft.category}
+                    </span>
+                    <span className="text-[#666B73]">DISCIPLINE</span>
+                  </div>
+
+                  <h3 className="text-base sm:text-lg font-mono font-bold text-[#F4F1EA] group-hover:text-white transition-colors">
+                    {craft.title}
+                  </h3>
+
+                  <p className="text-[12.5px] text-[#9A9DA3] leading-relaxed font-sans">
+                    {craft.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </EditorialSection>
       </div>

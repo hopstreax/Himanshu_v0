@@ -53,6 +53,24 @@ export function AboutPreview() {
             {aboutData.currentFocus}
           </div>
         </div>
+
+        <div>
+          <div className="text-[10px] font-mono uppercase tracking-widest text-ink-subtle flex items-center justify-between">
+            <span>TECHNICAL MATRIX</span>
+            <span className="text-[#45D6A0]">6 DOMAINS · 30 SPECS</span>
+          </div>
+          <div className="flex flex-wrap gap-1.5 mt-1.5">
+            {aboutData.technicalMatrix?.slice(0, 4).map((d) => (
+              <span
+                key={d.id}
+                className="text-[9.5px] font-mono px-2 py-0.5 rounded border border-border-subtle bg-canvas-subtle/80 text-ink-muted"
+                style={{ borderLeftColor: d.accent, borderLeftWidth: "2px" }}
+              >
+                {d.badge}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Action Link */}
