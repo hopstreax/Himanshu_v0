@@ -312,7 +312,9 @@ export default function AboutPage() {
               </div>
 
               <div className="text-left md:text-right font-mono shrink-0 space-y-1">
-                <div className="text-2xl font-bold text-[#F4F1EA]">CGPA: 8.35</div>
+                <div className="text-2xl font-bold text-[#F4F1EA]">
+                  {aboutData.education.grade}
+                </div>
                 <div className="text-[11px] text-[#45D6A0] uppercase tracking-widest">
                   CLASS OF 2026 (2022 — 2026)
                 </div>
